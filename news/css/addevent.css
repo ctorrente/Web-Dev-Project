@@ -1,0 +1,27 @@
+      
+      .addeve{
+        margin: 0 auto;
+        padding-top: 10%;
+        width: 40%;
+      }
+      .addeve input::-webkit-input-placeholder {
+        color: #A9a9a9;
+      }
+      .addeve input, .addeve textarea{
+        border: 1px solid #A9a9a9;
+        padding: 10px;
+        border: 1px solid #2062a2;
+        background: none;
+        border-radius: 5px;
+        margin: 10px auto;
+      }
+      .addeve textarea{
+        height: 8em;
+      }
+      .addeve input[type="submit"]{
+        color: #2062a2;
+      }
+      .addeve input[type="submit"]:hover{
+        background: #2062a2;
+        color: white;
+      }

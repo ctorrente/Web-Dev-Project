@@ -1,0 +1,113 @@
+			.content-wrapper{
+				  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			}
+			.calele{
+				width: 40%;
+				display: block;
+				margin: 200px 0 auto;
+			}
+			table.calendar{
+				margin: 0 auto;
+				padding: 20px auto;
+				width: 100%;
+			}
+			.calendar td {
+			  padding: .6em;
+			}
+			.calendar-container{
+				display: block;
+				width: 100%;
+				margin: 0 auto;
+			}
+			table.calendar{
+				width: 30%;
+				margin: 0 auto;
+			}
+			input[type="search"]{
+				border: none;
+			}
+			header{
+				border: none;
+			}
+			.nav{
+				margin-top: 53px;
+				border: none;
+				position: fixed;
+				z-index: 100000;
+			}
+			.carousel{
+				position: relative;
+				width: 60%;
+				height: 100%;
+			}
+			.carousel figure {
+				margin: 0;
+				width: 100%;
+				height: 100%;
+				border: none;
+			}
+			.content{
+				margin: 100px 0 auto;
+				padding: 0;
+				height: 80%;
+				display: flex;
+				height: 100%;
+				overflow: hidden;
+			}
+			.carousel li {
+				margin: 500px 5px 0 5px;
+			}
+			.carousel figure figcaption {
+				display: block;
+			}
+			.events ul{
+        margin-left: 40px;
+        width: 100%;
+      }
+      a.cal{
+        color: black;
+        display: block;
+        margin: 10px 65px;
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #2062a2;
+        border-radius: 3px;
+        color: #2062a2;
+      }
+      a.cal:hover{
+        background: #2062a2;
+        color: white;
+      }
+			.calendar {
+			  display: block;
+			  margin: 0 auto;
+			}
+
+			.calendar thead {
+			  color: #2062a2;
+			  text-transform: uppercase;
+			}
+
+			.calendar td {
+			  padding: .6em;
+			  text-align: center;
+			  padding-left:-5px; 
+			}
+
+			.calendar tbody td:hover {
+			  background: #cacaca;
+			  color: #fff;
+			}
+
+			.calendar .prev-month {
+			  color: #cacaca;
+			}
+
+			.calendar .next-month {
+			  color: #cacaca;
+			}
+
+			.current-day {
+			  color: white;
+			  background: #2062a2;
+			}

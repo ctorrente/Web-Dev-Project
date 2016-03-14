@@ -1,0 +1,54 @@
+.program-info-container {
+	width: 80%;
+	margin: 0% 10% 5% 10%;
+}
+
+.course-table {
+	width: 80%;
+	margin: auto;
+}
+
+.course-table th, .course-table td {
+	text-align: left;
+}
+
+.semester-container {
+	width: 100%;
+}
+
+.semester-one {
+    width: 100%;
+}
+
+.semester-two {
+    width: 100%;
+}
+
+.summer {
+    width: 80%;
+}
+
+.course-code {
+    width: 20%;
+    text-align: center;
+}
+
+.course-name {
+    width: 50%;
+}
+
+.credit-units {
+    text-align: center;
+    width: 5%;
+}
+
+.prerequisites {
+    text-align: center;
+    width: 25%;
+}
+.header {
+    text-align: center;
+}
+.division {
+    width: 50%;
+}

@@ -1,0 +1,144 @@
+.card {
+  background: #FFFFFF;
+  width: 300px;
+  border-radius: 4px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  margin: 5px 30px 0 30px;
+  overflow: hidden;
+  display: inline-block;
+  height: 354px;
+}
+.card-img {
+  position: relative;
+  height: 200px;
+  text-align: center;
+  overflow: hidden;
+  background-size: cover; 
+  background-position: center;
+}
+
+.card-img img{
+  width: 100%;
+}
+
+.content {
+	display: block;
+	text-align: center;
+	font-size: 40px;
+}
+
+
+.rdmr {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #FFFFFF;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 6px 10px;
+  color: #333333;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.rdmr:hover{
+  background: #2062a2;
+  color: white;
+}
+
+.card-content {
+  text-align: center;
+  padding: 30px 20px;
+}
+.title {
+  margin: 0 0 10px;
+  color: #333333;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.title .badge {
+  display: inline-block;
+  background: #FCD000;
+  border-radius: 2px;
+  margin: 0 10px 0;
+  padding: 4px;
+  color: #333333;
+  font-size: 10px;
+  font-weight: 600;
+  vertical-align: middle;
+}
+.desc {
+  color: #666666;
+  font-size: 12px;
+}
+.admin-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  background: #F3F3F3;
+  color: #333333;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.edit, .delete{
+  padding: 15px 59.5px;
+}
+.edit:hover, .delete:hover{
+  background:  #2062a2;
+  color: white;
+}
+.card-container{
+  margin: 0 auto;
+  width: 100%;
+}
+h1{
+  display: block;
+}
+
+a.add {
+	color: #2062a2;
+	text-align: center;
+	padding: 10px;
+	border: 1px solid #2062a2;
+	border-radius: 3px;
+	font-size: 16px;
+}
+
+a.add:hover {
+	color: white;
+	background:  #2062a2;
+}
+
+.pagetitle {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+@media all and (max-width: 1100px), only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min--moz-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: 1024px), only screen and (min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min-resolution: 192dpi) and (max-width: 1024px), only screen and (min-resolution: 2dppx) and (max-width: 1024px) {
+  .card-container{
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .card{
+    margin: 15px auto;
+  }
+  .content{
+    height: auto;
+  }
+}

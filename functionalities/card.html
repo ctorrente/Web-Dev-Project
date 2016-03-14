@@ -1,0 +1,154 @@
+<html>
+
+<!-- You can see this tile now life in action at https://privacypatterns.eu -->
+
+<head>
+  
+  <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Open+Sans:400,900">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+body, html {
+  height:100%;
+}
+
+.card-wrapper {
+  margin: 0 auto;
+  padding-left: 10em;
+  padding-top: 1em;
+  background-color: #fafafa;
+  height:100%;
+}
+
+.card {
+  width:27.5em;
+  background-color: #fff;
+  display:block;
+  overflow-y:hidden;
+  color: #212121;
+  text-overflow: ellipsis;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-left: 1px solid #eeeeee;
+  border-right: 1px solid #eeeeee;
+  border-top: 1px solid #eeeeee;
+  
+  
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.card .controls {
+  content: "";
+  display: block;
+  height: 2.3em;
+  width: 100%;
+  list-style: none;
+  margin:0;
+  padding:0;
+  
+  border-top: 1px solid #eee;
+}
+
+.card .controls li {
+  position:relative;
+  font-family: "Open Sans";
+  z-index:1;
+  color: #424242;
+  font-size: 0.7em;
+  height:100%;
+  display:inline-block;
+  float:left;
+  width:33.33333%;
+  text-align: center;
+}
+
+/*
+
+  Check this pen for the hover
+  effect I'm using:     http://codepen.io/benjaminzanatta/pen/CKqjk  
+
+*/
+.card .controls li:hover {
+  cursor:pointer;
+  color: #212121;
+  transition: color .175s;
+}
+
+.card .controls li:after {
+  position:absolute;
+  content: " ";
+  z-index: -2;
+  display: block;
+  background: #e0e0e0;
+  height: 110%;
+  width:100%;
+  margin-top:0;
+  transition: transform .175s;
+}
+
+.card .controls li:hover::after {
+  transform: translateY(-95%);
+  transition: transform .175s;
+  margin-top:0;
+}
+
+.card .controls li p {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.card h1 {
+  font-family: "Open Sans";
+  font-size: 2em;
+  font-weight:normal;
+  padding-top: 0;
+  margin-top: 0.3em;
+  margin-left:0.7em;
+  margin-bottom:0;
+  color: #616161;
+}
+
+.card .desc-text {
+  font-family: "Open Sans";
+  color: #212121;
+  font-size: 0.8em;
+  padding-top:0.4em;
+  padding-left: 1.75em;
+  padding-right: 1.75em;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 10.5em;
+  line-height:1.5;
+}
+  </style>
+</head>
+
+<body>
+  <div class="card-wrapper">
+    <div class="card">
+      <h1>Anonymity Set</h1>
+      <p class="desc-text">
+
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.asdasdkasdjkasndjkasdjbasdbasjkdbasjkdbjkasbdkasbdbkjasd
+
+      </p>
+      <ul class="controls">
+        <li>
+          <i class="fa fa-book"></i> <p>Read</p>
+        </li>
+        <li>
+          <i class="fa fa-pencil"></i>
+          <p>Edit</p>
+        </li>
+        <li>
+          <i class="fa fa-comment"></i>
+          <p>66 Comments</p>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+</html>

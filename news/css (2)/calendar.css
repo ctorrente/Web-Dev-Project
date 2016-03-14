@@ -1,0 +1,95 @@
+      input[type="search"]{
+        border: none;
+      }
+      header{
+        border: none;
+      }
+      .nav{
+        margin-top: 53px;
+        border: none;
+        position: fixed;
+        z-index: 100000;
+      }
+      .content-wrapper{
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+      .content{
+        margin: 100px 0 auto;
+        padding-top: 7%;
+        padding-bottom: 0;
+        height: 80%;
+        height: 100%;
+        overflow: hidden;
+      }
+      a.btn{
+        width: 5%;
+        display: block;
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #2062a2;
+        border-radius: 3px;
+        color: #2062a2;
+        float: right;
+        margin: 1% 2%;
+      }
+       a.btn2{
+        width: 5%;
+        display: block;
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #2062a2;
+        border-radius: 3px;
+        color: #2062a2;
+        margin: 1% 2%;
+      }
+      a.btn:hover{
+        background: #2062a2;
+        color: white;
+      }
+.calendar-container {
+  position: relative;
+  width: 100%;
+}
+
+h1{
+  float: left;
+  margin: 2% 8%;
+}
+
+.calendar {
+  display: block;
+  margin: 0 auto;
+}
+
+.calendar thead {
+  color: #2062a2;
+  text-transform: uppercase;
+}
+
+.calendar td {
+  padding: 2em 3em;
+  text-align: center;
+  padding-left:-5px; 
+}
+
+.calendar tbody td:hover {
+  background: #cacaca;
+  color: #fff;
+}
+
+.calendar .prev-month {
+  color: #cacaca;
+}
+
+.calendar .next-month {
+  color: #cacaca;
+}
+
+.current-day {
+  color: white;
+  background: #2062a2;
+}
+.date{
+  margin-left: 2em;
+  float: left;
+}

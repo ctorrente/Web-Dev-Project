@@ -1,0 +1,6 @@
+font-family: 'Open Sans', sans-serif;
+font-family: 'Roboto Slab', serif;
+
+lightblue: #2062A2
+blue: #1C558D
+b4 hover text: #dddddd

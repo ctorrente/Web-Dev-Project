@@ -1,0 +1,42 @@
+$_SESSION['user_type']
+0 = Guest
+1 = Student
+2 = Faculty
+
+// SORTING FOR A GUEST
+if ($_SESSION['user_type'] == 0)
+
+// SORTING FOR STUDENT
+if ($_SESSION['user_type'] == 1)
+
+// SORTING FOR STUDENT OFFICER
+	$officerquery = "SELECT officer_id FROM organization_officer WHERE student_id = '" . $_SESSION['student_id'] . "';";
+	$result = mysqli_query($conn, $officerquery);
+	if (mysqli_num_rows($result) > 0)
+	
+// SORTING FOR FACULTY
+if ($_SESSION['user_type'] == 2)
+
+// SORTING FOR MODERATOR
+	$moderatorquery = "SELECT faculty_id FROM moderator;";
+	$result = mysqli_query($conn, $moderatorquery);
+	$row = mysqli_fetch_assoc($result);
+	$moderator_id = $row['faculty_id'];
+	if ($moderator_id == $_SESSION['faculty_id'])
+	
+// SORTING FOR PROGRAM COORDINATOR
+	$progcoordquery = "SELECT faculty_id FROM program_coordinator;";
+	$result = mysqli_query($conn, $progcoordquery);
+	$row = mysqli_fetch_assoc($result);
+	$prog_coord_id = $row['faculty_id'];
+	if ($prog_coord_id == $_SESSION['faculty_id'])
+	
+// SORTING FOR CHAIRPERSON
+	$chairquery = "SELECT faculty_id FROM chair;";
+	$result = mysqli_query($conn, $chairquery);
+	$row = mysqli_fetch_assoc($result);
+	$chair_id = $row['faculty_id'];
+	if ($chair_id == $_SESSION['faculty_id'])
+	
+// SORTING FOR ADMIN
+

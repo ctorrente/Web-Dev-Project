@@ -1,0 +1,162 @@
+.content-wrapper{
+  margin: 0 auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.content, #annevecon {
+  padding-top: 30px;
+  display: block;
+ }
+
+div.news{
+  width: 80%;
+  margin: 0 auto;
+}
+div.announcement, div.events{
+  width: 50%;
+}
+
+.news, .announcement, .events {
+  overflow-y:hidden;
+  text-overflow: ellipsis;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-left: 1px solid #eeeeee;
+  border-right: 1px solid #eeeeee;
+  border-top: 1px solid #eeeeee;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom: 2px solid #e0e0e0;
+  overflow-x:hidden;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#annevecon{
+  display: flex;
+  margin: 0 auto;
+  width: 85%;
+  padding-bottom: 50px;
+}
+
+#annevecon .events{
+  margin: 10px 0 10px  10px;
+}
+#annevecon .announcement{
+  margin: 10px 10px 10px  0;
+}
+
+.controls {
+  content: "";
+  display: inline-block;
+  height: 2.3em;
+  width: 100%;
+  list-style: none;
+  margin:0;
+  padding:0;
+  border-top: 1px solid #eee;
+}
+
+.controls li {
+  position:relative;
+  z-index:1;
+  color: #424242;
+  font-size: 0.7em;
+  height:100%;
+  display:inline-block;
+  float:left;
+  width:100%;
+  text-align: center;
+}
+
+.controls li:hover {
+  cursor:pointer;
+  color: #212121;
+  transition: color .175s;
+}
+
+.controls li:after {
+  position:absolute;
+  content: " ";
+  z-index: -2;
+  display: block;
+  background: #e0e0e0;
+  height: 110%;
+  width:100%;
+  margin-top:0;
+  transition: transform .175s;
+}
+
+.controls li:hover::after {
+  transform: translateY(-95%);
+  transition: transform .175s;
+  margin-top:0;
+}
+
+.controls li p {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.desc-text {
+  padding: 5px 5px 0px 5px;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  line-height:1.5;
+}
+@media all and (max-width: 768px), only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min--moz-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: 1024px), only screen and (min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min-resolution: 192dpi) and (max-width: 1024px), only screen and (min-resolution: 2dppx) and (max-width: 1024px) {
+  #annevecon {
+  display: block;
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 0;
+  margin: 0 auto;
+ }
+#annevecon .events, 
+#annevecon .announcement{
+  margin-top: 19px;
+}
+ .content > div, #annevecon > div {
+  width: 90%;
+  margin: 10px;
+ }
+ .card{
+  margin: 20px auto;
+ }
+ .content{
+    width: 90%;
+    margin: 0 0 0 19px;
+ }
+ .events{
+  margin-right: 0 0 0 70px; 
+ }
+}
+
+.postdate {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  float: left;
+  color: #000000;
+}
+.month, .day, .year { 
+  position: absolute; 
+  text-indent: -1000em;
+}
+.month { top: 2px; left: 0; width: 32px; height: 24px;}
+.day { top: 25px; left: 0; width: 32px; height: 25px;}
+.year { bottom: 0; right: 0; width: 17px; height: 48px;}
+
+.m-01 { background-position: 0 4px;}
+.m-02 { background-position: 0 -28px;}
+.m-03 { background-position: 0 -57px;}
+... more like this ...
+
+.d-01 { background-position: -50px 0;}
+.d-02 { background-position: -50px -31px;}
+.d-03 { background-position: -50px -62px;}
+... more like this ...
+
+.y-2006 { background-position: -150px 0;}
+.y-2007 { background-position: -150px -50px;}
+.y-2008 { background-position: -150px -100px;}

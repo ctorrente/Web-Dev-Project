@@ -1,0 +1,130 @@
+body, html{
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+}
+a[data-toggle="open-modal"] {
+	cursor: pointer;
+}
+
+/*white thingy with dcs logo @ very top*/
+
+.toplogo{
+	background: rgba(255,255,255, .50);
+	width: 100%;
+	display: block;
+	margin: 0 auto;
+	position: fixed;
+	z-index: 2;
+}
+.toplogo a img{
+	padding: 5px;
+	display: block;
+	margin: 0 auto;
+    height: 43px;
+}
+
+/* Navbar */
+.nav {
+	margin-top: 25px;
+	border-bottom: 1px solid white;
+	background: #1C558D;
+	transition: all 0.2s;
+	position: absolute;
+    width: 100%;
+}
+
+.fixed {
+	position: fixed;
+	top: 28px;
+	border: 0px;
+    z-index: 4;
+}
+
+/* Container */
+.container {
+	padding-right:15px;
+	padding-left:15px;
+	margin-right:auto;
+	margin-left:auto;
+}
+@media (min-width:768px){
+	.container{
+		width:750px
+	}
+}
+@media (min-width:992px){
+	.container{
+		width:970px
+	}
+}
+@media (min-width:1200px){
+	.container{
+		width:1170px
+	}
+}
+
+/* MODAL */
+
+.modal {
+    position: fixed;
+    top:  0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: none;
+    z-index: 3;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/*content
+
+.content-wrapper{
+	width: 80%;
+	margin: 0 auto;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.content{
+	padding-top: 50px;
+	display: block;
+ }
+
+@media all and (max-width: 768px), only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min--moz-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: 1024px), only screen and (min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min-resolution: 192dpi) and (max-width: 1024px), only screen and (min-resolution: 2dppx) and (max-width: 1024px) {
+ .content > div{
+	width: 90%;
+	margin: 10px;
+ }
+ .content{
+		width: 90%;
+		margin: 0 0 0 19px;
+ }
+}
+*/
+
+h1, h2, h3, h4, h5, h6{
+	font-family: 'Lora', serif;
+	letter-spacing: 1pt;
+	text-align: center;
+	font-weight: normal;
+}
+
+body{
+	font-family: 'Open Sans', sans-serif;
+	text-align: justify;
+	font-size: 11pt; 
+}
+
+a{
+	text-decoration: none;
+	color: white;
+}

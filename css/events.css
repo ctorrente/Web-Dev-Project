@@ -1,0 +1,94 @@
+.content-wrapper{
+  width: 80%;
+  margin: 0 auto;
+  height: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.content{
+  margin: 0;
+ }
+
+.container{
+  position: relative;
+
+}
+
+@media all and (max-width: 768px), only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min--moz-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: 1024px), only screen and (min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min-resolution: 192dpi) and (max-width: 1024px), only screen and (min-resolution: 2dppx) and (max-width: 1024px) {
+ .content > div{
+  width: 90%;
+  margin: 10px;
+ }
+ .content{
+    width: 90%;
+    margin: 0 0 0 19px;
+ }
+}
+
+.calendar {
+  position: relative;
+  padding: 3em;
+  border-radius: 10px;
+  width: 50%;
+}
+.calendar .month {
+  margin-top: 0;
+  font-weight: normal;
+  font-size: 3em;
+  color: #6EB590;
+}
+.calendar ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.calendar ol li {
+  float: left;
+  width: 14.28571%;
+}
+.calendar .day-names {
+  border-bottom: 1px solid #eee;
+}
+.calendar .day-names li {
+  text-transform: uppercase;
+  margin-bottom: .5em;
+}
+.calendar .days li {
+  border-bottom: 1px solid #eee;
+  min-height: 8em;
+}
+.calendar .days li .date {
+  margin: .5em 0;
+}
+.calendar .days li .event {
+  background: #6EB590;
+  font-size: .75em;
+  padding: 0 .75em;
+  line-height: 2em;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 1em;
+  margin-bottom: 1px;
+}
+.calendar .days li .event.span-2 {
+  width: 200%;
+}
+.calendar .days li .event.begin {
+  border-radius: 1em 0 0 1em;
+}
+.calendar .days li .event.end {
+  border-radius: 0 1em 1em 0;
+}
+.calendar .days li .event.all-day {
+  background: #9987B5;
+}
+.calendar .days li .event.clear {
+  background: none;
+}
+.calendar .days li:nth-child(n+29) {
+  border-bottom: none;
+}
+.calendar .days li.outside .date {
+  color: #ddd;
+}

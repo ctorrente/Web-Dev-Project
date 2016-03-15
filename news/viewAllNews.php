@@ -112,15 +112,20 @@
 
 	<div class="container">
 		<div class="content-wrapper" >
-		<?php 
-			if($_SESSION['user_type'] != 1)
-				echo '<a href="addNews.php" class="btn" style="margin-top: 5%;">&#10133; Add</a>';
-		?>
+			<div class="ptcontainer">
+				<div class = "pagetitle">
+           			<p> All News </p>
+            	</div>
+            
+            	<div class = "pagetitle" id="downadd">
+            		<?php 
+						if($_SESSION['user_type'] != 1 || $_SESSION['is_officer'] == 1)
+							echo '<a href="addNews.php" class="add">Add &#10133;</a>';
+					?>    	
+            	</div>
+            </div>
     	
 			<div class="content">
-				<div style="font-size: 30px; margin-left: 5%; margin-top: 2%;">
-					<h2 >Headline</h2>
-				</div>
 				<?php
 				if ($_SESSION['is_admin'] == 1 || $_SESSION['is_moderator'] == 1) {
 					$query = 'SELECT * FROM news n, picture p WHERE n.picture_id = p.picture_id ORDER BY n.date_posted DESC';
@@ -136,14 +141,14 @@
 					$num_rows = mysqli_num_rows($exec);
 
 					if($num_rows == 0){
-						echo '<i><div style="margin: 0 auto; margin-top: 20%;">Their are no News that are posted.<div></i>';
+						echo '<i><div>Their are no News that are posted.<div></i>';
 					}
 					foreach($exec as $row){	
 						//echo $row['file_path'];
 						$date_posted = strtotime($row['date_posted']);
 						if ($_SESSION['is_admin'] == 1 || ($_SESSION['is_moderator'] == 1 && $row['is_approved'] == 0) || $_SESSION['user_id'] == $row['user_id'])  {
 							?>
-							<div class="card" style="margin-top: 15%;">
+							<div class="card">
 							    <!-- Header -->
 							    <div class="card-img">
 							    	<img  src="<?php echo $row['file_path']?>">

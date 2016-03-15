@@ -1,4 +1,9 @@
 <?php
+	/**
+ 		* File Description: Read more page of a news 
+ 		* @version 2.0
+		* @authors Charles Torrente
+	*/
 	include('functions.php');
 	include('connection.php');
 

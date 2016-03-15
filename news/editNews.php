@@ -1,4 +1,9 @@
 <?php
+	/* File Description: Edit a news page
+ 		*	type users or news that are posted/approved by the moderator.
+ 		* @version 2.0
+		* @authors Charles Torrente
+	*/
 	include('functions.php');
 	include('connection.php');
 

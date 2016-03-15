@@ -1,4 +1,9 @@
 <?php
+	/**
+ 		* File Description: The news that the user have added or posted
+ 		* @version 2.0
+		* @authors Charles Torrente
+	*/
 	include('functions.php');
 	include('connection.php');
 

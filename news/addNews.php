@@ -1,4 +1,10 @@
 <?php
+	/**
+ 		* File Description: DCS site add news page-this will add a news in the database.
+ 		* @version 2.0
+		* @authors Eric Rosales, Charles Torrente
+	*/
+
 	include('functions.php');
 	include('connection.php');
 

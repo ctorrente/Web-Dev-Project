@@ -1,4 +1,9 @@
 <?php
+	/* File Description: Functions that are used in news module 
+ 		*	type users or news that are posted/approved by the moderator.
+ 		* @version 2.0
+		* @authors Charles Torrente
+	*/
 	session_start();
 	function login($conn, $username, $password){
 		$query = "SELECT * FROM users where username like '%" . $username . "%'";

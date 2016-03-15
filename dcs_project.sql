@@ -1,3 +1,10 @@
+/**
+ * File Description: DCS site full with users and other input data Database 
+ * @version 2.0
+ * @authors Eric Rosales, Sotto, Charles Torrente
+*/
+
+
 -- phpMyAdmin SQL Dump
 -- version 4.4.11
 -- http://www.phpmyadmin.net

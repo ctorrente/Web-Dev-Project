@@ -1,4 +1,10 @@
 <?php
+	/**
+ 		* File Description: View all news that are posted by the admin 
+ 		*	type users or news that are posted/approved by the moderator.
+ 		* @version 2.0
+		* @authors Charles Torrente
+	*/
 	include('functions.php');
 	include('connection.php');
 	if(isset($_POST['logout'])){

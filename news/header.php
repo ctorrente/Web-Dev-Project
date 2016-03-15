@@ -1,4 +1,11 @@
 <html>
+	<?php
+	/* File Description: Header of the all page
+ 		*	type users or news that are posted/approved by the moderator.
+ 		* @version 2.0
+		* @authors Charles Torrente
+	*/
+	?>
 	<head>
 		<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>

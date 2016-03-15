@@ -1,5 +1,11 @@
 <!--start navbar-->
-
+<?php
+	/* File Description: NavBar of all the pages 
+ 		*	type users or news that are posted/approved by the moderator.
+ 		* @version 2.0
+		* @authors Charles Torrente
+	*/
+?>
 <div class="nav">
 	<div class="container">
 		<div id='cssmenu'>

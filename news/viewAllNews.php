@@ -73,13 +73,13 @@
 	<form action="readMore.php" method="POST" id="readMoreForm">
 		<input type="hidden" name="news_id" value="">
 	</form>	
-	<form action="viewAllNews.php" method="POST" id="deleteNewsForm">
+	<form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" id="deleteNewsForm">
 		<input type="hidden" name="deleteNewsId" value="">
 	</form>	
 	<form action="editNews.php" method="POST" id="editNewsForm">
 		<input type="hidden" name="editNewsId" value="">
 	</form>	
-	<form action="viewAllNews.php" method="POST" id="approvalForm">
+	<form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" id="approvalForm">
 		<input type="hidden" name="for_approval_id" value="">
 	</form>
 	<head>
@@ -119,120 +119,80 @@
             
             	<div class = "pagetitle" id="downadd">
             		<?php 
-						if($_SESSION['user_type'] != 1 || $_SESSION['is_officer'] == 1)
+						if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5)
 							echo '<a href="addNews.php" class="add">Add &#10133;</a>';
 					?>    	
             	</div>
             </div>
     	
 			<div class="content">
-				<?php
-				if ($_SESSION['is_admin'] == 1 || $_SESSION['is_moderator'] == 1) {
-					$query = 'SELECT * FROM news n, picture p WHERE n.picture_id = p.picture_id ORDER BY n.date_posted DESC';
-					$show_all = 1;
-				}
-				else {
-					$query = 'SELECT * FROM news n, picture p WHERE n.picture_id = p.picture_id AND n.is_approved = 1 ORDER BY n.date_posted DESC';
-					$show_all = 0;
-				}
-				
-					
-					$exec =  mysqli_query($conn, $query);
-					$num_rows = mysqli_num_rows($exec);
+			<?php
+				$query = 'select * from news n, picture p, users u where n.picture_id = p.picture_id and u.user_id = n.user_id order by date_posted desc';
+				$exec =  mysqli_query($conn, $query);
+				$num_rows = mysqli_num_rows($exec);
 
-					if($num_rows == 0){
-						echo '<i><div>Their are no News that are posted.<div></i>';
-					}
+				if($num_rows == 0){
+					echo '<i><div>Their are no News that are posted.<div></i>';
+				}else{
 					foreach($exec as $row){	
-						//echo $row['file_path'];
-						$date_posted = strtotime($row['date_posted']);
-						if ($_SESSION['is_admin'] == 1 || ($_SESSION['is_moderator'] == 1 && $row['is_approved'] == 0) || $_SESSION['user_id'] == $row['user_id'])  {
-							?>
-							<div class="card">
-							    <!-- Header -->
-							    <div class="card-img">
-							    	<img  src="<?php echo $row['file_path']?>">
-							      	<a href="#" class="rdmr" onclick="readMore('<?php echo $row['news_id']?>')">Read More</a>
-							    </div>
-							    <!-- Content-->
-							    <div class="card-content">
-							      	<div class="title"><?php echo $row['title']?></div>
-							      	<div class="desc">
-							      		<?php 
-							      			$words = explode(' ', $row['details']);
-							      			if(count($words) > 4){
-								      			for($i = 0; $i < 5; $i++){
-								      				echo $words[$i] . ' ';
-								      			}
-								      			echo '....';
-							      			}else
-							      				echo $row['details'];
-							      		?>
-							      	</div>
-							    </div>
-							    <!-- Footer-->
-							    <div class="admin-btn">
-									<?php if($_SESSION['is_moderator'] == 1 && $row['is_approved'] == 0) {
-										$padding = "15px 28px 15px 28px";
-										}
-										else {
-											$padding = NULL;
-										}
-									if ($_SESSION['is_moderator'] == 1 && $row['is_approved'] == 0) {
-									?>
-									<div class="edit" onclick="approve(<?php echo $row['news_id']?>)" style='padding:<?php echo $padding;?>;'><span>Approve</span>
-										<div class="label"></div>
-									</div>
-									<?php } ?>
-							    	<div class="edit" onclick="editNewsFunction(<?php echo $row['news_id']?>)" style='padding:<?php echo $padding;?>;'> <span >Edit</span>
-							        	<div class="label"></div>
-							      	</div>
-							      	<div class="delete" onclick="deleteNews(<?php echo $row['news_id']?>)" style='padding:<?php echo $padding;?>;'> <span >Delete</span>
-							        	<div class="label"></div>
-							      	</div>
-							    </div>
-							</div>
-							<?php
-						} else {
-							?>
-							<div class="card" style="margin-top: 15%;">
-							    <!-- Header -->
-							    <div class="card-img">
-							    	<img src="<?php echo $row['file_path']?>">
-							      	<a href="#" class="rdmr" onclick="readMore('<?php echo $row['news_id']?>')">Read More</a>
-							    </div>
-							    <!-- Content-->
-							    <div class="card-content">
-							      	<div class="title"><?php echo $row['title'] ?></div>
-									
-							      	<div class="desc">
-							      		<?php 
-							      			$words = explode(' ', $row['details']);
-							      			$size = sizeof($words) / 5;
-							      			for($i = 0; $i <= $size; $i++){
-							      				echo $words[$i] . ' ';
-							      			}
-							      			echo '....';
-							      		?>
-							      	</div>
-							    </div>
+						$dateTime = new DateTime($row['date_posted'], new DateTimeZone('Asia/Kolkata')); ?>
+						<div class="card">
+						    <!-- Header -->
+						    <div class="card-img">
+						    	<img src="<?php echo $row['file_path']?>">
+						      	<?php echo '<a class="rdmr" onclick="readMore(' .  $row['news_id'] . ')">Read More</a>';?>
+						    </div>
+						    <!-- Content-->
+						    <div class="card-content">
+						      	<div class="title"><?php echo $row['title'] ?></div>
+						      	<div class="desc">
+						      	<!-- Footer-->
+						      	<?php 
+					      			$words = explode(' ', $row['details']);
+					      			echo '<strong>Posted: ' . $dateTime->format("d/m/y  H:i A") . ' </strong><br>';
+					      			if(count($words) > 4){
+						      			for($i = 0; $i < 5; $i++){
+						      				echo $words[$i] . ' ';
+						      			}
+						      			echo '....';
+					      			}else
+					      				echo $row['details'];
 
-							    
-							    <!-- Footer-->
-							    <div class="div">
-							    	<i class="i"><strong>Date posted: </strong><?php $tmp = strtotime($row['date_posted']); echo date("M/d/Y", $tmp);?></i>
-							    	 <?php
-								    	$query = 'SELECT * FROM users WHERE user_id = \'' . $row['user_id'] . '\'';
-								    	
-								    	$poster_row = mysqli_query($conn, $query);
-								    	foreach($poster_row as $poster){
-							   		 		echo '<i class="i"> <strong>By:</strong> ' . $poster['first_name'] . '</i>';
-							    		}
-							    	?>
-							    </div>
-							</div>
-							<?php
-						} 
+									if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
+								    
+								    	if($row['user_type'] == 5 && ($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3)){?>
+									    	<div class="admin-btn">
+									    		<div class="edit" style="padding: 0 -20% 0px -0;" onclick="editNewsFunction(<?php echo $row['news_id']?>)"> <span>Approved</span>
+										        	<div class="label"></div>
+										      	</div>
+										    	<div class="edit" style="padding: 0px -5px 0px -5px" onclick="editNewsFunction(<?php echo $row['news_id']?>)"> <span>Edit</span>
+										        	<div class="label"></div>
+										      	</div>
+										      	<div class="delete" style="padding: 0px -5px 0px -5px" onclick="deleteNews(<?php echo $row['news_id']?>)"> <span>Delete</span>
+										        	<div class="label"></div>
+										      	</div>
+										    </div>
+										   </div>
+									    <?php
+									    }else{?>
+										    <div class="admin-btn">
+										    	<div class="edit" onclick="editNewsFunction(<?php echo $row['news_id']?>)"> <span>Edit</span>
+										        	<div class="label"></div>
+										      	</div>
+										      	<div class="delete" onclick="deleteNews(<?php echo $row['news_id']?>)"> <span>Delete</span>
+										        	<div class="label"></div>
+										      	</div>
+										    </div>
+										   </div>
+									<?php
+										}
+									}else{?>
+										</div>
+									    </div>
+									    </div>
+									<?php
+									}
+						}
 					}
 				?>
  			</div>

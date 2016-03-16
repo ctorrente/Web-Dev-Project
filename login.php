@@ -2,7 +2,7 @@
 <?php
 	$servername = "localhost";
 	$username = "root";
-	$password = "admin";
+	$password = "sS201211235";
 	$dbname = "dcs_project";
 
 	// Create connection

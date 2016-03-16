@@ -23,7 +23,6 @@
 		$file_ext = strtolower(pathinfo($file_name ,PATHINFO_EXTENSION));
 		$user_id = $_SESSION['user_id'];
 		
-		
 		$allowedExt = array('gif', 'jpeg', 'jpg', 'png');
 		if(in_array($file_ext, $allowedExt) && $file_size < 2000000){
 
@@ -36,9 +35,11 @@
 			$query = 'insert into picture(picture_id, file_name, file_path) values('. "$totalPictures, '$file_name'," . "'$file_path'" . ')';
 			$exec = mysqli_query($conn, $query);
 			//echo $query;
-
-			$query = "insert into news(user_id, picture_id, title, details, date_posted, is_approved) VALUES(" . $user_id . ", " . $totalPictures . ", '" . $title . "', '" . $details . "', NOW(), " . $approved . ")";
-			
+			$query = "";
+			if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3)
+				$query = "insert into news(user_id, picture_id, title, details, date_posted, is_approved, user_type) VALUES(" . $user_id . ", " . $totalPictures . ", '" . $title . "', '" . $details . "', NOW(), 1, 9)";
+			if($_SESSION['user_type'] == 5)
+				$query = "insert into news(user_id, picture_id, title, details, date_posted, is_approved, user_type) VALUES(" . $user_id . ", " . $totalPictures . ", '" . $title . "', '" . $details . "', NOW(), 0, 9)";
 			//echo $query;
 			$exec = mysqli_query($conn, $query);
 			
@@ -90,8 +91,8 @@
 <?php require('navbar.php'); ?>
 
 <!--ADD NEWS FORM-->
-<div class="container">
-	<div class="content-wrapper">
+<div class="container"style="height: 600px">
+	<div class="content-wrapper" >
 		<div class="content">
 			<form class="addeve" enctype="multipart/form-data" method="POST" action="addNews.php">
 				<h1>Add News</h1>
@@ -104,8 +105,8 @@
 	</div>
 </div>
 
-<footer>
-	<div class="lookWrap">
+<footer >
+	<div class="lookWrap" >
 		<a class="btn btn-lg btn-success js-modal" href="#" role="button" data-toggle="modal" data-target="#demoModal"><h2>Contact Us</h2></a>
 		<div id="look">
 			<div class="contactus">

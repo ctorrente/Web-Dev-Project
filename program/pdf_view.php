@@ -1,5 +1,5 @@
 <?php
-	$conn = mysqli_connect('localhost', 'root', 'admin', 'dcs_project');
+	$conn = mysqli_connect('localhost', 'root', 'sS201211235', 'dcs_project');
 	$curriculum_id = $_GET['curriculum_id'];
 	$pdfviews = mysqli_query($conn, "UPDATE curriculum_downloads SET download_count_value = download_count_value + 1 WHERE curriculum_id = " . $curriculum_id . ";");
 	

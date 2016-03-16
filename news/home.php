@@ -51,17 +51,27 @@
 				<li><a href='#'>Admission</a></li>
 				<li><a href='#'>Faculty</a></li>
 				<?php 
-					if($_SESSION['user_type'] != 1){
-						echo '<li class="has-sub" style="float: left;"><a href="#">News</a>' . 
+					if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
+						echo '<li class="has-sub" style="float: left;"><a href="viewAllNews.php">News</a>' . 
 							'<ul>' . 
 								'<li><a href="viewAllNews.php">All News</a></li>' . 
-								'<li><a href="MyNews">My Posted News</a></li>' . 
-							'<li><a href="addNews.php">Add News</a></li>'.
+								'<li><a href="forFaculties.php">For faculties</a></li>' . 
+								'<li><a href="forOrgOfficers.php">For org. officers</a></li>' . 
+								'<li><a href="forStudents.php">For students</a></li>' . 
+								'<li><a href="forAlumni.php">For alumni</a></li>' . 
+								'<li><a href="forGuests.php">For guests</a></li>' . 
 							'</ul>'.
 						'</li>';
-					}else
+					}else{
 						echo '<li><a href="viewAllNews.php">News</a></li>';
+					}
 				?>
+				<li><a href='../events/calendar/calendar.php'>Events</a></li>
+				<li><a href='../program/course_list.php'>Courses</a></li>
+				<li><a href='../program/program_list.php'>Programs</a></li>
+				<?php if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
+					echo "<li><a href='../sitestatistics.php'>Statistics</a></li>";
+				} ?>
 				<li><a href='#'>Policies</a></li>
 
 				<li class='has-sub'><a href='#'><?php echo $_SESSION['first_name']?></a>

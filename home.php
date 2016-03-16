@@ -13,49 +13,7 @@
 		
 		$_SESSION['first_name'] = $info['first_name'];
 		$_SESSION['user_type'] = $info['user_type'];
-		
-		// CHECK IF USER IS STUDENT
-		if ($info['user_type'] == 1) {
-			$_SESSION['is_admin'] = 0;
-			$_SESSION['is_prog_coordinator'] = 0;
-			$_SESSION['is_moderator'] = 0;
-			// Check if Officer
-			$is_officer = mysqli_query($connect, "SELECT * FROM organization_officer WHERE student_id='".$info['username']."'");
-			if (mysqli_num_rows($is_officer) > 0) {
-				$officer_info = mysqli_fetch_assoc($is_officer);
-				$_SESSION['org_position'] = $officer_info['position'];
-				$_SESSION['is_officer'] = 1;
-			} else {
-				$_SESSION['is_officer'] = 0;
-			}
-		}
-		
-		// CHECK IF USER IS FACULTY
-		if ($info['user_type'] == 2) {
-			// Check if Chair/Admin
-			$is_admin = mysqli_fetch_assoc(mysqli_query($connect, "SELECT is_admin FROM faculty WHERE user_id=$id"));
-			if ($is_admin['is_admin'] == 1) {
-				$_SESSION['is_admin'] = 1;
-				$is_admin = 1;
-			} else {	
-				$is_admin = 0;
-				$_SESSION['is_admin'] = $is_admin;
-			}
-			// Check if Program Coordinator
-			$is_prog_coordinator = mysqli_fetch_assoc(mysqli_query($connect, "SELECT COUNT(faculty_id) as ct FROM program_coordinator WHERE faculty_id='".$info['username']."';"));
-			if ($is_prog_coordinator['ct'] == 1) {
-				$_SESSION['is_prog_coordinator'] = 1;
-			} else {
-				$_SESSION['is_prog_coordinator'] = 0;
-			}
-			// Check if Moderator
-			$is_moderator = mysqli_fetch_assoc(mysqli_query($connect, "SELECT COUNT(faculty_id) as ct FROM moderator WHERE faculty_id='".$info['username']."';"));
-			if ($is_moderator['ct'] == 1) {
-				$_SESSION['is_moderator'] = 1;
-			} else {
-				$_SESSION['is_moderator'] = 0;
-			}
-		}
+		$_SESSION['user_id']= $info['user_id'];
 	}
 	require('header.php');
 	require('carousel.php');

@@ -7,6 +7,7 @@
       .addeve input::-webkit-input-placeholder {
         color: #A9a9a9;
       }
+      
       .addeve input, .addeve textarea{
         border: 1px solid #A9a9a9;
         padding: 10px;
@@ -15,6 +16,7 @@
         border-radius: 5px;
         margin: 10px auto;
       }
+
       .addeve textarea{
         height: 8em;
       }

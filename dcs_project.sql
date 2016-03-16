@@ -30,12 +30,12 @@ DROP DATABASE IF EXISTS dcs_project;
 CREATE DATABASE IF NOT EXISTS `dcs_project` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `dcs_project`;
 
--- --------------------------------------------------------
+-- ----------------------------dlasdljsal----------------------------
 
 --
 -- Table structure for table `adviser`
 --
-
+  
 CREATE TABLE IF NOT EXISTS `adviser` (
   `faculty_id` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -293,15 +293,16 @@ CREATE TABLE IF NOT EXISTS `news` (
   `title` varchar(100) NOT NULL,
   `details` text,
   `date_posted` datetime DEFAULT NULL,
-  `is_approved` tinyint(1) NOT NULL
+  `is_approved` tinyint(1) NOT NULL,
+   user_type tinyint(1) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`news_id`, `user_id`, `picture_id`, `title`, `details`, `date_posted`, `is_approved`) VALUES
-(1, 1, 1, 'TRIAL VERSION', 'DROGA? DROGA?', '2016-03-09 16:52:24', 0);
+INSERT INTO `news` (`news_id`, `user_id`, `picture_id`, `title`, `details`, `date_posted`, `is_approved`, user_type) VALUES
+(1, 1, 1, 'TACTICS Election', 'Vote wise!', '2016-03-09 08:52:24', 0, 6);
 
 -- --------------------------------------------------------
 
@@ -525,25 +526,26 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_type`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `gender`, `birth_date`, `address`, `major`, `gbox_acct`) VALUES
-(1, 1, 's201311530', 'e10adc3949ba59abbe56e057f20f883e', 'Eric Xavier', 'Carreras', 'Rosales', 'M', '1990-09-19', '52 Abella Street Villa Sorabella Subdivision Naga City', 'IT', 'errosales@gbox.adnu.edu.ph'),
-(2, 1, 's201310531', 'e10adc3949ba59abbe56e057f20f883e', 'Xavier Eric', 'Carreras', 'Rosales', 'M', '1996-06-14', 'Z-1 Del Rosario, Naga City', 'CS', 'esotto@gbox.adnu.edu.ph'),
-(4, 1, 's201310500', 'e10adc3949ba59abbe56e057f20f883e', 'Marlou', 'marlou', 'marlou', 'M', '2013-01-03', 'Z-1 Del Rosario, Naga City', 'IS', 'mmarlou@gbox.adnu.edu.ph'),
-(5, 1, 's201310501', 'e10adc3949ba59abbe56e057f20f883e', 'justin', 'bababa', 'bieber', 'M', '2005-11-06', 'Z-1 Del Rosario, Naga City', 'CS', 'jbieber@gbox.adnu.edu.ph'),
-(6, 1, 's201310502', 'e10adc3949ba59abbe56e057f20f883e', 'maria', 'sasa', 'ozawa', 'F', '2016-03-06', 'Z-1 Del Rosario, Naga City', 'IS', 'mozawa@gbox.adnu.edu.ph'),
-(7, 1, 's200011234', 'e10adc3949ba59abbe56e057f20f883e', 'Student', 'Number', 'One', 'M', '1996-02-02', 'BETLOG AVENUE', 'IT', 'sone@gbox.adnu.edu.ph'),
-(8, 2, 'f200112345', 'e10adc3949ba59abbe56e057f20f883e', 'Adrian Leo', 'Tendenilla', 'Pajarillo', 'M', '1987-10-03', 'Camaligan', 'IT', 'apajarillo@gbox.adnu.edu.ph'),
-(9, 2, 'f201511000', 'e10adc3949ba59abbe56e057f20f883e', 'Mitchell Zachary', 'Bax', 'Imperial', 'M', '1991-03-10', 'Naga City', 'CS', 'miimperial@gbox.adnu.edu.ph'),
-(10, 2, 'f201511001', 'e10adc3949ba59abbe56e057f20f883e', 'John Sixto', 'Something', 'Santos', 'M', '1990-05-06', 'Naga City', 'IT', 'johnssantos@gbox.adnu.edu.ph'),
-(11, 2, 'f201511002', 'e10adc3949ba59abbe56e057f20f883e', 'Michelle', 'Buenagua', 'Santos', 'F', '1992-08-08', 'Naga City', 'IS', 'misantos@gbox.adnu.edu.ph'),
-(12, 2, 'f200410123', 'e10adc3949ba59abbe56e057f20f883e', 'Frederick', 'Yamaha', 'Olano', 'M', '1967-10-03', 'Naga City', 'CS', 'fzolano@gbox.adnu.edu.ph'),
-(13, 2, 'f201211001', 'e10adc3949ba59abbe56e057f20f883e', 'Jalea', 'Pantoja', 'Aureus', 'F', '1987-07-10', 'Naga City', 'IT', 'jaureus@gbox.adnu.edu.ph'),
+(1, 5, 's201311530', 'e10adc3949ba59abbe56e057f20f883e', 'Eric Xavier', 'Carreras', 'Rosales', 'M', '1990-09-19', '52 Abella Street Villa Sorabella Subdivision Naga City', 'IT', 'errosales@gbox.adnu.edu.ph'),
+(2, 6, 's201310531', 'e10adc3949ba59abbe56e057f20f883e', 'Xavier Eric', 'Carreras', 'Rosales', 'M', '1996-06-14', 'Z-1 Del Rosario, Naga City', 'CS', 'esotto@gbox.adnu.edu.ph'),
+(4, 6, 's201310500', 'e10adc3949ba59abbe56e057f20f883e', 'Marlou', 'marlou', 'marlou', 'M', '2013-01-03', 'Z-1 Del Rosario, Naga City', 'IS', 'mmarlou@gbox.adnu.edu.ph'),
+(5, 6, 's201310501', 'e10adc3949ba59abbe56e057f20f883e', 'justin', 'bababa', 'bieber', 'M', '2005-11-06', 'Z-1 Del Rosario, Naga City', 'CS', 'jbieber@gbox.adnu.edu.ph'),
+(6, 6, 's201310502', 'e10adc3949ba59abbe56e057f20f883e', 'maria', 'sasa', 'ozawa', 'F', '2016-03-06', 'Z-1 Del Rosario, Naga City', 'IS', 'mozawa@gbox.adnu.edu.ph'),
+(7, 6, 's200011234', 'e10adc3949ba59abbe56e057f20f883e', 'Student', 'Number', 'One', 'M', '1996-02-02', 'BETLOG AVENUE', 'IT', 'sone@gbox.adnu.edu.ph'),
+(8, 4, 'f200112345', 'e10adc3949ba59abbe56e057f20f883e', 'Adrian Leo', 'Tendenilla', 'Pajarillo', 'M', '1987-10-03', 'Camaligan', 'IT', 'apajarillo@gbox.adnu.edu.ph'),
+(9, 4, 'f201511000', 'e10adc3949ba59abbe56e057f20f883e', 'Mitchell Zachary', 'Bax', 'Imperial', 'M', '1991-03-10', 'Naga City', 'CS', 'miimperial@gbox.adnu.edu.ph'),
+(10, 4, 'f201511001', 'e10adc3949ba59abbe56e057f20f883e', 'John Sixto', 'Something', 'Santos', 'M', '1990-05-06', 'Naga City', 'IT', 'johnssantos@gbox.adnu.edu.ph'),
+(11, 4, 'f201511002', 'e10adc3949ba59abbe56e057f20f883e', 'Michelle', 'Buenagua', 'Santos', 'F', '1992-08-08', 'Naga City', 'IS', 'misantos@gbox.adnu.edu.ph'),
+(12, 1, 'f200410123', 'e10adc3949ba59abbe56e057f20f883e', 'Frederick', 'Yamaha', 'Olano', 'M', '1967-10-03', 'Naga City', 'CS', 'fzolano@gbox.adnu.edu.ph'),
+(13, 4, 'f201211001', 'e10adc3949ba59abbe56e057f20f883e', 'Jalea', 'Pantoja', 'Aureus', 'F', '1987-07-10', 'Naga City', 'IT', 'jaureus@gbox.adnu.edu.ph'),
 (14, 2, 'f201211002', 'e10adc3949ba59abbe56e057f20f883e', 'Rey', 'Man', 'Vidallo', 'M', '1982-05-03', 'Naga City', 'CS', 'rvidallo@gbox.adnu.edu.ph'),
-(16, 2, 'f200811000', 'e10adc3949ba59abbe56e057f20f883e', 'Cecilbeth', 'Ibanez', 'Vidallo', 'F', '1984-01-03', 'Naga City', 'IT', 'cvidallo@gbox.adnu.edu.ph'),
-(17, 2, 'f201311000', 'e10adc3949ba59abbe56e057f20f883e', 'Marianne', 'P-something', 'Ang', 'F', '1988-05-17', 'Naga City', 'CS', 'mang@gbox.adnu.edu.ph'),
-(18, 2, 'f200111000', 'e10adc3949ba59abbe56e057f20f883e', 'Joshua', 'Something', 'Martinez', 'M', '1976-08-14', 'Naga City', 'IT', 'jmartinez@gbox.adnu.edu.ph'),
-(19, 1, 's200412345', 'e10adc3949ba59abbe56e057f20f883e', 'One', 'Sample', 'Student', 'M', '1987-06-06', 'Naga City Camarines Sur', 'CS', 'ostudent@gbox.adnu.edu.ph'),
-(20, 1, 's200412000', 'e10adc3949ba59abbe56e057f20f883e', 'Another', 'Sample', 'Student', 'M', '1987-10-14', 'Naga City Camarines Sur', 'IS', 'anstudent@gbox.adnu.edu.ph'),
-(21, 1, 's200412001', 'e10adc3949ba59abbe56e057f20f883e', 'Just another', 'Sample', 'Student', 'F', '1990-12-12', 'Naga City Camarines Sur', 'IT', 'jastudent@gbox.adnu.edu.ph');
+(16, 4, 'f200811000', 'e10adc3949ba59abbe56e057f20f883e', 'Cecilbeth', 'Ibanez', 'Vidallo', 'F', '1984-01-03', 'Naga City', 'IT', 'cvidallo@gbox.adnu.edu.ph'),
+(17, 3, 'f201311000', 'e10adc3949ba59abbe56e057f20f883e', 'Marianne', 'P-something', 'Ang', 'F', '1988-05-17', 'Naga City', 'CS', 'mang@gbox.adnu.edu.ph'),
+(18, 4, 'f200111000', 'e10adc3949ba59abbe56e057f20f883e', 'Joshua', 'Something', 'Martinez', 'M', '1976-08-14', 'Naga City', 'IT', 'jmartinez@gbox.adnu.edu.ph'),
+(19, 6, 's200412345', 'e10adc3949ba59abbe56e057f20f883e', 'One', 'Sample', 'Student', 'M', '1987-06-06', 'Naga City Camarines Sur', 'CS', 'ostudent@gbox.adnu.edu.ph'),
+(20, 6, 's200412000', 'e10adc3949ba59abbe56e057f20f883e', 'Another', 'Sample', 'Student', 'M', '1987-10-14', 'Naga City Camarines Sur', 'IS', 'anstudent@gbox.adnu.edu.ph'),
+(21, 6, 's200412001', 'e10adc3949ba59abbe56e057f20f883e', 'Just another', 'Sample', 'Student', 'F', '1990-12-12', 'Naga City Camarines Sur', 'IT', 'jastudent@gbox.adnu.edu.ph'),
+(22, 8, 'guest', 'e10adc3949ba59abbe56e057f20f883e', 'Guest', 'Guest', 'Guest', 'F', '1990-12-12', 'Naga City Camarines Sur', 'IT', 'guest@gbox.adnu.edu.ph');
 
 -- --------------------------------------------------------
 

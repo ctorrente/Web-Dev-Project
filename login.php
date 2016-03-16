@@ -61,12 +61,20 @@
 </head>
 <body>
 	<img src="img/dcs-sign.png" height="60">
-	    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+		<script type="text/javascript">
+		function loginFormFunction(){
+			var form = document.getElementById("loginForm");
+			form.username.value = 'guest';
+			form.password.value = '123456';
+			form.submit();
+		}
+		</script>
+	    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" id="loginForm">
 		<p><h2>Login to your DCS account</h2></p>
 		    <input type="text" name="username" placeholder="Username"/><br>
 		    <input type="password" name="password" placeholder="Password"/><br>
 		    <input type = "submit" name="btnLogin" value="Login" /> <br>
-		    <input type="submit" name="btnLoginGuest" value="Login as Guest" /><br>
+		    <input type="submit" name="btnLoginGuest" value="Login as Guest" onclick="loginFormFunction()"/><br>
 	    </form>
 	<footer>
 		<div class="lookWrap">
@@ -99,7 +107,7 @@
 </body>
 
 <?php
-	if(isset($_POST['btnLogin'])) {
+	if(isset($_POST['btnLogin']) || isset($_POST['btnLoginGuest'])) {
 		$username = $_POST['username'];
 		$password = md5($_POST['password']);
 		

@@ -37,16 +37,15 @@
 			//echo $query;
 			$query = "";
 			if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3)
-				$query = "insert into news(user_id, picture_id, title, details, date_posted, is_approved, user_type) VALUES(" . $user_id . ", " . $totalPictures . ", '" . $title . "', '" . $details . "', NOW(), 1, 7)";
+				$query = "insert into news(user_id, picture_id, title, details, date_posted, is_approved, user_type) VALUES(" . $user_id . ", " . $totalPictures . ", '" . $title . "', '" . $details . "', NOW(), 1, 8)";
 			if($_SESSION['user_type'] == 5)
-				$query = "insert into news(user_id, picture_id, title, details, date_posted, is_approved, user_type) VALUES(" . $user_id . ", " . $totalPictures . ", '" . $title . "', '" . $details . "', NOW(), 0, 7)";
+				$query = "insert into news(user_id, picture_id, title, details, date_posted, is_approved, user_type) VALUES(" . $user_id . ", " . $totalPictures . ", '" . $title . "', '" . $details . "', NOW(), 0, 8)";
 			//echo $query;
 			$exec = mysqli_query($conn, $query);
 			
 			move_uploaded_file($_FILES['picture']['tmp_name'], $file_path);
 			echo "<script type='text/javascript'>alert('News Added!')</script>";
-			echo "<script>setTimeout(\"location.href = 'forAlumnus.php';\",100);</script>";
-		
+			echo "<script>setTimeout(\"location.href = 'forGuests.php';\",100);</script>";
 		}else{
 			echo '<script type="text/javascript">alert("Invalid File")</script>';
 		}
@@ -95,7 +94,7 @@
 	<div class="content-wrapper" >
 		<div class="content">
 			<form class="addeve" enctype="multipart/form-data" method="POST" action="<?php echo $_SERVER['PHP_SELF']?>">
-				<h1>Add News for Students</h1>
+				<h1>Add News for Guests</h1>
 				<input type="text" name="title" placeholder="Title" required>
 				<input type="file" name="picture" placeholder="Browse" required>
 				<textarea name="details" placeholder="Details" required></textarea>

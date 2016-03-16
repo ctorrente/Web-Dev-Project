@@ -114,20 +114,20 @@
 		<div class="content-wrapper" >
 			<div class="ptcontainer">
 				<div class = "pagetitle">
-           			<p> All News </p>
+           			<p> Alumnus</p>
             	</div>
             
             	<div class = "pagetitle" id="downadd">
             		<?php 
 						if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5)
-							echo '<a href="addNews.php" class="add">Add &#10133;</a>';
+							echo '<a href="addNewsForAlumnus.php" class="add">Add &#10133;</a>';
 					?>    	
             	</div>
             </div>
     	
 			<div class="content">
 			<?php
-				$query = 'select * from news n, picture p, users u where n.picture_id = p.picture_id and u.user_id = n.user_id order by date_posted desc';
+				$query = 'select * from news n, picture p, users u where n.picture_id = p.picture_id and u.user_id = n.user_id and n.user_type = 7 order by date_posted desc';
 				$exec =  mysqli_query($conn, $query);
 				$num_rows = mysqli_num_rows($exec);
 

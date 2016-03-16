@@ -19,7 +19,7 @@
 								'<li><a href="forFaculties.php">For faculties</a></li>' . 
 								'<li><a href="forOrgOfficers.php">For org. officers</a></li>' . 
 								'<li><a href="forStudents.php">For students</a></li>' . 
-								'<li><a href="forAlumni.php">For alumnus</a></li>' . 
+								'<li><a href="forAlumnus.php">For alumnus</a></li>' . 
 								'<li><a href="forGuests.php">For guests</a></li>' . 
 							'</ul>'.
 						'</li>';

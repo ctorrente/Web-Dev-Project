@@ -6,27 +6,35 @@ body, html{
 a[data-toggle="open-modal"] {
 	cursor: pointer;
 }
-
+.modal input::-webkit-input-placeholder {
+  color: #A9A9A9;
+}
 /*white thingy with dcs logo @ very top*/
 
 .toplogo{
-	background: rgba(255,255,255, .50);
+	background: white;
 	width: 100%;
 	display: block;
 	margin: 0 auto;
 	position: fixed;
 	z-index: 2;
+    /*
+    -webkit-filter: blur(20px);
+    filter: blur(20px);
+    opacity: 0.4;
+    */
 }
 .toplogo a img{
 	padding: 5px;
 	display: block;
 	margin: 0 auto;
     height: 43px;
+    z-index: 10000;
 }
 
 /* Navbar */
 .nav {
-	margin-top: 25px;
+	margin-top:  25px;
 	border-bottom: 1px solid white;
 	background: #1C558D;
 	transition: all 0.2s;
@@ -45,8 +53,11 @@ a[data-toggle="open-modal"] {
 .container {
 	padding-right:15px;
 	padding-left:15px;
-	margin-right:auto;
-	margin-left:auto;
+	margin: 0 auto;
+}
+.content{
+
+	margin-top: 25px;
 }
 @media (min-width:768px){
 	.container{
@@ -73,7 +84,7 @@ a[data-toggle="open-modal"] {
     right: 0;
     left: 0;
     display: none;
-    z-index: 3;
+    z-index: 10000000;
 }
 
 .modal-backdrop {
@@ -127,4 +138,13 @@ body{
 a{
 	text-decoration: none;
 	color: white;
+}
+::-webkit-scrollbar {
+    width: 7px; 
+    height: 5px;
+    background: #F0F0F0;
+}
+::-webkit-scrollbar-thumb { 
+    background-color: #888888; 
+	-webkit-border-radius: 4ex; 
 }

@@ -7,7 +7,7 @@
 		<link rel="stylesheet" href="css/styles.css">
 		<link rel="stylesheet" href="css/navbar-footer.css">
 		<link rel="stylesheet" href="css/carousel.css">
-
+		<link rel="stylesheet" href="css/accordion.css">
 		<script src="js/jquery-latest.min.js" type="text/javascript"></script>
 		<script src="js/script.js"></script>
 		<script src="js/home.js"></script>

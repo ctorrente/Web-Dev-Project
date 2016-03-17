@@ -134,6 +134,12 @@
 	    		<a onclick="deleteNews(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 5%;">Delete</a>
     	<?php 
     		}
+    		if($_SESSION['user_type'] == $num_rows['user_type']){
+    	?>
+    			<a onclick="editNewsFunction(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 5%;">Edit</a>
+	    		<a onclick="deleteNews(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 5%;">Delete</a>
+    	<?php
+    		}
     		if(isset($_POST['news_idSave']) && ($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3) || $_SESSION['user_id'] == $num_rows['user_id']){
     	?>
 				<a onclick="editNewsFunction(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 5%;">Edit</a>
@@ -142,18 +148,18 @@
     		}
     	?>
 			<div class="content">
-				<div style="font-size: 30px; margin-left: 5%; margin-top: 2%;">
-					<h2 >Headline</h2>
-				</div>
-				<div style="margin-top: 20%">
+				
 				<?php
 					if(isset($_POST['news_id'])){
 						$query = 'SELECT * FROM news n, picture p, users u WHERE n.news_id = ' .  $_POST['news_id'] . ' AND ' .
 						'n.picture_id = p.picture_id AND n.user_id = u.user_id';
 						$exec = mysqli_query($conn, $query);
 						$row = mysqli_fetch_assoc($exec);
-
-						echo '<h1 style="margin: 0 auto; text-align: center;">' .  $row['title'] . '</h1>';
+				?>
+					<div style="font-size: 30px; margin-left: 5%; margin-top: 2%;">
+						<h2 ><?php echo $row['title']?></h2>
+					</div>
+				<?php
 						echo '<br><br><div><i><strong >By: </strong>' . $row['first_name'] . ' <strong>| Date posted: </strong>' . $row['date_posted'] . '</i></div>';
 						echo '<img style="margin-top: 2%;" src="' . 'newsPictures/' . $row['file_name'] . '" width="900" height=300>'; 
 						echo '<p><strong>Details: </strong>' . $row['details'] . '</p>';

@@ -28,7 +28,7 @@
 	if (isset($_POST['for_approval_id'])) {
 		$query = "UPDATE news SET is_approved = 1 WHERE news_id = " . $_POST['for_approval_id'] . ";";
 		$exec = mysqli_query($conn, $query);
-		echo '<script type="text/javascript">alert("Aprub!")</script>';
+		echo '<script type="text/javascript">alert("' . $_POST['for_approval_id'] . '")</script>';
 	}
 	date_default_timezone_set('Asia/Manila');
 ?>
@@ -98,6 +98,20 @@
 		<script src="js/home.js"></script>
 		<title>Adnu DCS</title>
 		<style type="text/css">
+			a{
+				color: black;
+			}
+			li{
+				display: inline;
+			}
+			body{
+				font-family: "Trebuchet MS", Arial, Halvetica, sans-serif;
+			}
+			div#pagination_controls{
+				font-size: 21px;
+			}
+			div#pagination_controls > a{ color: #06F;}
+			div#pagination_controls > a:visited{ color: #06F;}
 		</style>
 	</head>
 <body>
@@ -124,78 +138,175 @@
 					?>    	
             	</div>
             </div>
-    	
+
 			<div class="content">
 			<?php
-				$query = 'select * from news n, picture p, users u where n.picture_id = p.picture_id and u.user_id = n.user_id order by date_posted desc';
-				$exec =  mysqli_query($conn, $query);
-				$num_rows = mysqli_num_rows($exec);
+				$sql = "SELECT count(*) from news";
+				$query = mysqli_query($conn, $sql);
+				$row = mysqli_fetch_row($query);
+				$rows = $row[0];
+				$page_rows = 3;
+				$last = ceil($rows/$page_rows);
 
-				if($num_rows == 0){
+				if($last < 1)
+					$last = 1;
+
+				$pagenum = 1;
+				if(isset($_GET['pn'])){
+					$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
+				}
+
+				//this makes sure that page number is less 1 or more than last our last page
+				if($pagenum < 1)
+					$pagenum = 1;
+				else if ($pagenum > $last) {
+					$pagenum = $last;
+				}
+
+				$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ', ' . $page_rows;
+				$sql = "select * from news n, picture p, users u where n.picture_id = p.picture_id and u.user_id = n.user_id order by date_posted desc $limit";
+				$query = mysqli_query($conn, $sql);
+				$textline1 = "ldap_count_entries(link_identifier, result_identifier) (<b>$rows<b>)";
+				$textline2 = "Page (<b>$pagenum<b> of <b>$last<b>)";
+				$paginationCtrls = '';
+
+				if($last != 1){
+					if($pagenum > 1){
+						$previous = $pagenum - 1;
+						$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn='.$previous.'">Previous</a> &nbsp; &nbsp; ';  
+					
+						for($i = $pagenum - 4; $i < $pagenum; $i++){
+							if($i > 0){
+								$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn='.$i.'">'.$i. '</a> &nbsp; ';  
+							}
+						}
+					}
+
+
+					$paginationCtrls .=''.$pagenum.' &nbsp; ';
+					for($i = $pagenum +1; $i <=  $last; $i++){
+						$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn='.$i.'">'.$i. '</a> &nbsp; '; 
+						if($i >= $pagenum+4){
+							break;
+						}
+					}
+
+					if($pagenum != $last){
+						$next = $pagenum+1;
+						$paginationCtrls .= '&nbsp; &nbsp; <a href="' . $_SERVER['PHP_SELF'] . '?pn='.$next.'">Next</a> ';  
+					}
+				}
+			?>
+			<p><?php echo $textline2; ?></p>
+			<?php
+				if($rows == 0){
 					echo '<i><div>Their are no News that are posted.<div></i>';
 				}else{
-					foreach($exec as $row){	
-						$dateTime = new DateTime($row['date_posted'], new DateTimeZone('Asia/Kolkata')); ?>
-						<div class="card">
-						    <!-- Header -->
-						    <div class="card-img">
-						    	<img src="<?php echo $row['file_path']?>">
-						      	<?php echo '<a class="rdmr" onclick="readMore(' .  $row['news_id'] . ')">Read More</a>';?>
-						    </div>
-						    <!-- Content-->
-						    <div class="card-content">
-						      	<div class="title"><?php echo $row['title'] ?></div>
-						      	<div class="desc">
-						      	<!-- Footer-->
-						      	<?php 
-					      			$words = explode(' ', $row['details']);
-					      			echo '<strong>Posted: ' . $dateTime->format("d/m/y  H:i A") . ' </strong><br>';
-					      			echo '<strong>By: ' . $row['first_name'] . ' </strong><br><br>';
-					      			if(count($words) > 4){
-						      			for($i = 0; $i < 5; $i++){
-						      				echo $words[$i] . ' ';
-						      			}
-						      			echo '....';
-					      			}else
-					      				echo $row['details'];
 
-									if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
-								    
-								    	if($row['user_type'] == 5 && ($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3)){?>
-									    	<div class="admin-btn">
-									    		<div class="edit" style="padding: 0 -20% 0px -0;" onclick="editNewsFunction(<?php echo $row['news_id']?>)"> <span>Approved</span>
-										        	<div class="label"></div>
-										      	</div>
-										    	<div class="edit" style="padding: 0px -5px 0px -5px" onclick="editNewsFunction(<?php echo $row['news_id']?>)"> <span>Edit</span>
-										        	<div class="label"></div>
-										      	</div>
-										      	<div class="delete" style="padding: 0px -5px 0px -5px" onclick="deleteNews(<?php echo $row['news_id']?>)"> <span>Delete</span>
-										        	<div class="label"></div>
-										      	</div>
-										    </div>
-										   </div>
-									    <?php
-									    }else{?>
-										    <div class="admin-btn">
-										    	<div class="edit" onclick="editNewsFunction(<?php echo $row['news_id']?>)"> <span>Edit</span>
-										        	<div class="label"></div>
-										      	</div>
-										      	<div class="delete" onclick="deleteNews(<?php echo $row['news_id']?>)"> <span>Delete</span>
-										        	<div class="label"></div>
-										      	</div>
-										    </div>
-										   </div>
-									<?php
-										}
-									}else{?>
+					while($row =  mysqli_fetch_array($query, MYSQL_ASSOC)){
+						if($row['is_approved'] && ($_SESSION['user_type'] == 6 || $_SESSION['user_type'] == 7 || $_SESSION['user_type'] == 8)){
+							$dateTime = new DateTime($row['date_posted'], new DateTimeZone('Asia/Kolkata')); ?>
+							<div class="card">
+							    <!-- Header -->
+							    <div class="card-img">
+							    	<img src="<?php echo $row['file_path']?>">
+							      	<?php echo '<a class="rdmr" onclick="readMore(' .  $row['news_id'] . ')">Read More</a>';?>
+							    </div>
+							    <!-- Content-->
+							    <div class="card-content">
+							      	<div class="title"><?php echo $row['title'] ?></div>
+							      	<div class="desc">
+							      	<!-- Footer-->
+							      	<?php 
+						      			$words = explode(' ', $row['details']);
+						      			echo '<strong>Posted: ' . $dateTime->format("d/m/y  H:i A") . ' </strong><br>';
+						      			echo '<strong>By: ' . $row['first_name'] . ', ';
+						      			if($row['is_approved'] == 0 && $_SESSION['user_id'] == $row['user_id'])
+						      				echo 'Not yet approved</strong><br><br>';
+						      			else
+						      				echo 'Approved</strong><br><br>';
+						      			if(count($words) > 4){
+							      			for($i = 0; $i < 5; $i++){
+							      				echo $words[$i] . ' ';
+							      			}
+							      			echo '....';
+						      			}else
+						      				echo $row['details'];
+
+										?>
+									</div>
+								</div>
+							</div>
+							<?php
+							}else{
+								if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
+									$dateTime = new DateTime($row['date_posted'], new DateTimeZone('Asia/Kolkata')); ?>
+									<div class="card">
+									    <!-- Header -->
+									    <div class="card-img">
+									    	<img src="<?php echo $row['file_path']?>">
+									      	<?php echo '<a class="rdmr" onclick="readMore(' .  $row['news_id'] . ')">Read More</a>';?>
+									    </div>
+									    <!-- Content-->
+									    <div class="card-content">
+									      	<div class="title"><?php echo $row['title'] ?></div>
+									      	<div class="desc">
+									      	<!-- Footer-->
+									      	<?php 
+								      			$words = explode(' ', $row['details']);
+								      			echo '<strong>Posted: ' . $dateTime->format("d/m/y  H:i A") . ' </strong><br>';
+								      			echo '<strong>By: ' . $row['first_name'] . ', ';
+								      			if($row['is_approved'] == 0 && $_SESSION['user_id'] == $row['user_id'])
+								      				echo 'Not yet approved</strong><br><br>';
+								      			else
+								      				echo 'Approved</strong><br><br>';
+								      			if(count($words) > 4){
+									      			for($i = 0; $i < 5; $i++){
+									      				echo $words[$i] . ' ';
+									      			}
+									      			echo '....';
+								      			}else
+								      				echo $row['details'];
+								      			if($row['user_type'] == 5 && $row['is_approved'] == 0 && ($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3)){?>
+											    	<div class="admin-btn">
+											    		<div class="edit" style="padding: 0 -20% 0px -0;" onclick="editNewsFunction(<?php echo $row['news_id']?>)"> <span>Approved</span>
+												        	<div class="label"></div>
+												      	</div>
+												    	<div class="edit" style="padding: 0px -5px 0px -5px" onclick="editNewsFunction(<?php echo $row['news_id']?>)"> <span>Edit</span>
+												        	<div class="label"></div>
+												      	</div>
+												      	<div class="delete" style="padding: 0px -5px 0px -5px" onclick="deleteNews(<?php echo $row['news_id']?>)"> <span>Delete</span>
+												        	<div class="label"></div>
+												      	</div>
+												    </div>
+											</div>
 										</div>
-									    </div>
-									    </div>
+									</div>
+										    <?php
+										    }else{?>
+											    <div class="admin-btn">
+											    	<div class="edit" onclick="editNewsFunction(<?php echo $row['news_id']?>)"> <span>Edit</span>
+											        	<div class="label"></div>
+											      	</div>
+											      	<div class="delete" onclick="deleteNews(<?php echo $row['news_id']?>)"> <span>Delete</span>
+											        	<div class="label"></div>
+											      	</div>
+											 	</div>
+											</div>
+										</div>
+									</div>
 									<?php
 									}
+
+								}
+							}
 						}
 					}
 				?>
+
+				<div id="pagnation_controls">
+					<?php echo $paginationCtrls; ?>
+				</div>
  			</div>
 		</div>
 	</div>

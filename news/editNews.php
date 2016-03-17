@@ -17,9 +17,10 @@
 			logoutForm.submit();
 		}
 
-		function Validate(form){
+		function Validate(news_id){
 			var validFileExtension = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
 			var inputs = document.getElementsByTagName("input");
+			var form = document.getElementById("editForm");
 
 			for(var i = 0; i < inputs.length; i++){
 				if(inputs[i].type == "file"){
@@ -32,8 +33,10 @@
 						}
 					}
 
-					if(match || document.getElementById("picture").value = NULL)
+					if(match || form.picture.files.length == 0){
+						form.news_idSave.value = news_id;
 						return true;
+					}
 					else{
 						alert("Sorry, " + file_name + " is invalid, allowed extensions are: " + validFileExtension.join(", "));
                     	return false;
@@ -81,21 +84,18 @@
 					$exec = mysqli_query($conn, $query);
 					$row = mysqli_fetch_assoc($exec);
 			?>
-						<form class="addeve" onsubmit="return Validate(this);" enctype="multipart/form-data" method="POST" action="readMore.php">
-							<h1>Edit News</h1>
-							<input type="text" value="<?php echo $row['title']?>" name="title" placeholder="Title" required>
-							<?php
-									echo '<img style="margin-top: 2%;width:100%;" src="' . 'newsPictures/' . $row['file_name'] . '" height="300">'; 
-							
-							?>
-							<p>Change picture</p>
-							<input type="file" name="picture" id="picture" placeholder="Browse">
-							<textarea name="details" placeholder="Details" required>
-								<?php echo $row['details']?>
-							</textarea>
-							<input type="hidden" name="news_idSave" value="<?php echo $_POST['editNewsId']; ?>">
-							<input type="submit" name="save" value="Save">
-						</form>
+					<form class="addeve" id="editForm" onsubmit="return Validate(<?php echo $_POST['editNewsId']; ?>);" enctype="multipart/form-data" method="POST" action="readMore.php">
+						<h1>Edit News</h1>
+						<input type="text" value="<?php echo $row['title']?>" name="title" placeholder="Title" required>
+						<?php
+							echo '<img style="margin-top: 2%;width:100%;" src="' . 'newsPictures/' . $row['file_name'] . '" height="300">'; 
+						?>
+						<p>Change picture</p>
+						<input type="file" name="picture" id="picture" placeholder="Browse">
+						<textarea name="details" placeholder="Details" required><?php echo $row['details']?></textarea>
+						<input type="hidden" name="news_idSave" value="<?php echo $_POST['editNewsId']; ?>">
+						<input type="submit" name="save" value="Save">
+					</form>
 			<?php
 				}
 			?>

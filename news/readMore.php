@@ -23,19 +23,19 @@
 		$file_name = $_FILES['picture']['name'];
 		$file_ext = strtolower(pathinfo($file_name ,PATHINFO_EXTENSION));
 		$user_id = $_SESSION['user_id'];
-
 		$allowedExt = array('gif', 'jpeg', 'jpg', 'png');
-		if (isset($_POST['picture'])) {
-			if (in_array($file_ext, $allowedExt) && $file_size < 2000000){
+		if (isset($_FILES['picture']) && strlen($_FILES['picture']['name']) != 0) {
+			if (in_array($file_ext, $allowedExt) && $file_size < 5000000){
 				$totalPictures = getTotalPictures($conn);
-				$pic_id =  $totalPictures + 1;
+				$totalPictures =  $totalPictures + 1;
 				$file_name = $totalPictures . '.' . $file_ext;
-				//echo $file_name;
 				$file_path = 'newsPictures/' . $file_name;
-				//echo $file_path;
 				$query = 'insert into picture(picture_id, file_name, file_path) values('. "$totalPictures, '$file_name'," . "'$file_path'" . ')';
 				$exec = mysqli_query($conn, $query);
 				move_uploaded_file($_FILES['picture']['tmp_name'], $file_path);
+				$query = 'UPDATE news set picture_id = ' . $totalPictures  . ', title = "' . $title . '", details = "' . $details . '", date_posted = NOW() WHERE news_id = ' . $_POST['news_idSave'] . ' ;';
+				$exec = mysqli_query($conn, $query);
+				echo '<script type="text/javascript">alert("Success")</script>';
 			} else{
 				echo '<script type="text/javascript">alert("Invalid File")</script>';
 			}
@@ -43,11 +43,12 @@
 			$query = "SELECT picture_id FROM news WHERE news_id = ".$_POST['news_idSave'].";";
 			$row = mysqli_fetch_assoc(mysqli_query($conn, $query));
 			$pic_id = $row['picture_id'];
+			$query = 'UPDATE news set picture_id = ' . $pic_id . ', title = "' . $title . '", details = "' . $details . '", date_posted = NOW() WHERE news_id = ' . $_POST['news_idSave'] . ' ;';
+			$exec = mysqli_query($conn, $query);
+			echo '<script type="text/javascript">alert("Success")</script>';
 		}
 
-		$query = 'UPDATE news set picture_id = ' . $pic_id . ', title = "' . $title . '", details = "' . $details . '", date_posted = NOW() WHERE news_id = ' . $_POST['news_idSave'] . ' ;';
-		$exec = mysqli_query($conn, $query);
-		echo '<script type="text/javascript">alert("Success")</script>';
+		
 		
 		$query = 'SELECT * FROM news n, picture p, users u WHERE n.news_id = ' .  $_POST['news_idSave'] . ' AND ' .
 		'n.picture_id = p.picture_id AND n.user_id = u.user_id AND n.user_id = \'' . $_SESSION['user_id'] . '\'';
@@ -124,35 +125,41 @@
 	<div class="container">
 		<div class="content-wrapper" >
     	<?php 
-			if($_SESSION['user_type'] != 1)
+			if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 ||  $_SESSION['user_type'] == 5)
 				echo '<a href="addNews.php" class="btn" style="margin-top: 5%;">&#10133; Add</a>';
 
-    		if(isset($_POST['news_id']) && $num_rows > 0 && $_SESSION['user_type'] != 1 && !isset($_POST['news_idSave'])){
+    		if(isset($_POST['news_id']) && ($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3) && !isset($_POST['news_idSave'])){
     	?>
 				<a onclick="editNewsFunction(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 5%;">Edit</a>
 	    		<a onclick="deleteNews(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 5%;">Delete</a>
     	<?php 
     		}
-    		if(isset($_POST['news_idSave']) && $num_rows > 0 && $_SESSION['user_type'] != 1){
+    		if($_SESSION['user_type'] == $num_rows['user_type']){
+    	?>
+    			<a onclick="editNewsFunction(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 5%;">Edit</a>
+	    		<a onclick="deleteNews(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 5%;">Delete</a>
+    	<?php
+    		}
+    		if(isset($_POST['news_idSave']) && ($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3) || $_SESSION['user_id'] == $num_rows['user_id']){
     	?>
 				<a onclick="editNewsFunction(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 5%;">Edit</a>
 	    		<a onclick="deleteNews(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 5%;">Delete</a>
-    	<?php 
+    	<?php
     		}
     	?>
 			<div class="content">
-				<div style="font-size: 30px; margin-left: 5%; margin-top: 2%;">
-					<h2 >Headline</h2>
-				</div>
-				<div style="margin-top: 20%">
+				
 				<?php
 					if(isset($_POST['news_id'])){
 						$query = 'SELECT * FROM news n, picture p, users u WHERE n.news_id = ' .  $_POST['news_id'] . ' AND ' .
 						'n.picture_id = p.picture_id AND n.user_id = u.user_id';
 						$exec = mysqli_query($conn, $query);
 						$row = mysqli_fetch_assoc($exec);
-
-						echo '<h1 style="margin: 0 auto; text-align: center;">' .  $row['title'] . '</h1>';
+				?>
+					<div style="font-size: 30px; margin-left: 5%; margin-top: 2%;">
+						<h2 ><?php echo $row['title']?></h2>
+					</div>
+				<?php
 						echo '<br><br><div><i><strong >By: </strong>' . $row['first_name'] . ' <strong>| Date posted: </strong>' . $row['date_posted'] . '</i></div>';
 						echo '<img style="margin-top: 2%;" src="' . 'newsPictures/' . $row['file_name'] . '" width="900" height=300>'; 
 						echo '<p><strong>Details: </strong>' . $row['details'] . '</p>';

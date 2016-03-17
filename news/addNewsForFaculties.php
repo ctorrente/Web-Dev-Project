@@ -24,7 +24,7 @@
 		$user_id = $_SESSION['user_id'];
 		
 		$allowedExt = array('gif', 'jpeg', 'jpg', 'png');
-		if(in_array($file_ext, $allowedExt) && $file_size < 2000000){
+		if(in_array($file_ext, $allowedExt) && $file_size < 5000000){
 
 			$totalPictures = getTotalPictures($conn);
 			$totalPictures += 1;

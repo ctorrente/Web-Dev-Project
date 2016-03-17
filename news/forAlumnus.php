@@ -171,8 +171,9 @@
 										      	</div>
 										      	<div class="delete" style="padding: 0px -5px 0px -5px" onclick="deleteNews(<?php echo $row['news_id']?>)"> <span>Delete</span>
 										        	<div class="label"></div>
-										      	</div>
-										    </div>
+										       </div>
+										   </div>
+										   </div>
 										   </div>
 									    <?php
 									    }else{?>
@@ -184,6 +185,8 @@
 										        	<div class="label"></div>
 										      	</div>
 										    </div>
+										   </div>
+										   </div>
 										   </div>
 									<?php
 										}

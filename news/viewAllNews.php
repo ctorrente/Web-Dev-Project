@@ -104,6 +104,14 @@
 			li{
 				display: inline;
 			}
+			body{
+				font-family: "Trebuchet MS", Arial, Halvetica, sans-serif;
+			}
+			div#pagination_controls{
+				font-size: 21px;
+			}
+			div#pagination_controls > a{ color: #06F;}
+			div#pagination_controls > a:visited{ color: #06F;}
 		</style>
 	</head>
 <body>
@@ -130,26 +138,72 @@
 					?>    	
             	</div>
             </div>
-    	
-			<div class="content">
-			<ul class="pagination">
-				<li><a href="#">Previous</a></li>
-			  	<li><a href="#">1</a></li>
-			  	<li class="active"><a href="#">2</a></li>
-			  	<li><a href="#">3</a></li>
-			  	<li><a href="#">4</a></li>
-			  	<li><a href="#">5</a></li>
-			  	<li><a href="#">Next</a></li>
-			</ul>
-			<?php
-				$query = 'select * from news n, picture p, users u where n.picture_id = p.picture_id and u.user_id = n.user_id order by date_posted desc';
-				$exec =  mysqli_query($conn, $query);
-				$num_rows = mysqli_num_rows($exec);
 
-				if($num_rows == 0){
+			<div class="content">
+			<?php
+				$sql = "SELECT count(*) from news";
+				$query = mysqli_query($conn, $sql);
+				$row = mysqli_fetch_row($query);
+				$rows = $row[0];
+				$page_rows = 3;
+				$last = ceil($rows/$page_rows);
+
+				if($last < 1)
+					$last = 1;
+
+				$pagenum = 1;
+				if(isset($_GET['pn'])){
+					$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
+				}
+
+				//this makes sure that page number is less 1 or more than last our last page
+				if($pagenum < 1)
+					$pagenum = 1;
+				else if ($pagenum > $last) {
+					$pagenum = $last;
+				}
+
+				$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ', ' . $page_rows;
+				$sql = "select * from news n, picture p, users u where n.picture_id = p.picture_id and u.user_id = n.user_id order by date_posted desc $limit";
+				$query = mysqli_query($conn, $sql);
+				$textline1 = "ldap_count_entries(link_identifier, result_identifier) (<b>$rows<b>)";
+				$textline2 = "Page (<b>$pagenum<b> of <b>$last<b>)";
+				$paginationCtrls = '';
+
+				if($last != 1){
+					if($pagenum > 1){
+						$previous = $pagenum - 1;
+						$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn='.$previous.'">Previous</a> &nbsp; &nbsp; ';  
+					
+						for($i = $pagenum - 4; $i < $pagenum; $i++){
+							if($i > 0){
+								$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn='.$i.'">'.$i. '</a> &nbsp; ';  
+							}
+						}
+					}
+
+
+					$paginationCtrls .=''.$pagenum.' &nbsp; ';
+					for($i = $pagenum +1; $i <=  $last; $i++){
+						$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn='.$i.'">'.$i. '</a> &nbsp; '; 
+						if($i >= $pagenum+4){
+							break;
+						}
+					}
+
+					if($pagenum != $last){
+						$next = $pagenum+1;
+						$paginationCtrls .= '&nbsp; &nbsp; <a href="' . $_SERVER['PHP_SELF'] . '?pn='.$next.'">Next</a> ';  
+					}
+				}
+			?>
+			<p><?php echo $textline2; ?></p>
+			<?php
+				if($rows == 0){
 					echo '<i><div>Their are no News that are posted.<div></i>';
 				}else{
-					foreach($exec as $row){	
+
+					while($row =  mysqli_fetch_array($query, MYSQL_ASSOC)){
 						if($row['is_approved'] && ($_SESSION['user_type'] == 6 || $_SESSION['user_type'] == 7 || $_SESSION['user_type'] == 8)){
 							$dateTime = new DateTime($row['date_posted'], new DateTimeZone('Asia/Kolkata')); ?>
 							<div class="card">
@@ -246,10 +300,13 @@
 
 								}
 							}
-							
 						}
 					}
 				?>
+
+				<div id="pagnation_controls">
+					<?php echo $paginationCtrls; ?>
+				</div>
  			</div>
 		</div>
 	</div>

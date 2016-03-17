@@ -126,6 +126,13 @@
             </div>
     	
 			<div class="content">
+			<ul class="pagination">
+			  	<li><a href="#">1</a></li>
+			  	<li class="active"><a href="#">2</a></li>
+			  	<li><a href="#">3</a></li>
+			  	<li><a href="#">4</a></li>
+			  	<li><a href="#">5</a></li>
+			</ul>
 			<?php
 				$query = 'select * from news n, picture p, users u where n.picture_id = p.picture_id and u.user_id = n.user_id order by date_posted desc';
 				$exec =  mysqli_query($conn, $query);
@@ -174,6 +181,8 @@
 										      	</div>
 										    </div>
 										   </div>
+										   </div>
+										   </div>
 									    <?php
 									    }else{?>
 										    <div class="admin-btn">
@@ -184,6 +193,8 @@
 										        	<div class="label"></div>
 										      	</div>
 										    </div>
+										   </div>
+										   </div>
 										   </div>
 									<?php
 										}

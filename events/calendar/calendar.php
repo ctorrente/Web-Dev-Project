@@ -153,6 +153,11 @@
 		<button id="delete">Delete</button> 
 	</div>
 	
+	<div id="nonSubEvent" title="Event Details" style="display:none;">
+		<div id="nonSubEventDate"></div><br>
+		Description: <span id="nonSubEventInfo"></span><br><br>
+	</div>
+	
 	<div id="addEventContent" title="Add Event" style="display:none;">
 		<form method="post" action="<?php 
 					if ($_SESSION['user_type']==5)
@@ -264,7 +269,7 @@
 		}
 	});
 	var user = (document.getElementById("usertype")).innerHTML;
-	if (user != "6" && user != "7" && user != "8") {
+	if (user == "0" || user == "1" || user == "2" || user == "3" || user == "4") {
 		$(document).ready(function() {
 			$('#calendar').fullCalendar({
 				header: {
@@ -314,17 +319,27 @@
 				eventRender: function (event, element) {
 					element.attr('href', 'javascript:void(0);');
 					element.click(function() {
-						if (event.end)
-							$("#eventDate").html($.format.date(event.start.toString(), "MMM d") + " till " + $.format.date(event.end.toString(), "MMM d") );
-						else
-							$("#eventDate").html($.format.date(event.start.toString(), "MMM d ddd"));
-						$("#eventInfo").html(event.desc);
-						$("#eventContent").dialog({ modal: true, title: event.title, width:350});
-						$('#edit').click(function(){
-							$("#editEventContent").dialog({ modal: true, width:350});
-							$("#editTitle").val(event.title);
-							$("#editDesc").val(event.desc);
-						});
+						if (event.sub_by == user) {
+							if (event.end)
+								$("#eventDate").html($.format.date(event.start.toString(), "MMM d") + " till " + $.format.date(event.end.toString(), "MMM d") );
+							else
+								$("#eventDate").html($.format.date(event.start.toString(), "MMM d ddd"));
+							$("#eventInfo").html(event.desc);
+							$("#eventContent").dialog({ modal: true, title: event.title, width:350});
+							$('#edit').click(function(){
+								$("#editEventContent").dialog({ modal: true, width:350});
+								$("#editTitle").val(event.title);
+								$("#editDesc").val(event.desc);
+							});
+						}
+						else {
+							if (event.end)
+								$("#nonSubEventDate").html($.format.date(event.start.toString(), "MMM d") + " till " + $.format.date(event.end.toString(), "MMM d") );
+							else
+								$("#nonSubEventDate").html($.format.date(event.start.toString(), "MMM d ddd"));
+							$("#nonSubEventInfo").html(event.desc);
+							$("#nonSubEvent").dialog({ modal: true, title: event.title, width:350});
+						}
 						$("#editEvent").click(function(){
 							var title = $('#editTitle').val();
 							var desc = $('#editDesc').val();
@@ -361,6 +376,9 @@
 				}
 			});
 		});
+	}
+	else if (user == '5') {
+		
 	}
 	else {
 		$(document).ready(function() {

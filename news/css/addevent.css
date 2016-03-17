@@ -1,4 +1,8 @@
-      
+      #editForm{
+        padding: 0;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
       .addeve{
         margin: 0 auto;
         padding-top: 10%;

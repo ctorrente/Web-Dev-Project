@@ -55,7 +55,6 @@
 				</li>
 				<li class="msg">
 					<input type="search" placeholder="&#x1f50e; Search" /></li>
-
 			</ul>
 		</div>
 	</div>

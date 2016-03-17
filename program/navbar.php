@@ -9,11 +9,14 @@
 				<li><a href='../home.php'>Home</a></li>
 				<?php 
 					if($_SESSION['user_type'] != 1 || $_SESSION['is_officer'] == 1){
-						echo '<li class="has-sub" style="float: left;"><a href="../news/viewAllNews.php">News</a>' . 
+						echo '<li class="has-sub" style="float: left;"><a href="viewAllNews.php">News</a>' . 
 							'<ul>' . 
-								'<li><a href="../news/viewAllNews.php">All News</a></li>' . 
-								'<li><a href="../news/MyNews.php">My Posted News</a></li>' . 
-								'<li><a href="../news/addNews.php">Add News</a></li>'.
+								'<li><a href="viewAllNews.php">All News</a></li>' . 
+								'<li><a href="forFaculties.php">For faculties</a></li>' . 
+								'<li><a href="forOrgOfficers.php">For org. officers</a></li>' . 
+								'<li><a href="forStudents.php">For students</a></li>' . 
+								'<li><a href="forAlumnus.php">For alumnus</a></li>' . 
+								'<li><a href="forGuests.php">For guests</a></li>' . 
 							'</ul>'.
 						'</li>';
 					}else
@@ -22,7 +25,7 @@
 				<li><a href='../events/calendar/calendar.php'>Events</a></li>
 				<li><a href='course_list.php'>Courses</a></li>
 				<li><a href='program_list.php'>Programs</a></li>
-				<?php if($_SESSION['is_admin'] == 1) {
+				<?php if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5) {
 					echo "<li><a href='../sitestatistics.php'>Statistics</a></li>";
 				} ?>
 

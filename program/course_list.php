@@ -9,7 +9,7 @@
 
 <div class="container">
 	<div class="content-wrapper" style="padding: 150px 0px 50px 0px">
-		<?php if ($_SESSION['is_prog_coordinator'] == 1) { 
+		<?php if ($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5) { 
 			echo '<form style="padding: 0px"class="addeve" action="add_course.php" method="POST">';
 			echo '	<input type="submit" name="add_course_btn" value="Add Course">';
 			echo '</form>';

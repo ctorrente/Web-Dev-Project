@@ -107,6 +107,10 @@
   width: 100%;
   margin-top: -50px;
 }
+.card-content{
+    padding: 0;
+    margin-top: 30px;
+}
 h1{
   display: block;
 }
@@ -148,6 +152,10 @@ a.add:hover {
 #downadd {
   margin-top: 235px;
   margin-left: 10px;
+}
+
+#pagination_controls a{
+  margin-top: 30px;
 }
 
 @media all and (max-width: 1100px), only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min--moz-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: 1024px), only screen and (min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min-resolution: 192dpi) and (max-width: 1024px), only screen and (min-resolution: 2dppx) and (max-width: 1024px) {

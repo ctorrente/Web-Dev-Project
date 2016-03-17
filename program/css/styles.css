@@ -34,7 +34,7 @@ a[data-toggle="open-modal"] {
 
 /* Navbar */
 .nav {
-	margin-top: 25px;
+	margin-top:  25px;
 	border-bottom: 1px solid white;
 	background: #1C558D;
 	transition: all 0.2s;
@@ -54,6 +54,10 @@ a[data-toggle="open-modal"] {
 	padding-right:15px;
 	padding-left:15px;
 	margin: 0 auto;
+}
+.content{
+
+	margin-top: 25px;
 }
 @media (min-width:768px){
 	.container{
@@ -136,10 +140,11 @@ a{
 	color: white;
 }
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 7px; 
+    height: 5px;
+    background: #F0F0F0;
 }
-
-::-webkit-scrollbar-thumb {
-    background: #000; 
-    
+::-webkit-scrollbar-thumb { 
+    background-color: #888888; 
+	-webkit-border-radius: 4ex; 
 }

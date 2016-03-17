@@ -123,7 +123,9 @@
 	<!--start content-->
 	<!--Core Modules -->
 	<div class="container">
-		<div class="content-wrapper" >
+		<div class="content-wrapper" style=" width: 100%;">
+			<div class="content" style=" width: 100%;">
+
     	<?php 
 			if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 ||  $_SESSION['user_type'] == 5)
 				echo '<a href="addNews.php" class="btn" style="margin-top: 5%;">&#10133; Add</a>';
@@ -147,14 +149,27 @@
     	<?php
     		}
     	?>
+<<<<<<< HEAD
+				<div style="font-size: 30px; margin:0 auto;">
+					<h2 >Headline</h2>
+				</div>
+				<div style="margin: 0 auto" >
+=======
 			<div class="content">
 				
+>>>>>>> a20402b86feda8fd662641234ca3d60e3144692c
 				<?php
 					if(isset($_POST['news_id'])){
 						$query = 'SELECT * FROM news n, picture p, users u WHERE n.news_id = ' .  $_POST['news_id'] . ' AND ' .
 						'n.picture_id = p.picture_id AND n.user_id = u.user_id';
 						$exec = mysqli_query($conn, $query);
 						$row = mysqli_fetch_assoc($exec);
+<<<<<<< HEAD
+
+						echo '<h1 style="text-align: center;">' .  $row['title'] . '</h1><br>';
+						echo '<br><br><div style="text-align: center;"><i><strong >By: </strong>' . $row['first_name'] . ' <strong>| Date posted: </strong>' . $row['date_posted'] . '</i></div><br>';
+						echo '<img style="margin: 0 auto; height: 50%; " src="' . 'newsPictures/' . $row['file_name'] . '" >'; 
+=======
 				?>
 					<div style="font-size: 30px; margin-left: 5%; margin-top: 2%;">
 						<h2 ><?php echo $row['title']?></h2>
@@ -162,6 +177,7 @@
 				<?php
 						echo '<br><br><div><i><strong >By: </strong>' . $row['first_name'] . ' <strong>| Date posted: </strong>' . $row['date_posted'] . '</i></div>';
 						echo '<img style="margin-top: 2%;" src="' . 'newsPictures/' . $row['file_name'] . '" width="900" height=300>'; 
+>>>>>>> a20402b86feda8fd662641234ca3d60e3144692c
 						echo '<p><strong>Details: </strong>' . $row['details'] . '</p>';
 						
 					}else {
@@ -171,9 +187,9 @@
 							$exec = mysqli_query($conn, $query);
 							$row = mysqli_fetch_assoc($exec);
 
-							echo '<h1 style="margin: 0 auto; text-align: center;">' .  $row['title'] . '</h1>';
+							echo '<h1 style="text-align: center;">' .  $row['title'] . '</h1>';
 							echo '<br><br><div><i><strong >By: </strong>' . $row['first_name'] . ' <strong>| Date posted: </strong>' . $row['date_posted'] . '</i></div>';
-							echo '<img style="margin-top: 2%;" src="' . $row['file_path'] . '" width="900" height=300>'; 
+							echo '<img style="margin-top: 2%;" src="' . $row['file_path'] . '">'; 
 							echo '<p><strong>Details: </strong>' . $row['details'] . '</p>';
 						}else
 							header('location: viewAllNews.php');

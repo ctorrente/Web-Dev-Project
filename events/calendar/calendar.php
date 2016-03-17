@@ -16,7 +16,6 @@
 		// $_SESSION['user_id']= $info['user_id'];
 	// }
 	require('header.php');
-	require('carousel.php');
 	require('navbar.php');
 ?>
 

@@ -104,9 +104,6 @@
 			li{
 				display: inline;
 			}
-			body{
-				font-family: "Trebuchet MS", Arial, Halvetica, sans-serif;
-			}
 			div#pagination_controls{
 				font-size: 21px;
 			}

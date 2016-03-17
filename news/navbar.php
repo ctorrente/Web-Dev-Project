@@ -53,7 +53,6 @@
 						} ?>
 					</ul>
 				</li>
-				<li class="msg"><a data-toggle="open-modal" data-target="#contact">&#9993;</a></li>
 				<li class="msg">
 					<input type="search" placeholder="&#x1f50e; Search" /></li>
 

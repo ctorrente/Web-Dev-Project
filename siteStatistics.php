@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<html>
+<head><title>Site Statistics</title></head>
+<body>
+
+
 <?php
 			session_start();
 			require('header.php');
@@ -28,6 +33,11 @@
 				@parameters: None
 				@return: None
 			*/
+?>
+	<div class="container" style="margin-top: -50px;">
+		<div class="content-wrapper">
+			<div class="content" >
+	<?php
 			function countUsers()
 			{
 				$usercount_sql = "SELECT COUNT(*) as userCount FROM users";
@@ -409,7 +419,7 @@
 			//--------------------------------------------------Connect DB---------------------------------------------------
 			$servername = "localhost";
 			$username = "root";
-			$password = "sS201211235";
+			$password = "";
 			$dbname = "dcs_project";
 
 			// Create connection
@@ -441,13 +451,13 @@
 
 		?>
 
-		<div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-		<div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-		<div id="container3" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-		<div id="container4" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-		<div id="container5" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-		<div id="container6" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-		<div id="container7" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		<div id="container1"></div>
+		<div id="container2"></div>
+		<div id="container3"></div>
+		<div id="container4"></div>
+		<div id="container5"></div>
+		<div id="container6"></div>
+		<div id="container7"></div>
 
 		<script>
             $(function () {
@@ -673,7 +683,9 @@
                     }
                 });
             });
-
         </script>
+</div>
+</div>
+</div>
 	</body>
 </html>

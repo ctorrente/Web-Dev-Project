@@ -244,8 +244,7 @@
 					    }
 
 					?>
-					<!--end content-->
-						
+
 					
 	</table>
 	</form>
@@ -335,19 +334,21 @@ $(document).ready(function(){
 
 <?php
 
+$dblink = mysqli_connect("localhost", "root", "root", "dcs_project");
+
 if(isset($_POST['addEvent'])) {
 	if($_POST['eventTitle']) {
-		$title = $_POST['eventTitle'];
-		$desc = $_POST['eventDesc'];
-		$startdate = $_POST['eventStartDate'];
-		$enddate = $_POST['eventEndDate'];
-		
-		echo $title;
-		
+		$title = '\''.$_POST['eventTitle'].'\'';
+		$desc = '\''.$_POST['eventDesc'].'\'';
+		$startdate = '\''.$_POST["eventStartDate"].'\'';
+		$enddate = '\''.$_POST["eventEndDate"].'\'';
+
 		$query="INSERT INTO EVENT (event_title, event_desc, event_start, event_end, event_sub_by, event_status) VALUES ($title, $desc, $startdate, $enddate, 5, 2)";
-		$result = mysqli_query($dblink, $sql);
+		
+		mysqli_query($dblink, $query);
 	}
 }
+
 
 ?>
 

@@ -24,10 +24,12 @@
 		$color = "#00cc66";
 	if ($_SESSION['user_type'] == 1)
 		$color = "#ff751a";
-	if ($_SESSION['user_type'] == 4)
+	if ($_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 4)
 		$color = "#9966ff";
 	if ($_SESSION['user_type'] == 5)
-		$status = 2;
+		$status = '2';
+	else
+		$status = '0';
 
 	$sql = "INSERT INTO EVENT (event_title, event_desc, event_start, event_end, event_color, event_status, event_sub_by) VALUES (:title, :desc, :start, :end, :color, :status, :sub)";
 	$q = $bdd->prepare($sql);

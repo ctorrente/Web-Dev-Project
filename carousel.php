@@ -8,9 +8,9 @@
 					<div class="thumb"></div>
 				</label>
 				<figure>
-					<figcaption>
-						DCS website image 1
-					</figcaption>
+					<figcaption></figcaption>
+					<h1>DCS website image 1</h1>
+					<p>Hello this is DCS!</p>
 				</figure>
 			</li>
 			<li>
@@ -20,9 +20,9 @@
 					<div class="thumb"></div>
 				</label>
 				<figure>
-					<figcaption>
-						DCS website image 2
-					</figcaption>
+					<figcaption></figcaption>
+					<h1>DCS website image 1</h1>
+					<p>Hello this is DCS!</p>
 				</figure>
 			</li>
 			<li>
@@ -32,9 +32,9 @@
 					<div class="thumb"></div>
 				</label>
 				<figure>
-					<figcaption>
-						DCS website image 3
-					</figcaption>
+					<figcaption></figcaption>
+					<h1>DCS website image 1</h1>
+					<p>Hello this is DCS!</p>
 				</figure>
 			</li>
 		</ul>

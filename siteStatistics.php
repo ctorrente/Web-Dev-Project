@@ -431,7 +431,7 @@
 			} 
 			//--------------------------------------------------Main Program---------------------------------------------------
 			//Count/Update Statistics
-			echo "<div style='margin-left:4%;margin-right:4%;'>";
+			echo "<div style='margin:0 auto; text align: center;'>";
 			countUsers(); 
 			countStudents(); 
 			countFaculty(); 

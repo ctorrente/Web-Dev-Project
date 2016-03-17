@@ -200,7 +200,7 @@
 					echo '<i><div>Their are no News that are posted.<div></i>';
 				}else{
 
-					while($row =  mysqli_fetch_array($query, MYSQL_ASSOC)){
+					while($row =  mysqli_fetch_array($query)){
 						if($row['is_approved'] && ($_SESSION['user_type'] == 6 || $_SESSION['user_type'] == 7 || $_SESSION['user_type'] == 8)){
 							$dateTime = new DateTime($row['date_posted'], new DateTimeZone('Asia/Kolkata')); ?>
 							<div class="card">

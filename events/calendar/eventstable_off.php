@@ -185,15 +185,18 @@
 <!--end navbar-->
 
 	<!--start content-->
+	
 	<div class="container">
 		<div class="content-wrapper">
-
+		
 			<div class="content">
 			
-
 			
-
+			
+			<button id="addEvent">Create Event</button>
+			<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 				<table id="offEvents">
+				<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 					<!--start header-->
 					<tr>
 						<th>Event Name</th>
@@ -216,10 +219,8 @@
 					    if (mysqli_num_rows($result) > 0) {
 					    	 while($row = mysqli_fetch_assoc($result)) {
 
-
 					?>
-
-					<form method="post" name ="students" action="<?php echo $_SERVER['PHP_SELF']?>" enctype="multipart/form-data">
+					
 					<tr>
 						<td><?php echo $row["event_title"]; ?></td>
 						<td><?php echo $row["event_desc"]; ?></td>
@@ -236,7 +237,7 @@
 						<td><?php echo $row["event_comment"]; ?></td>
 						<td></td>
 					</tr>
-					</form>
+					
 
 					<?php
 							}
@@ -244,11 +245,16 @@
 
 					?>
 					<!--end content-->
+						
+					
 	</table>
+	</form>
 
 			</div>
+			
 		</div>
 	</div>
+
 	<!--end content-->
 
 	<!--start footer-->
@@ -302,22 +308,30 @@
 
 <script>
 
-function addEventRow() {
-    var table = document.getElementById("offEvents");
-    var row = table.insertRow(-1);
-    var cell0 = row.insertCell(0);
-    var cell1 = row.insertCell(1);
-	var cell2 = row.insertCell(2);
-	var cell3 = row.insertCell(3);
-	var cell4 = row.insertCell(4);
-	var cell5 = row.insertCell(5);
-    cell0.innerHTML = "<input type='text' name='eventTitle' size='10'>";
-    cell1.innerHTML = "<input type='text' name='eventDesc' size='10'>";
-	cell2.innerHTML = "<input type='date' name='eventStartDate'> until <input type='date' name='eventEndDate'>";
-	cell3.innerHTML = " ";
-	cell4.innerHTML = " ";
-	cell5.innerHTML = "<button name='addEvent'>Submit</button></form>";
-}
+$(document).ready(function(){
+    $('#addEvent').click(function(event){
+        $('#offEvents').append("<tr><td><input type='text' name='eventTitle' size='10'></td><td><input type='text' name='eventDesc' size='10'></td><td><input type='date' name='eventStartDate'> until <input type='date' name='eventEndDate'></td><td></td><td></td><td><button name='addEvent'>Submit</button></td></tr>");
+    });
+});
+
+    
+
+// function addEventRow() {
+    // var table = document.getElementById("offEvents");
+    // var row = table.insertRow(-1);
+    // var cell0 = row.insertCell(0);
+    // var cell1 = row.insertCell(1);
+	// var cell2 = row.insertCell(2);
+	// var cell3 = row.insertCell(3);
+	// var cell4 = row.insertCell(4);
+	// var cell5 = row.insertCell(5);
+    // cell0.innerHTML = "<input type='text' name='eventTitle' size='10'>";
+    // cell1.innerHTML = "<input type='text' name='eventDesc' size='10'>";
+	// cell2.innerHTML = "<input type='date' name='eventStartDate'> until <input type='date' name='eventEndDate'>";
+	// cell3.innerHTML = " ";
+	// cell4.innerHTML = " ";
+	// cell5.innerHTML = "<button name='addEvent'>Submit</button></form>";
+// }
 
 <?php
 
@@ -328,9 +342,10 @@ if(isset($_POST['addEvent'])) {
 		$startdate = $_POST['eventStartDate'];
 		$enddate = $_POST['eventEndDate'];
 		
-		$query="INSERT INTO EVENT (event_title, event_desc, event_start, event_end, event_sub_by, event_status) VALUES ($title, $desc, $date, $end, 5, 2)";
-		$result = mysqli_query($dblink, $sql);
+		echo $title;
 		
+		$query="INSERT INTO EVENT (event_title, event_desc, event_start, event_end, event_sub_by, event_status) VALUES ($title, $desc, $startdate, $enddate, 5, 2)";
+		$result = mysqli_query($dblink, $sql);
 	}
 }
 

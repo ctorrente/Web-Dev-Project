@@ -264,7 +264,7 @@
 		}
 	});
 	var user = (document.getElementById("usertype")).innerHTML;
-	if (user == "0" || user == "1" || user == "4") {
+	if (user != "6" && user != "7" && user != "8") {
 		$(document).ready(function() {
 			$('#calendar').fullCalendar({
 				header: {

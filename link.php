@@ -5,7 +5,7 @@
 	
 	$host = "localhost";
 	$user = "root";
-	$pass = "sS201211235";
+	$pass = "root";
 	$dbse = "dcs_project";
 	
 	$connect = mysqli_connect($host, $user, $pass, $dbse);

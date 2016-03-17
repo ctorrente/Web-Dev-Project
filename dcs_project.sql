@@ -166,12 +166,13 @@ INSERT INTO `curr_subjects` (`curriculum_id`, `course_id`, `curr_year`, `curr_se
 
 CREATE TABLE IF NOT EXISTS `event` (
   `event_id` int(4) NOT NULL,
-  `event_title` varchar(32) NOT NULL,
-  `event_description` text,
-  `event_start` datetime NOT NULL,
-  `event_end` datetime DEFAULT NULL,
-  `event_status` enum('0','1','2','') NOT NULL,
-  `event_comment` varchar(100) DEFAULT NULL
+  `event_title` text NOT NULL,
+  `event_desc` text,
+  `event_start` text NOT NULL,
+  `event_end` text,
+  `event_status` enum('0','1','2','') NOT NULL DEFAULT '0',
+  `event_comment` varchar(100) DEFAULT NULL,
+  `event_color` enum('#ff1a1a','#3399ff','#33cc33','#ffff00') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

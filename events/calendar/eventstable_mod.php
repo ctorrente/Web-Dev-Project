@@ -204,9 +204,9 @@
 					<!--start content-->
 
 					<?php
-						$dblink = mysqli_connect("localhost", "root", "root", "dcs");
+						$dblink = mysqli_connect("localhost", "root", "root", "dcs_project");
 
-					    $sql = "SELECT * FROM events";
+					    $sql = "SELECT * FROM event where event_sub_by='5' AND event_status = '2'";
 					    $result = mysqli_query($dblink, $sql);
 
 					    if (mysqli_num_rows($result) > 0) {
@@ -217,7 +217,7 @@
 
 					<form method="post" name ="students" action="<?php echo $_SERVER['PHP_SELF']?>" enctype="multipart/form-data">
 					<tr>
-						<td><?php echo $row["event_name"] ?></td>
+						<td><?php echo $row["event_title"] ?></td>
 						<td><?php echo $row["event_desc"] ?></td>
 						<td><?php echo $row["event_start"] ?></td>
 						<td>
@@ -227,7 +227,10 @@
 								</select>
 						</td>
 						<td><textarea name="comment"></textarea></td>
-						<td><input class="button" type="submit" name="<?php echo $row["event_id"] ?>" value="Submit"></td>
+						<td>
+						<input type='text' name='eventID' value='<?php echo $row['event_id'];?>' hidden>
+						
+						<input class="button" type="submit" name="submitStatus" value="Submit"></td>
 					</tr>
 					</form>
 
@@ -238,6 +241,8 @@
 					?>
 					<!--end content-->
 	</table>
+	
+	
 
 			</div>
 		</div>
@@ -298,21 +303,26 @@
 
 <?php
 
-if(isset($_POST[$row["event_id"]])){
-	$submitID = $_POST["event_id"];
-	$status = $_POST["status"];
+if(isset($_POST['submitStatus'])){
+	
+	$submitID = $_POST["eventID"];
+	if ($_POST["status"] == 'A')
+		$status = "0";
+	else
+		$status = "1";
 	$comment = $_POST["comment"];
 
-	$update = "UPDATE events SET event_comment = '$comment', status = '$status' WHERE event_id = $submitID";
+	$update = "UPDATE event SET event_comment = '$comment', event_status = '$status', event_color = '#ff4d4d' WHERE event_id = $submitID";
+	
+	echo $update;
 
-	mysqli_select_db('dcs');
-    $retval = mysqli_query( $dblink, $update );
+    mysqli_query( $dblink, $update );
+	header("Location: eventstable_mod.php");
             
-    if(! $retval ) {
-    	die('Could not update data: ' . mysqli_error());
-    }
-    echo "Updated data successfully\n";      
-
+    // if(! $retval ) {
+    	// die('Could not update data: ' . mysqli_error());
+    // }
+    // echo "Updated data successfully\n";
 
 }
 

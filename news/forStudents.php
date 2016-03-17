@@ -174,6 +174,8 @@
 										      	</div>
 										    </div>
 										   </div>
+										   </div>
+										   </div>
 									    <?php
 									    }else{?>
 										    <div class="admin-btn">
@@ -184,6 +186,8 @@
 										        	<div class="label"></div>
 										      	</div>
 										    </div>
+										   </div>
+										   </div>
 										   </div>
 									<?php
 										}

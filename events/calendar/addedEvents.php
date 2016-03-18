@@ -21,7 +21,8 @@ while($row = mysqli_fetch_array($result)) {
 			"desc" => $row['event_desc'],
 			"start" => $row['event_start'],
 			"end" => $row['event_end'],
-			"color"=>$row['event_color']
+			"color"=>$row['event_color'],
+			"sub_by"=>$row['event_sub_by']
 		);
 	}
  }

@@ -194,9 +194,9 @@
 			
 			
 			<button id="addEvent">Create Event</button>
-			<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-				<table id="offEvents">
 				<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
+				<table id="offEvents">
+		
 					<!--start header-->
 					<tr>
 						<th>Event Name</th>
@@ -224,30 +224,32 @@
 					<tr>
 						<td><?php echo $row["event_title"]; ?></td>
 						<td><?php echo $row["event_desc"]; ?></td>
-						<td><?php echo $row["event_start"]; ?></td>
+						<td><?php
+							if ($row["event_start"] != $row["event_end"])
+								echo $row['event_start'] . " until " . $row['event_end'];
+							else
+								echo $row['event_start'];
+						?></td>
 						<td><?php
 						if ($row["event_status"]==0)
 							echo "Approved";
 						else if ($row["event_status"]==1)
 							echo "Disapproved";
 						else
-							echo "For approval";
-						
-						$row["event_status"]; ?></td>
+							echo "For approval"; ?></td>
 						<td><?php echo $row["event_comment"]; ?></td>
 						<td></td>
 					</tr>
-					
 
 					<?php
 							}
 					    }
-
 					?>
 
 					
 	</table>
-	</form>
+	</form>	
+
 
 			</div>
 			
@@ -313,8 +315,6 @@ $(document).ready(function(){
     });
 });
 
-    
-
 // function addEventRow() {
     // var table = document.getElementById("offEvents");
     // var row = table.insertRow(-1);
@@ -343,9 +343,10 @@ if(isset($_POST['addEvent'])) {
 		$startdate = '\''.$_POST["eventStartDate"].'\'';
 		$enddate = '\''.$_POST["eventEndDate"].'\'';
 
-		$query="INSERT INTO EVENT (event_title, event_desc, event_start, event_end, event_sub_by, event_status) VALUES ($title, $desc, $startdate, $enddate, 5, 2)";
+		$query="INSERT INTO EVENT (event_title, event_desc, event_start, event_end, event_sub_by, event_status) VALUES ($title, $desc, $startdate, $enddate, '5', '2')";
 		
 		mysqli_query($dblink, $query);
+		header("Location: eventstable_off.php");
 	}
 }
 

@@ -244,14 +244,6 @@
 	</div>
 </body>
 <script type="text/javascript">
-	$(window).scroll(function() {
-		var x = window.pageYOffset;
-		if(x > 250){
-			$('.nav').addClass("fixed"); //make position fixed instead of absolute
-		} else {
-			$('.nav').removeClass("fixed") ;//clear styles if back to original position
-		}
-	});
 	$("*").click(function(){
 		var button = $(this);
 		if(button.data('toggle') == "open-modal") {

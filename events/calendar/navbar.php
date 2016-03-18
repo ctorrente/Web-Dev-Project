@@ -21,14 +21,29 @@
 						echo '<li><a href="news/viewAllNews.php">News</a></li>';
 					}
 				?>
-				<li><a href='../../events/calendar/calendar.php'>Events</a></li>
+				<?php 
+					if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
+						echo '<li class="has-sub" style="float: left;"><a href="calendar.php">Events</a>' . 
+							'<ul>' . 
+								'<li><a href="eventstable_off.php">Manage Events</a></li>' . 
+							'</ul>'.
+						'</li>';
+					}else if($_SESSION['user_type'] == 6 || $_SESSION['user_type'] == 7 || $_SESSION['user_type'] == 8){
+						'<li class="has-sub" style="float: left;"><a href="calendar.php">Events</a>' . 
+							'<ul>' . 
+								'<li><a href="eventstable_mod.php">Events for Approval</a></li>' . 
+							'</ul>'.
+						'</li>';
+					}
+				?>
+			</li>
 				<li><a href='../../program/course_list.php'>Courses</a></li>
 				<li><a href='../../program/program_list.php'>Programs</a></li>
 				<?php if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
 					echo "<li><a href='sitestatistics.php'>Statistics</a></li>";
 				} ?>
 
-				<li class='has-sub'><a href='profile.php'><?php echo $_SESSION['first_name'];?></a>
+				<li class='has-sub'><a href='../../profile.php'><?php echo $_SESSION['first_name'];?></a>
 					<ul>
 						<li><a href='logout.php'>Log Out</a></li>
 						<?php if($_SESSION['user_type'] == 1) {

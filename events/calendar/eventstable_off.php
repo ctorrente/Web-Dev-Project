@@ -30,15 +30,15 @@
 		<style type="text/css">
 		
 		#calendar {
-			max-width: 900px;
-			margin: 0 auto;
-		}
+				max-width: 900px;
+				margin: 0 auto;
+			}
 		
 		button {
 			background: none;
 			border: 1px solid #A9A9A9;
 			border-radius: 8px;
-			padding: 5px;
+			padding: 10px;
 			color: #A9A9A9;
 			outline: none;
 		}
@@ -71,14 +71,19 @@
 		    margin: 20px auto;
 		}
 		tr {
+			width: 100px;
 		    border-bottom: 1px solid #ccc;
 		    text-align: center;
 		    vertical-align: center;
 		}
 
 		td {
+			padding: 10px;
 		    text-align: center;
 		    vertical-align: center;
+			word-break: normal;
+			white-space: normal;
+			font-size: 90%;
 		}
 
 		ul{
@@ -106,8 +111,8 @@
 		}
 
 		textarea{
-			max-width: 50%;
-			height: 3em;
+			max-width: 100%;
+			height: 6em;
 			padding: 10px;
 			margin: 20px 0;
 			border: 1px solid #A9A9A9;
@@ -132,11 +137,26 @@
 		form{
 			vertical-align: middle;
 			height: 3em;
-			padding: 10px;
-			margin: 20px 0;
-			max-width: 50%;
+			margin: 0 auto;
+			max-width: 100%;
 		}
-		
+		#addEvent{
+			padding: 10px;
+			width: 200px;
+			height: 37px;
+			position: absolute;
+			margin-left: 60%;
+		}
+		.eveContainer {
+			width: 100%;
+		}
+		.eventdate {
+			width: 140px;
+		}
+		#submitEvent, #cancelevent {
+			width: 100px;
+			height: 37px;
+		}
 		</style>
 
 	</head>
@@ -188,47 +208,52 @@
 	
 	<div class="container">
 		<div class="content-wrapper">
-		
 			<div class="content">
-			
-			
-			
+		
 			<button id="addEvent">Create Event</button>
+			<div class="eveContainer"><br><br><br>
 				<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 				<table id="offEvents">
 		
 					<!--start header-->
 					<tr>
-						<th>Event Name</th>
-						<th>Description</th>
-						<th>Date</th>	
-						<th>Status</th>	
-						<th>Comment</th>
-						<th>Action</th>							
+						<th style="width:150px;">Event Name</th>
+						<th style="width:200px;">Description</th>
+						<th style="width:150px;">Date</th>	
+						<th style="width:150px;">Status</th>	
+						<th style="width:150px;">Comment</th>
+						<th><th>
 					</tr>
 					<!--end header-->
 
 					<!--start content-->
-
+					
+					<tr style="display:none" id="addRow">
+						<td><input type='text' name='eventTitle' size='10'></td>
+						<td><textarea name='eventDesc'></textarea></td>
+						<td><input type='date' name='eventStartDate' class='eventdate'><br>to<br><input type='date' name='eventEndDate' class='eventdate'></td>
+						<td></td><td colspan='2'><button name='submitEvent' id='submitEvent'>Submit</button> <button id='cancelevent'>Cancel</button></td>
+					</tr>
+		
 					<?php
+						
 						$dblink = mysqli_connect("localhost", "root", "root", "dcs_project");
 
-					    $sql = "SELECT * FROM event where event_sub_by = 5;";
+					    $sql = "SELECT * FROM event where event_sub_by = 5 ORDER BY event_start DESC;";
 					    $result = mysqli_query($dblink, $sql);
 
 					    if (mysqli_num_rows($result) > 0) {
 					    	 while($row = mysqli_fetch_assoc($result)) {
-
+							 if (!isset($_POST['editevent']) || $_POST["id"] != $row["event_id"]) {
 					?>
-					
 					<tr>
 						<td><?php echo $row["event_title"]; ?></td>
 						<td><?php echo $row["event_desc"]; ?></td>
 						<td><?php
 							if ($row["event_start"] != $row["event_end"])
-								echo $row['event_start'] . " until " . $row['event_end'];
+								echo date('M j, Y',strtotime($row['event_start'])) . " until " . date('M j, Y',strtotime($row['event_end'])) ;
 							else
-								echo $row['event_start'];
+								echo date('M j, Y',strtotime($row['event_start'])) ;
 						?></td>
 						<td><?php
 						if ($row["event_status"]==0)
@@ -236,19 +261,29 @@
 						else if ($row["event_status"]==1)
 							echo "Disapproved";
 						else
-							echo "For approval"; ?></td>
+							echo "For approval";
+						 ?></td>
 						<td><?php echo $row["event_comment"]; ?></td>
-						<td></td>
+						<td>
+						<input type='text' name='id' value="<?php echo $row['event_id']; ?>" hidden>
+						<button name='editevent'>Edit</button></td>
 					</tr>
-
 					<?php
+							}
+							else {
+								echo "<tr><td><input type='text' name='editedname' value='".$row["event_title"]."'></td>
+								<td><textarea name='editeddesc' id='editdesc'>".$row["event_desc"]."</textarea></td>
+								<td><input type=date name='editedstart' class='eventdate' value='".$row['event_start']."'><br>to<br><input type=date name='editedend' class='eventdate' value='".$row['event_end']."'></td>
+								<td></td>
+								<td colspan='2'><button name='saveedit'>Save</button> <button>Cancel</button></td>
+								</tr>";
+							}
 							}
 					    }
 					?>
-
-					
-	</table>
-	</form>	
+				</table>
+				</form>
+			</div>
 
 
 			</div>
@@ -311,32 +346,17 @@
 
 $(document).ready(function(){
     $('#addEvent').click(function(event){
-        $('#offEvents').append("<tr><td><input type='text' name='eventTitle' size='10'></td><td><input type='text' name='eventDesc' size='10'></td><td><input type='date' name='eventStartDate'> until <input type='date' name='eventEndDate'></td><td></td><td></td><td><button name='addEvent'>Submit</button></td></tr>");
+		document.getElementById("addRow").style.display = "table-row";
     });
 });
 
-// function addEventRow() {
-    // var table = document.getElementById("offEvents");
-    // var row = table.insertRow(-1);
-    // var cell0 = row.insertCell(0);
-    // var cell1 = row.insertCell(1);
-	// var cell2 = row.insertCell(2);
-	// var cell3 = row.insertCell(3);
-	// var cell4 = row.insertCell(4);
-	// var cell5 = row.insertCell(5);
-    // cell0.innerHTML = "<input type='text' name='eventTitle' size='10'>";
-    // cell1.innerHTML = "<input type='text' name='eventDesc' size='10'>";
-	// cell2.innerHTML = "<input type='date' name='eventStartDate'> until <input type='date' name='eventEndDate'>";
-	// cell3.innerHTML = " ";
-	// cell4.innerHTML = " ";
-	// cell5.innerHTML = "<button name='addEvent'>Submit</button></form>";
-// }
+</script>
 
 <?php
 
 $dblink = mysqli_connect("localhost", "root", "root", "dcs_project");
 
-if(isset($_POST['addEvent'])) {
+if(isset($_POST['submitEvent'])) {
 	if($_POST['eventTitle']) {
 		$title = '\''.$_POST['eventTitle'].'\'';
 		$desc = '\''.$_POST['eventDesc'].'\'';
@@ -353,7 +373,7 @@ if(isset($_POST['addEvent'])) {
 
 ?>
 
-</script>
+
 
 
 <html>

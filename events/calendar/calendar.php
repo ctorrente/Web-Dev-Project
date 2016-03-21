@@ -159,11 +159,7 @@
 	</div>
 	
 	<div id="addEventContent" title="Add Event" style="display:none;">
-		<form method="post" action="<?php 
-					if ($_SESSION['user_type']==5)
-						echo "eventstable_off.php";
-					else
-						echo $_SERVER['PHP_SELF']?>" enctype="multipart/form-data">
+		<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>" enctype="multipart/form-data">
 			When:<span id="addEventStart"></span><br><br>
 			Title: <input type="text" id="title" name="title" class="text ui-widget-content ui-corner-all title" required><br><br>
 			Description:<textarea id="desc" name="desc" rows="3" class="text ui-widget-content ui-corner-all"></textarea><br><br>
@@ -180,7 +176,11 @@
 	</div>
 	
 	<div id="editEventContent" title="Edit Event" style="display:none;">
-		<form method="post" name ="edit" action="<?php echo $_SERVER['PHP_SELF']?>" enctype="multipart/form-data">
+		<form method="post" name ="edit" action="<?php 
+					if ($_SESSION['user_type']=='5')
+						echo "eventstable_off.php";
+					else
+						echo $_SERVER['PHP_SELF']?>" enctype="multipart/form-data">
 			Title: <input type="text" id="editTitle" name="title" class="text ui-widget-content ui-corner-all title" required><br><br>
 			Description:<textarea id="editDesc" name="desc" rows="3" class="text ui-widget-content ui-corner-all"></textarea><br><br>
 			<input type="submit" id="editEvent" value="Save"><br>
@@ -249,14 +249,7 @@
 	</div>
 </body>
 <script type="text/javascript">
-	$(window).scroll(function() {
-		var x = window.pageYOffset;
-		if(x > 250){
-			$('.nav').addClass("fixed"); //make position fixed instead of absolute
-		} else {
-			$('.nav').removeClass("fixed") ;//clear styles if back to original position
-		}
-	});
+
 	$("*").click(function(){
 		var button = $(this);
 		if(button.data('toggle') == "open-modal") {
@@ -345,7 +338,7 @@
 							var desc = $('#editDesc').val();
 							$.ajax({
 								url: 'editEvents.php',
-								data: 'id='+event.id+'&title='+title+'&desc='+desc,
+								data: 'id='+event.id+'&title='+title+'&desc='+desc+'&sub_by='+event.sub_by,
 								type: 'POST',
 								dataType: 'text',
 								success: function(json) {
@@ -377,9 +370,6 @@
 			});
 		});
 	}
-	else if (user == '5') {
-		
-	}
 	else {
 		$(document).ready(function() {
 			$('#calendar').fullCalendar({
@@ -389,7 +379,18 @@
 					right: 'month,agendaWeek,agendaDay'
 				},
 				eventLimit: true, 
-				events: 'addedEvents.php'
+				events: 'addedEvents.php',
+				eventRender: function (event, element) {
+					element.attr('href', 'javascript:void(0);');
+					element.click(function() {
+						if (event.end)
+							$("#nonSubEventDate").html($.format.date(event.start.toString(), "MMM d") + " till " + $.format.date(event.end.toString(), "MMM d") );
+						else
+							$("#nonSubEventDate").html($.format.date(event.start.toString(), "MMM d ddd"));
+						$("#nonSubEventInfo").html(event.desc);
+						$("#nonSubEvent").dialog({ modal: true, title: event.title, width:350});
+					});
+				}
 			});
 		});
 	}

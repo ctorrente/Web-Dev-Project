@@ -11,22 +11,7 @@
 		<div id='cssmenu'>
 			<ul>
 				<li><a href='../home.php'>Home</a></li>
-				<?php 
-					if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
-						echo '<li class="has-sub" style="float: left;"><a href="viewAllNews.php">News</a>' . 
-							'<ul>' . 
-								'<li><a href="viewAllNews.php">All News</a></li>' . 
-								'<li><a href="forFaculties.php">For faculties</a></li>' . 
-								'<li><a href="forOrgOfficers.php">For org. officers</a></li>' . 
-								'<li><a href="forStudents.php">For students</a></li>' . 
-								'<li><a href="forAlumnus.php">For alumnus</a></li>' . 
-								'<li><a href="forGuests.php">For guests</a></li>' . 
-							'</ul>'.
-						'</li>';
-					}else{
-						echo '<li><a href="viewAllNews.php">News</a></li>';
-					}
-				?>
+				<li><a href="viewAllNews.php">News</a></li>
 				<li><a href='../events/calendar/calendar.php'>Events</a></li>
 				<li><a href='../program/course_list.php'>Courses</a></li>
 				<li><a href='../program/program_list.php'>Programs</a></li>

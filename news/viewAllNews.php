@@ -67,20 +67,20 @@
 			form.submit();
 		}
 	</script>
-	<form action="login.php" method="POST" id="logoutForm">
-		<input type="hidden" name="logout" value="">
+	<form action="login.php" method="POST" id="logoutForm" style="display:none;">
+		<input type="hidden" name="logout" value="" style="display:none;">
 	</form>
-	<form action="readMore.php" method="POST" id="readMoreForm">
-		<input type="hidden" name="news_id" value="">
+	<form action="readMore.php" method="POST" id="readMoreForm" style="display:none;">
+		<input type="hidden" name="news_id" value="" style="display:none;">
 	</form>	
-	<form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" id="deleteNewsForm">
-		<input type="hidden" name="deleteNewsId" value="">
+	<form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" id="deleteNewsForm" style="display:none;">
+		<input type="hidden" name="deleteNewsId" value="" style="display:none;">
 	</form>	
-	<form action="editNews.php" method="POST" id="editNewsForm">
-		<input type="hidden" name="editNewsId" value="">
+	<form action="editNews.php" method="POST" id="editNewsForm" style="display:none;">
+		<input type="hidden" name="editNewsId" value="" style="display:none;">
 	</form>	
-	<form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" id="approvalForm">
-		<input type="hidden" name="for_approval_id" value="">
+	<form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" id="approvalForm" style="display:none;">
+		<input type="hidden" name="for_approval_id" value="" style="display:none;">
 	</form>
 	<head>
 		<!--<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
@@ -197,7 +197,7 @@
 			<p><?php echo $textline2; ?></p>
 			<?php
 				if($rows == 0){
-					echo '<i><div>Their are no News that are posted.<div></i>';
+					echo '<i><div>There are no News that are posted.<div></i>';
 				}else{
 
 					while($row =  mysqli_fetch_array($query)){
@@ -312,7 +312,7 @@
 	<!--start footer-->
 	<footer>
 		<div class="lookWrap">
-			<a class="btn btn-lg btn-success js-modal" href="#" role="button" data-toggle="modal" data-target="#demoModal"><h2>Contact Us</h2></a>
+			<h2>Contact Us</h2>
 			<div id="look">
 				<div class="contactus">
 					<h3>Ateneo de Naga University</h3>
@@ -337,37 +337,7 @@
 			&copy; Copyright 2016 by Your Company
 		</div>
 	</footer>
-<div class="modal" id="contact">
-		<div class="contactpop">
-			<form class="contact-form">
-				<div class="name">
-					<input type="text" id="name" placeholder="Full Name"/>
-				</div>  
-				<div class="email">
-					<input type="email" id="email" placeholder="Email"/>
-				</div>
-				<div class="message">
-					<textarea name="message" id="message" placeholder="Message"></textarea>
-				</div>
-				<div class="submit">
-					<input type="submit" value="Send" class="button" />
-				</div>
-			</form>
-		</div>
-	</div>
-</body>
-<script type="text/javascript">
 
-	$("*").click(function(){
-		var button = $(this);
-		if(button.data('toggle') == "open-modal") {
-			var target = button.data('target');
-			$('body').append('<div class="modal-backdrop"></div>');
-			$('.modal').css("overflow-y", "auto");
-			$('html').css("overflow", "hidden");
-			$('.modal-backdrop').fadeIn("fast");
-			$(target).fadeIn("fast");
-		}
-	});
-</script>
+</body>
+
 <html>

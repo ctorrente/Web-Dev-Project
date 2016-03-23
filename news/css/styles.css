@@ -148,3 +148,6 @@ a{
     background-color: #888888; 
 	-webkit-border-radius: 4ex; 
 }
+#pagnation_controls{
+	margin-top: 30px;
+}

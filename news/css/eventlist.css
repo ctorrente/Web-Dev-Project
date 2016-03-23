@@ -138,8 +138,13 @@ a.add:hover {
   font-size: 36px;
 }
 
+.pagetitle p{
+  font-family: times;
+}
+
 .content{
   display: block;
+  margin-top: 50px;
 }
 
 .ptcontainer {

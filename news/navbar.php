@@ -48,7 +48,7 @@
 					echo "<li><a href='../sitestatistics.php'>Statistics</a></li>";
 				} ?>
 
-				<li class='has-sub'><a href='profile.php'><?php echo $_SESSION['first_name'];?></a>
+				<li class='has-sub'><a href='../profile.php'><?php echo $_SESSION['first_name'];?></a>
 					<ul>
 						<li><a href='../logout.php'>Log Out</a></li>
 						<?php if ($_SESSION['user_type'] == 1) {

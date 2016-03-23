@@ -211,7 +211,7 @@
 					<!--start content-->
 
 					<?php
-						$dblink = mysqli_connect("localhost", "root", "root", "dcs_project");
+						$dblink = mysqli_connect("localhost", "root", "", "dcs_project");
 
 					    $sql = "SELECT * FROM event where event_sub_by = 5;";
 					    $result = mysqli_query($dblink, $sql);
@@ -343,7 +343,7 @@ if(isset($_POST['addEvent'])) {
 		$startdate = '\''.$_POST["eventStartDate"].'\'';
 		$enddate = '\''.$_POST["eventEndDate"].'\'';
 
-		$query="INSERT INTO EVENT (event_title, event_desc, event_start, event_end, event_sub_by, event_status) VALUES ($title, $desc, $startdate, $enddate, '5', '2')";
+		$query="INSERT INTO EVENT (event_title, event_desc, event_start, event_end, event_sub_by, event_status,event_comment) VALUES ($title, $desc, $startdate, $enddate, '5', '2')";
 		
 		mysqli_query($dblink, $query);
 		header("Location: eventstable_off.php");

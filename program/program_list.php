@@ -21,7 +21,7 @@
 			echo "<h2>" . $program['program_name'] . " (" . $program['program_code'] . ") <br></h2>"; 
 			echo $program['program_desc'] . "<br>";
 
-			echo "<br> Available Curriculums: <br>";
+			echo "<h3>Available Curriculums:</h3>";
 			$sql = "SELECT * FROM curriculum WHERE program_id = ". $program['program_id'];
 			$curriculums = mysqli_query($conn, $sql);
 			while($curriculum = mysqli_fetch_array($curriculums)) {
@@ -29,7 +29,7 @@
 				<form style="margin: 0px 0px 2px 0px"id="<?php echo $program['program_code'] . $curriculum['curriculum_year']; ?>" action="curriculum_view.php" method="get">
 					<input name="program_code" value="<?php echo $program['program_code']; ?>" hidden>
 					<input id="curr-year-input" name="curriculum_year" value="<?php echo $curriculum['curriculum_year']; ?>" hidden>
-					<input type="submit" value="<?php echo $curriculum['curriculum_year']; ?>">
+					<input class="ibtn" type="submit" value="<?php echo $curriculum['curriculum_year']; ?>">
 				</form>
 			<?php } ?>
 		</div>

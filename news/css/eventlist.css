@@ -1,16 +1,16 @@
 .card {
   background: #FFFFFF;
-  width: 300px;
+  width: 500px;
   border-radius: 4px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   margin: 5px 30px 0 30px;
   overflow: hidden;
   display: inline-block;
-  height: 354px;
+  height: 500px;
 }
 .card-img {
   position: relative;
-  height: 200px;
+  height: 300px;
   text-align: center;
   overflow: hidden;
   background-size: cover; 
@@ -51,7 +51,7 @@
 
 .card-content {
   text-align: center;
-  padding: 30px 20px;
+  padding: 20px;
 }
 .title {
   margin: 0 0 10px;
@@ -93,6 +93,7 @@
   font-size: 14px;
   font-weight: 600;
   text-align: center;
+  margin-top: 55px;
 }
 
 .edit, .delete{
@@ -109,7 +110,7 @@
 }
 .card-content{
     padding: 0;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 h1{
   display: block;

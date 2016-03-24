@@ -238,9 +238,9 @@
 					<?php
 						$dblink = mysqli_connect("localhost", "root", "", "dcs_project");
 						
-						$dblink = mysqli_connect("localhost", "root", "root", "dcs_project");
+						$dblink = mysqli_connect("localhost", "root", "", "dcs_project");
 
-					    $sql = "SELECT * FROM event where event_sub_by = 5 ORDER BY event_start DESC;";
+					    $sql = "SELECT * FROM event where event_id = 5 ORDER BY event_start DESC;";
 					    $result = mysqli_query($dblink, $sql);
 
 					    if (mysqli_num_rows($result) > 0) {

@@ -188,3 +188,19 @@ td {
 td.division{
 	background: none;
 }
+.ibtn{
+	background: none;
+	width: 50%;
+        display: block;
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #2062a2;
+        border-radius: 3px;
+        color: #2062a2;
+        margin: 1% 2%;
+        margin: 10px auto;
+      }
+      .ibtn:hover{
+        background: #2062a2;
+        color: white;
+      }

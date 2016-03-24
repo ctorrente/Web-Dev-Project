@@ -148,3 +148,40 @@ a{
     background-color: #888888; 
 	-webkit-border-radius: 4ex; 
 }
+table{
+	text-align: center;
+  max-width: 960px;
+  margin: 10px auto;
+}
+
+th {
+  font-weight: 400;
+  background: #8a97a0;
+  color: #FFF;
+}
+
+tr {
+  background: none;
+  border-bottom: 1px solid #f4f7f8;
+  margin-bottom: 5px;
+}
+
+tr:nth-child(even) {
+  background: #e8eeef;
+}
+tr:nth-child(odd) {
+  background: #f4f7f8;
+}
+
+th, td {
+  padding: 20px;
+  font-weight: 300;
+}
+
+td {
+  padding: 10px 2px;
+  color: #8a97a0;
+}
+td.division{
+	background: none;
+}

@@ -89,11 +89,9 @@
 						echo "<h1>4th Year</h1>";
 				?>
 			</b>
-            <table style="width: 90%; margin: auto">
-                <tr>
-                    <td class="division">
-                        <div class="semester-one">
-                            1st Semester
+                
+                        <div class="semester-one" >
+                            <h2>1st Semester</h2>
                             <table>
                                 <tr>
                                     <th class='course-code'>Course Code</th>
@@ -115,10 +113,9 @@
 								?>
                             </table>
                         </div>
-                    </td>
-                    <td class="division">
+
                         <div class="semester-two">
-                            2nd Semester
+                            <h2>2nd Semester</h2>
                             <table>
                                 <tr>
                                     <th class='course-code'>Course Code</th>
@@ -140,13 +137,12 @@
 								?>
                             </table>
                         </div>
-                    </td>
-                </tr>
+
+
                 <?php if(count($subjects) >= $x && count($subjects[$x]) > 2) { ?>
-                    <tr>
-                        <td colspan="2" style="width: 100%">
+
                             <div class="summer">
-                                Summer
+                                <h2>Summer</h2>
                                 <table>
                                     <tr>
                                         <th class='course-code'>Course Code</th>
@@ -166,10 +162,9 @@
 									?>
                                 </table>
                             </div>
-                        </td>
-                    </tr>
+
                     <?php } ?>
-            </table>
+
         </div>
         <?php } ?>
 	</div>

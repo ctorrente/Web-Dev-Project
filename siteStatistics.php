@@ -365,9 +365,7 @@
 
 			function fetchVisitStatistics()
 			{
-				echo "<hr>";
 				echo "<h3>Site Visits</h3>";
-				echo "<hr>";
 				echo "<table id='visits'>";
 				echo "<tr>";
 				echo "<th>DATE</th>";
@@ -392,9 +390,7 @@
 			
 			function fetchCurriculumDownloadStatistics()
 			{
-				echo "<hr>";
 				echo "<h3>Curriculum Downloads</h3>";
-				echo "<hr>";
 				echo "<table id='curr_downloads'>";
 				echo "<tr>";
 				echo "<th>CURRICULUM YEAR</th>";
@@ -451,13 +447,13 @@
 
 		?>
 
-		<div id="container1"></div>
-		<div id="container2"></div>
-		<div id="container3"></div>
-		<div id="container4"></div>
-		<div id="container5"></div>
-		<div id="container6"></div>
-		<div id="container7"></div>
+		<div id="container1" style="min-width: 700px; height: 500px; margin: 0 auto"></div>
+		<div id="container2" style="min-width: 700px; height: 500px; margin: 0 auto"></div>
+		<div id="container3" style="min-width: 700px; height: 500px; margin: 0 auto"></div>
+		<div id="container4" style="min-width: 700px; height: 500px; margin: 0 auto"></div>
+		<div id="container5" style="min-width: 700px; height: 500px; margin: 0 auto"></div>
+		<div id="container6" style="min-width: 700px; height: 500px; margin: 0 auto"></div>
+		<div id="container7" style="min-width: 700px; height: 500px; margin: 0 auto"></div>
 
 		<script>
             $(function () {
@@ -688,4 +684,14 @@
 </div>
 </div>
 	</body>
+	<script type="text/javascript">
+		$(window).scroll(function() {
+		var x = window.pageYOffset;
+		if(x > 0){
+			$('.nav').addClass("fixed"); //make position fixed instead of absolute
+		} else {
+			$('.nav').removeClass("fixed") ;//clear styles if back to original position
+		}
+	});
+		</script>
 </html>

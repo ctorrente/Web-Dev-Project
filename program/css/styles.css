@@ -148,6 +148,9 @@ a{
     background-color: #888888; 
 	-webkit-border-radius: 4ex; 
 }
+
+/*table css*/
+
 table{
 	text-align: center;
   max-width: 960px;

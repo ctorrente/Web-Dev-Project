@@ -5,7 +5,6 @@
 		<div id='cssmenu'>
 			<ul>
 				<li><a href='home.php'>Home</a></li>
-<<<<<<< HEAD
 				<?php 
 					if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
 						echo '<li class="has-sub" style="float: left;"><a href="news/viewAllNews.php">News</a>' . 
@@ -37,10 +36,8 @@
 						'</li>';
 					}
 				?>
-=======
 				<li><a href="news/viewAllNews.php">News</a></li>
 				<li><a href='events/calendar/calendar.php'>Events</a></li>
->>>>>>> c24f57eab7adf47aa45627a29a9ad939656274aa
 				<li><a href='program/course_list.php'>Courses</a></li>
 				<li><a href='program/program_list.php'>Programs</a></li>
 				<?php if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){

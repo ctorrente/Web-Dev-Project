@@ -149,12 +149,6 @@
     	<?php
     		}
     	?>
-				<div style="font-size: 30px; margin:0 auto; margin-top:150px; padding-left: 300px; margin-right: 300px;">
-					<h2 >Headline</h2>
-				</div>
-				<div style="margin: 0 auto" >
-			<div class="content">
-				
 				<?php
 					if(isset($_POST['news_id'])){
 						$query = 'SELECT * FROM news n, picture p, users u WHERE n.news_id = ' .  $_POST['news_id'] . ' AND ' .
@@ -163,7 +157,14 @@
 						$row = mysqli_fetch_assoc($exec);
 
 
-						echo '<h1 style="text-align: center;">' .  $row['title'] . '</h1><br>';
+				?>
+
+					<div style="font-size: 30px; margin:0 auto; margin-top:150px; padding-left: 300px; margin-right: 300px;">
+						<h2 ><?php echo $row['title']?></h2>
+					</div>
+									<div style="margin: 0 auto" >
+			<div class="content" style="width: 100%; margin: 0 auto;">
+				<?php
 						echo '<br><br><div style="text-align: center;"><i><strong >By: </strong>' . $row['first_name'] . ' <strong>| Date posted: </strong>' . $row['date_posted'] . '</i></div><br>';
 						echo '<img style="margin: 0 auto; height: 50%; " src="' . 'newsPictures/' . $row['file_name'] . '" >'; 
 

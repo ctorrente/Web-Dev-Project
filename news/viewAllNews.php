@@ -28,7 +28,7 @@
 	if (isset($_POST['for_approval_id'])) {
 		$query = "UPDATE news SET is_approved = 1 WHERE news_id = " . $_POST['for_approval_id'] . ";";
 		$exec = mysqli_query($conn, $query);
-		echo '<script type="text/javascript">alert("' . $_POST['for_approval_id'] . '")</script>';
+		echo '<script type="text/javascript">alert("Approved")</script>';
 	}
 	date_default_timezone_set('Asia/Manila');
 ?>
@@ -142,7 +142,7 @@
 				$query = mysqli_query($conn, $sql);
 				$row = mysqli_fetch_row($query);
 				$rows = $row[0];
-				$page_rows = 3;
+				$page_rows = 2;
 				$last = ceil($rows/$page_rows);
 
 				if($last < 1)
@@ -218,7 +218,7 @@
 						      			$words = explode(' ', $row['details']);
 						      			echo '<strong>Posted: ' . $dateTime->format("d/m/y  H:i A") . ' </strong><br>';
 						      			echo '<strong>By: ' . $row['first_name'] . ', ';
-						      			if($row['is_approved'] == 0 && $_SESSION['user_id'] == $row['user_id'])
+						      			if($row['is_approved'] == 0)
 						      				echo 'Not yet approved</strong><br><br>';
 						      			else
 						      				echo 'Approved</strong><br><br>';
@@ -253,7 +253,7 @@
 								      			$words = explode(' ', $row['details']);
 								      			echo '<strong>Posted: ' . $dateTime->format("d/m/y  H:i A") . ' </strong><br>';
 								      			echo '<strong>By: ' . $row['first_name'] . ', ';
-								      			if($row['is_approved'] == 0 && $_SESSION['user_id'] == $row['user_id'])
+								      			if($row['is_approved'] == 0)
 								      				echo 'Not yet approved</strong><br><br>';
 								      			else
 								      				echo 'Approved</strong><br><br>';
@@ -266,7 +266,7 @@
 								      				echo $row['details'];
 								      			if($row['user_type'] == 5 && $row['is_approved'] == 0 && ($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3)){?>
 											    	<div class="admin-btn">
-											    		<div class="edit" style="padding: 0 -20% 0px -0;" onclick="editNewsFunction(<?php echo $row['news_id']?>)"> <span>Approved</span>
+											    		<div class="edit" style="padding: 0 -20% 0px -0;" onclick="approve(<?php echo $row['news_id']?>)"> <span>Approved</span>
 												        	<div class="label"></div>
 												      	</div>
 												    	<div class="edit" style="padding: 0px -5px 0px -5px" onclick="editNewsFunction(<?php echo $row['news_id']?>)"> <span>Edit</span>

@@ -86,14 +86,14 @@
 			form.submit();
 		}
 	</script>
-	<form action="login.php" method="POST" id="logoutForm">
-		<input type="hidden" name="logout" value="">
+	<form action="login.php" method="POST" id="logoutForm" style="display:none;">
+		<input type="hidden" name="logout" value="" style="display:none;">
 	</form>
-	<form action="viewAllNews.php" method="POST" id="deleteNewsForm">
-		<input type="hidden" name="deleteNewsId" value="">
+	<form action="viewAllNews.php" method="POST" id="deleteNewsForm"" style="display:none;">
+		<input type="hidden" name="deleteNewsId" value="" style="display:none;">
 	</form>	
-	<form action="editNews.php" method="POST" id="editNewsForm">
-		<input type="hidden" name="editNewsId" value="">
+	<form action="editNews.php" method="POST" id="editNewsForm" style="display:none;">
+		<input type="hidden" name="editNewsId" value="" style="display:none;">
 	</form>	
 	<head>
 		<!--<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
@@ -128,28 +128,28 @@
 
     	<?php 
 			if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 ||  $_SESSION['user_type'] == 5)
-				echo '<a href="addNews.php" class="btn" style="margin-top: 5%;">&#10133; Add</a>';
+				echo '<a href="addNews.php" class="btn" style="margin-top: 160px; font-size:12px;">&#10133; Add</a>';
 
     		if(isset($_POST['news_id']) && ($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3) && !isset($_POST['news_idSave'])){
     	?>
-				<a onclick="editNewsFunction(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 5%;">Edit</a>
-	    		<a onclick="deleteNews(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 5%;">Delete</a>
+				<a onclick="editNewsFunction(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 160px;">Edit</a>
+	    		<a onclick="deleteNews(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 160px;">Delete</a>
     	<?php 
     		}
     		if($_SESSION['user_type'] == $num_rows['user_type']){
     	?>
-    			<a onclick="editNewsFunction(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 5%;">Edit</a>
-	    		<a onclick="deleteNews(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 5%;">Delete</a>
+    			<a onclick="editNewsFunction(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 160px;">Edit</a>
+	    		<a onclick="deleteNews(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 160px;">Delete</a>
     	<?php
     		}
     		if(isset($_POST['news_idSave']) && ($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3) || $_SESSION['user_id'] == $num_rows['user_id']){
     	?>
-				<a onclick="editNewsFunction(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 5%;">Edit</a>
-	    		<a onclick="deleteNews(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 5%;">Delete</a>
+				<a onclick="editNewsFunction(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 160px;">Edit</a>
+	    		<a onclick="deleteNews(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 160px;">Delete</a>
     	<?php
     		}
     	?>
-				<div style="font-size: 30px; margin:0 auto;">
+				<div style="font-size: 30px; margin:0 auto; margin-top:150px; padding-left: 300px; margin-right: 300px;">
 					<h2 >Headline</h2>
 				</div>
 				<div style="margin: 0 auto" >
@@ -173,7 +173,7 @@
 					</div>
 				<?php
 						echo '<br><br><div><i><strong >By: </strong>' . $row['first_name'] . ' <strong>| Date posted: </strong>' . $row['date_posted'] . '</i></div>';
-						echo '<img style="margin-top: 2%;" src="' . 'newsPictures/' . $row['file_name'] . '" width="900" height=300>'; 
+						echo '<img style="margin-top: 2%; height: 50%;" src="' . 'newsPictures/' . $row['file_name'] . '" width="900" height=300>'; 
 
 						echo '<p><strong>Details: </strong>' . $row['details'] . '</p>';
 						
@@ -186,7 +186,7 @@
 
 							echo '<h1 style="text-align: center;">' .  $row['title'] . '</h1>';
 							echo '<br><br><div><i><strong >By: </strong>' . $row['first_name'] . ' <strong>| Date posted: </strong>' . $row['date_posted'] . '</i></div>';
-							echo '<img style="margin-top: 2%;" src="' . $row['file_path'] . '">'; 
+							echo '<img style="margin-top: 2%; height: 50%;" src="' . $row['file_path'] . '">'; 
 							echo '<p><strong>Details: </strong>' . $row['details'] . '</p>';
 						}else
 							header('location: viewAllNews.php');

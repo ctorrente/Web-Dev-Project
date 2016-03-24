@@ -80,13 +80,13 @@
             <b>
 				<?php
 					if($x == 1)
-						echo "1st Year";
+						echo "<h1>1st Year</h1>";
 					else if($x == 2)
-						echo "2nd Year";
+						echo "<h1>2nd Year</h1>";
 					else if($x == 3)
-						echo "3rd Year";
+						echo "<h1>3rd Year</h1>";
 					else
-						echo "4th Year";
+						echo "<h1>4th Year</h1>";
 				?>
 			</b>
             <table style="width: 90%; margin: auto">

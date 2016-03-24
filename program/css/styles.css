@@ -179,6 +179,7 @@ tr:nth-child(odd) {
 th, td {
   padding: 20px;
   font-weight: 300;
+  
 }
 
 td {

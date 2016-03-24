@@ -126,29 +126,7 @@
 		<div class="content-wrapper" style=" width: 100%;">
 			<div class="content" style=" width: 100%;">
 
-    	<?php 
-			if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 ||  $_SESSION['user_type'] == 5)
-				echo '<a href="addNews.php" class="btn" style="margin-top: 160px; font-size:12px;">&#10133; Add</a>';
 
-    		if(isset($_POST['news_id']) && ($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3) && !isset($_POST['news_idSave'])){
-    	?>
-				<a onclick="editNewsFunction(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 160px;">Edit</a>
-	    		<a onclick="deleteNews(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 160px;">Delete</a>
-    	<?php 
-    		}
-    		if($_SESSION['user_type'] == $num_rows['user_type']){
-    	?>
-    			<a onclick="editNewsFunction(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 160px;">Edit</a>
-	    		<a onclick="deleteNews(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 160px;">Delete</a>
-    	<?php
-    		}
-    		if(isset($_POST['news_idSave']) && ($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3) || $_SESSION['user_id'] == $num_rows['user_id']){
-    	?>
-				<a onclick="editNewsFunction(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 160px;">Edit</a>
-	    		<a onclick="deleteNews(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 160px;">Delete</a>
-    	<?php
-    		}
-    	?>
 				<?php
 					if(isset($_POST['news_id'])){
 						$query = 'SELECT * FROM news n, picture p, users u WHERE n.news_id = ' .  $_POST['news_id'] . ' AND ' .
@@ -158,8 +136,32 @@
 
 
 				?>
+		<div style="margin: 0px -300px; width: 100%; height: 20px;">
+    	<?php 
+			if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 ||  $_SESSION['user_type'] == 5)
+				echo '<a href="addNews.php" class="btn" style="margin-top: 130px; font-size:12px; ">&#10133; Add</a>';
 
-					<div style="font-size: 30px; margin:0 auto; margin-top:150px; padding-left: 300px; margin-right: 300px;">
+    		if(isset($_POST['news_id']) && ($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3) && !isset($_POST['news_idSave'])){
+    	?>
+				<a onclick="editNewsFunction(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 130px;">Edit</a>
+	    		<a onclick="deleteNews(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 130px;">Delete</a>
+    	<?php 
+    		}
+    		if($_SESSION['user_type'] == $num_rows['user_type']){
+    	?>
+    			<a onclick="editNewsFunction(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 130px;">Edit</a>
+	    		<a onclick="deleteNews(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 130px;">Delete</a>
+    	<?php
+    		}
+    		if(isset($_POST['news_idSave']) && ($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3) || $_SESSION['user_id'] == $num_rows['user_id']){
+    	?>
+				<a onclick="editNewsFunction(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 130px;">Edit</a>
+	    		<a onclick="deleteNews(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 130px;">Delete</a>
+    	<?php
+    		}
+    	?>
+    	</div>
+					<div style="font-size: 30px; margin:0 auto; margin-top:100px; padding-left: 300px; margin-right: 300px;">
 						<h2 ><?php echo $row['title']?></h2>
 					</div>
 

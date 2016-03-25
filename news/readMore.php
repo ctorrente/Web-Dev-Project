@@ -1,5 +1,5 @@
 <?php
-	/**
+	/*
  		* File Description: Read more page of a news 
  		* @version 2.0
 		* @authors Charles Torrente
@@ -89,7 +89,7 @@
 	<form action="login.php" method="POST" id="logoutForm" style="display:none;">
 		<input type="hidden" name="logout" value="" style="display:none;">
 	</form>
-	<form action="viewAllNews.php" method="POST" id="deleteNewsForm"" style="display:none;">
+	<form action="viewAllNews.php" method="POST" id="deleteNewsForm" style="display:none;">
 		<input type="hidden" name="deleteNewsId" value="" style="display:none;">
 	</form>	
 	<form action="editNews.php" method="POST" id="editNewsForm" style="display:none;">
@@ -162,20 +162,12 @@
 					<div style="font-size: 30px; margin:0 auto; margin-top:150px; padding-left: 300px; margin-right: 300px;">
 						<h2 ><?php echo $row['title']?></h2>
 					</div>
-									<div style="margin: 0 auto" >
+
+			<div style="margin: 0 auto" >
 			<div class="content" style="width: 100%; margin: 0 auto;">
 				<?php
 						echo '<br><br><div style="text-align: center;"><i><strong >By: </strong>' . $row['first_name'] . ' <strong>| Date posted: </strong>' . $row['date_posted'] . '</i></div><br>';
 						echo '<img style="margin: 0 auto; height: 50%; " src="' . 'newsPictures/' . $row['file_name'] . '" >'; 
-
-				?>
-					<div style="font-size: 30px; margin-left: 5%; margin-top: 2%;">
-						<h2 ><?php echo $row['title']?></h2>
-					</div>
-				<?php
-						echo '<br><br><div><i><strong >By: </strong>' . $row['first_name'] . ' <strong>| Date posted: </strong>' . $row['date_posted'] . '</i></div>';
-						echo '<img style="margin-top: 2%; height: 50%;" src="' . 'newsPictures/' . $row['file_name'] . '" width="900" height=300>'; 
-
 						echo '<p><strong>Details: </strong>' . $row['details'] . '</p>';
 						
 					}else {

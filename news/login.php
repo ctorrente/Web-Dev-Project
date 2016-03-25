@@ -1,5 +1,5 @@
 <?php 
-	* File Description: Login Page of the site 
+	/* File Description: Login Page of the site 
  		*	type users or news that are posted/approved by the moderator.
  		* @version 2.0
 		* @authors Charles Torrente

@@ -5,22 +5,7 @@
 		<div id='cssmenu'>
 			<ul>
 				<li><a href='../home.php'>Home</a></li>
-				<?php 
-					if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
-						echo '<li class="has-sub" style="float: left;"><a href="viewAllNews.php">News</a>' . 
-							'<ul>' . 
-								'<li><a href="../news/viewAllNews.php">All News</a></li>' . 
-								'<li><a href="../news/forFaculties.php">For faculties</a></li>' . 
-								'<li><a href="../news/forOrgOfficers.php">For org. officers</a></li>' . 
-								'<li><a href="../news/forStudents.php">For students</a></li>' . 
-								'<li><a href="../news/forAlumni.php">For alumni</a></li>' . 
-								'<li><a href="../news/forGuests.php">For guests</a></li>' . 
-							'</ul>'.
-						'</li>';
-					}else{
-						echo '<li><a href="news/viewAllNews.php">News</a></li>';
-					}
-				?>
+				<li><a href="../../news/viewAllNews.php">News</a></li>
 				<?php 
 					if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
 						echo '<li class="has-sub" style="float: left;"><a href="calendar.php">Events</a>' . 

@@ -101,11 +101,11 @@
 				<input type="file" name="picture" placeholder="Browse" required>
 				<textarea name="details" placeholder="Details" required></textarea>
 				<h3>Who can view this news?</h3>
-				<div class="bla">
-					<input type="checkbox" name="faculties" value="1"> Faculties
-					<input type="checkbox" name="students" value="1"> Students
-					<input type="checkbox" name="alumnus" value="1"> Alumnus
-					 <input type="checkbox" name="guests" value="1"> Guests
+				<div class="bla" >
+					<input type="checkbox" name="faculties" value="1" style="-webkit-appearance: checkbox; width: 20px;"> Faculties
+					<input type="checkbox" name="students" value="1" style="-webkit-appearance: checkbox; width: 20px; "> Students
+					<input type="checkbox" name="alumnus" value="1" style="-webkit-appearance: checkbox; width: 20px;"> Alumnus
+					<input type="checkbox" name="guests" value="1" style="-webkit-appearance: checkbox; width: 20px;"> Guests
 				</div>
 				<input type="submit" name="post" value="Post">
 			</form>
@@ -113,7 +113,7 @@
 	</div>
 </div>
 
-<footer >
+<footer>
 	<div class="lookWrap" >
 		<a class="btn btn-lg btn-success js-modal" href="#" role="button" data-toggle="modal" data-target="#demoModal"><h2>Contact Us</h2></a>
 		<div id="look">

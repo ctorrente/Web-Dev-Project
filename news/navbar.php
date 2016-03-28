@@ -11,7 +11,16 @@
 		<div id='cssmenu'>
 			<ul>
 				<li><a href='../home.php'>Home</a></li>
-				<li><a href="viewAllNews.php">News</a></li>
+				
+				<?php
+					if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3){
+						echo '<li class="has-sub" style="float: left;"><a href="viewAllNews.php">News</a>';
+						echo '<ul>' . 
+							'<li><a href="viewAllNews.php">News</a></li><li><a href="newsForApproval.php">News for approval</a></li>' . 
+						'</ul></li>';
+					}else
+						echo '<li style="float: left;"><a href="viewAllNews.php">News</a></li>';
+				?>
 				<?php 
 					if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
 						echo '<li class="has-sub" style="float: left;"><a href="../events/calendar/calendar.php">Events</a>' . 

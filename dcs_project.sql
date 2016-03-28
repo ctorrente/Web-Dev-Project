@@ -303,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `news` (
 --
 
 INSERT INTO `news` (`news_id`, `user_id`, `picture_id`, `title`, `details`, `date_posted`, `is_approved`, user_type) VALUES
-(1, 1, 1, 'TACTICS Election', 'Vote wise!', '2016-03-09 08:52:24', 0, 6);
+(1, 1, 1, 'TACTICS Election', 'Vote wise!', '2016/03/09 08:52:24 am', 0, 6);
 
 -- --------------------------------------------------------
 

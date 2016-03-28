@@ -70,7 +70,7 @@
 	<form action="login.php" method="POST" id="logoutForm" style="display:none;">
 		<input type="hidden" name="logout" value="" style="display:none;">
 	</form>
-	<form action="readMore.php" method="POST" id="readMoreForm" style="display:none;">
+	<form action="approvalReadMore.php" method="POST" id="readMoreForm" style="display:none;">
 		<input type="hidden" name="news_id" value="" style="display:none;">
 	</form>	
 	<form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" id="deleteNewsForm" style="display:none;">
@@ -125,20 +125,13 @@
 		<div class="content-wrapper" >
 			<div class="ptcontainer">
 				<div class = "pagetitle">
-           			<p> News </p>
+           			<p> News for Approval</p>
             	</div>
-            
-            	<div class = "pagetitle" id="downadd">
-            		<?php 
-						if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5)
-							echo '<a href="addNews.php" class="add">Add &#10133;</a>';
-					?>    	
-            	</div>
-            </div>
+            </div><br><br><br>
 
 			<div class="content">
 			<?php
-				$sql = "SELECT count(*) from news where is_approved = 1";
+				$sql = "SELECT count(*) from news WHERE is_approved = 0";
 				$query = mysqli_query($conn, $sql);
 				$row = mysqli_fetch_row($query);
 				$rows = $row[0];
@@ -161,7 +154,7 @@
 				}
 
 				$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ', ' . $page_rows;
-				$sql = "select * from news n, picture p, users u where n.picture_id = p.picture_id and u.user_id = n.user_id and n.is_approved = 1 order by date_posted desc $limit";
+				$sql = "select * from news n, picture p, users u where n.picture_id = p.picture_id and u.user_id = n.user_id and n.is_approved = 0 order by date_posted desc $limit";
 				$query = mysqli_query($conn, $sql);
 				$textline1 = "ldap_count_entries(link_identifier, result_identifier) (<b>$rows<b>)";
 				$textline2 = "Page (<b>$pagenum<b> of <b>$last<b>)";
@@ -197,7 +190,7 @@
 			
 			<?php
 				if($rows == 0){
-					echo '<i><div>There are no News that are posted.<div></i>';
+					echo '<i><div>There are no News that are posted by students.<div></i>';
 				}else{
 					echo "<p> $textline2</p>";
 					while($row =  mysqli_fetch_array($query)){
@@ -266,7 +259,7 @@
 								      				echo $row['details'];
 								      			if($row['user_type'] == 5 && $row['is_approved'] == 0 && ($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3)){?>
 											    	<div class="admin-btn">
-											    		<div class="edit" style="padding: 0 -20% 0px -0;" onclick="approve(<?php echo $row['news_id']?>)"> <span>Approved</span>
+											    		<div class="edit" style="padding: 0 -20% 0px -0;" onclick="approve(<?php echo $row['news_id']?>)"> <span>Approve</span>
 												        	<div class="label"></div>
 												      	</div>
 												    	<div class="edit" style="padding: 0px -5px 0px -5px" onclick="editNewsFunction(<?php echo $row['news_id']?>)"> <span>Edit</span>

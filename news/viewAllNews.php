@@ -197,7 +197,7 @@
 			
 			<?php
 				if($rows == 0){
-					echo '<i><div>There are no News that are posted.<div></i>';
+					echo ' <i><div>There are no News that are posted.<div></i>';
 				}else{
 					echo "<p> $textline2</p>";
 					while($row =  mysqli_fetch_array($query)){

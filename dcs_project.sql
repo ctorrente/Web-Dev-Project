@@ -359,7 +359,7 @@ INSERT INTO `organization_officer` (`officer_id`, `position`, `student_id`) VALU
 (5, 'External Vice President', NULL),
 (6, 'Secretary', NULL),
 (7, 'Assistant Secretary', NULL),
-(8, 'Treasurer', NULL),
+(8, 'Treasurer',  NULL),
 (9, 'Auditor', NULL),
 (10, 'Business Manager', NULL),
 (11, 'Business Manager', NULL),

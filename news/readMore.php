@@ -184,7 +184,7 @@
 							echo '<img style="margin-top: 2%; height: 50%;" src="' . $row['file_path'] . '">'; 
 							echo '<p><strong>Details: </strong>' . $row['details'] . '</p>';
 						}else
-							header('location: viewAllNews.php');
+							 header('location: viewAllNews.php');
 					}
 				?>
 				</div>

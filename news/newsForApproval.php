@@ -183,7 +183,7 @@
 
 					if($pagenum != $last){
 						$next = $pagenum+1;
-						$paginationCtrls .= '&nbsp; &nbsp; <a href="' . $_SERVER['PHP_SELF'] . '?pn='.$next.'">Next</a> ';  
+						 $paginationCtrls .= '&nbsp; &nbsp; <a href="' . $_SERVER['PHP_SELF'] . '?pn='.$next.'">Next</a> ';  
 					}
 				}
 			?>

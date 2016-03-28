@@ -105,7 +105,7 @@
 					<input type="checkbox" name="faculties" value="1"> Faculties
 					<input type="checkbox" name="students" value="1"> Students
 					<input type="checkbox" name="alumnus" value="1"> Alumnus
-					<input type="checkbox" name="guests" value="1"> Guests
+					 <input type="checkbox" name="guests" value="1"> Guests
 				</div>
 				<input type="submit" name="post" value="Post">
 			</form>

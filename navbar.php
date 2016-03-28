@@ -13,7 +13,7 @@
 							'<li><a href="news/viewAllNews.php">News</a></li><li><a href="news/newsForApproval.php">News for approval</a></li>' . 
 						'</ul></li>';
 					}else
-						echo '<li style="float: left;"><a href="news/viewAllNews.php">News</a></li>';
+						echo  '<li style="float: left;"><a href="news/viewAllNews.php">News</a></li>';
 				?>
 				<?php 
 					if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){

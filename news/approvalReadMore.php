@@ -162,7 +162,7 @@
     	?>
 				<a onclick="editNewsFunction(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 130px;">Edit</a>
 	    		<a onclick="deleteNews(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 130px;">Delete</a>
-	    		<a onclick="approve(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 130px; width:80px; height: 17px;">&#10133; Approve</a>
+	    		 <a onclick="approve(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 130px; width:80px; height: 17px;">&#10133; Approve</a>
     	<?php 
     		}
     		if($_SESSION['user_type'] == $num_rows['user_type']){

@@ -36,10 +36,11 @@
 			$exec = mysqli_query($conn, $query);
 			//echo $query;
 			$query = "";
+			$date = date('Y/m/d h:i:s a');
 			if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3)
-				$query = "insert into news(user_id, picture_id, title, details, date_posted, is_approved, user_type) VALUES(" . $user_id . ", " . $totalPictures . ", '" . $title . "', '" . $details . "', NOW(), 1, 9)";
+				$query = "insert into news(user_id, picture_id, title, details, date_posted, is_approved, user_type) VALUES(" . $user_id . ", " . $totalPictures . ", '" . $title . "', '" . $details . "', '$date', 1, 9)";
 			if($_SESSION['user_type'] == 5)
-				$query = "insert into news(user_id, picture_id, title, details, date_posted, is_approved, user_type) VALUES(" . $user_id . ", " . $totalPictures . ", '" . $title . "', '" . $details . "', NOW(), 0, 9)";
+				$query = "insert into news(user_id, picture_id, title, details, date_posted, is_approved, user_type) VALUES(" . $user_id . ", " . $totalPictures . ", '" . $title . "', '" . $details . "', '$date', 0, 9)";
 			//echo $query;
 			$exec = mysqli_query($conn, $query);
 			
@@ -91,7 +92,7 @@
 <?php require('navbar.php'); ?>
 
 <!--ADD NEWS FORM-->
-<div class="container"style="height: 600px">
+<div class="container">
 	<div class="content-wrapper" >
 		<div class="content">
 			<form class="addeve" enctype="multipart/form-data" method="POST" action="addNews.php">
@@ -99,6 +100,13 @@
 				<input type="text" name="title" placeholder="Title" required>
 				<input type="file" name="picture" placeholder="Browse" required>
 				<textarea name="details" placeholder="Details" required></textarea>
+				<h3>Who can view this news?</h3>
+				<div class="bla">
+					<input type="checkbox" name="faculties" value="1"> Faculties
+					<input type="checkbox" name="students" value="1"> Students
+					<input type="checkbox" name="alumnus" value="1"> Alumnus
+					<input type="checkbox" name="guests" value="1"> Guests
+				</div>
 				<input type="submit" name="post" value="Post">
 			</form>
 		</div>
@@ -144,6 +152,7 @@
 				<div class="message">
 					<textarea name="message" id="message" placeholder="Message"></textarea>
 				</div>
+				
 				<div class="submit">
 					<input type="submit" value="Send" class="button" />
 				</div>

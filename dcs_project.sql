@@ -535,7 +535,7 @@ INSERT INTO `users` (`user_id`, `user_type`, `username`, `password`, `first_name
 (2, 6, 's201310531', 'e10adc3949ba59abbe56e057f20f883e', 'Xavier Eric', 'Carreras', 'Rosales', 'M', '1996-06-14', 'Z-1 Del Rosario, Naga City', 'CS', 'esotto@gbox.adnu.edu.ph'),
 (4, 6, 's201310500', 'e10adc3949ba59abbe56e057f20f883e', 'Marlou', 'marlou', 'marlou', 'M', '2013-01-03', 'Z-1 Del Rosario, Naga City', 'IS', 'mmarlou@gbox.adnu.edu.ph'),
 (5, 6, 's201310501', 'e10adc3949ba59abbe56e057f20f883e', 'justin', 'bababa', 'bieber', 'M', '2005-11-06', 'Z-1 Del Rosario, Naga City', 'CS', 'jbieber@gbox.adnu.edu.ph'),
-(6, 6, 's201310502', 'e10adc3949ba59abbe56e057f20f883e', 'maria', 'sasa', 'ozawa', 'F', '2016-03-06', 'Z-1 Del Rosario, Naga City', 'IS', 'mozawa@gbox.adnu.edu.ph'),
+(6, 6, 's201310502', 'e10adc3949ba59abbe56e057f20f883e', 'Charles', 'sasa', 'ozawa', 'F', '2016-03-06', 'Z-1 Del Rosario, Naga City', 'IS', 'mozawa@gbox.adnu.edu.ph'),
 (7, 6, 's200011234', 'e10adc3949ba59abbe56e057f20f883e', 'Student', 'Number', 'One', 'M', '1996-02-02', 'BETLOG AVENUE', 'IT', 'sone@gbox.adnu.edu.ph'),
 (8, 4, 'f200112345', 'e10adc3949ba59abbe56e057f20f883e', 'Adrian Leo', 'Tendenilla', 'Pajarillo', 'M', '1987-10-03', 'Camaligan', 'IT', 'apajarillo@gbox.adnu.edu.ph'),
 (9, 4, 'f201511000', 'e10adc3949ba59abbe56e057f20f883e', 'Mitchell Zachary', 'Bax', 'Imperial', 'M', '1991-03-10', 'Naga City', 'CS', 'miimperial@gbox.adnu.edu.ph'),

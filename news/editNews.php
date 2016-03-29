@@ -45,7 +45,11 @@
 			$exec = mysqli_query($conn, $query);
 			echo '<script type="text/javascript">alert("Success")</script>';
 		}
-		header('location: viewAllNews.php');
+
+		if($_SESSION['user_type'] == 5)
+			header('location: newsForApproval.php');
+		else
+			header('location: viewAllNews.php');
 	} 
 ?>
 
@@ -61,33 +65,8 @@
 			var tmp = confirm("Save changes?");
 
 			if(tmp)
-				var validFileExtension = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
-				var inputs = document.getElementsByTagName("input");
-				var form = document.getElementById("editForm");
-
-				for(var i = 0; i < inputs.length  - 4; i++){
-					if(inputs[i].type == "file"){
-						var file_name = inputs[i].value;
-						var match = false;
-						for(var j = 0; j < validFileExtension.length; j++){
-							if(file_name.substr(file_name.length - validFileExtension[j].length, validFileExtension[i].length) == validFileExtension[j]){
-								match = true;
-								break;
-							}
-						}
-
-						if(match || form.picture.files.length == 0){
-							form.news_idSave.value = news_id;
-							return true;
-						}
-						else{
-							alert("Sorry, " + file_name + " is invalid, allowed extensions are: " + validFileExtension.join(", "));
-	                    	return false;
-						}
-					}
-				}
-				return false;
-			}else
+				return true;
+			else
 				return false;
 		}
 	</script>

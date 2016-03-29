@@ -53,7 +53,12 @@
 			
 			move_uploaded_file($_FILES['picture']['tmp_name'], $file_path);
 			echo "<script type='text/javascript'>alert('News Added!')</script>";
-			echo "<script>setTimeout(\"location.href = 'viewallnews.php';\",100);</script>";
+
+
+			if($_SESSION['user_type'] == 5)
+				echo "<script>setTimeout(\"location.href = 'newsForApproval.php';\",100);</script>";
+			else
+				echo "<script>setTimeout(\"location.href = 'viewAllNews.php';\",100);</script>";
 		
 		}else{
 			echo '<script type="text/javascript">alert("Invalid File")</script>';
@@ -73,8 +78,8 @@
 		<input type="hidden" name="logout" value="">
 	</form>
 	<head>
-		<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<!--<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>-->
 		<link rel="stylesheet" href="functionalities/css/contactus.css">
 		<link rel="stylesheet" href="css/styles.css">
 		<link rel="stylesheet" href="css/navbar-footer.css">

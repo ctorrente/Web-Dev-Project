@@ -1,7 +1,7 @@
 <html>
 	<head>
-		<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<!--<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>-->
 		<link rel="stylesheet" href="css/home.css">
 		<link rel="stylesheet" href="functionalities/css/contactus.css">
 		<link rel="stylesheet" href="css/styles.css">

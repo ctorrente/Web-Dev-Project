@@ -36,11 +36,18 @@
 			$exec = mysqli_query($conn, $query);
 			//echo $query;
 			$query = "";
+			$faculties = (!isset($_POST['faculties']))?0:1;
+			$students = (!isset($_POST['students']))?0:1;
+			$alumnus = (!isset($_POST['alumnus']))?0:1;
+			$guests = (!isset($_POST['guests']))?0:1;
+
 			$date = date('Y/m/d h:i:s a');
 			if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3)
-				$query = "insert into news(user_id, picture_id, title, details, date_posted, is_approved, user_type) VALUES(" . $user_id . ", " . $totalPictures . ", '" . $title . "', '" . $details . "', '$date', 1, 9)";
+				$query = "insert into news(user_id, picture_id, title, details, date_posted, faculties, students, alumnus, guests, is_approved, user_type) 
+			VALUES(" . $user_id . ", " . $totalPictures . ", '" . $title . "', '" . $details . "', '$date', $faculties, $students, $alumnus, $guests, 1, 9)";
 			if($_SESSION['user_type'] == 5)
-				$query = "insert into news(user_id, picture_id, title, details, date_posted, is_approved, user_type) VALUES(" . $user_id . ", " . $totalPictures . ", '" . $title . "', '" . $details . "', '$date', 0, 9)";
+				$query = "insert into news(user_id, picture_id, title, details, date_posted, faculties, students, alumnus, guests, is_approved, user_type) 
+			VALUES(" . $user_id . ", " . $totalPictures . ", '" . $title . "', '" . $details . "', '$date', $faculties, $students, $alumnus, $guests, 0, 9)";
 			//echo $query;
 			$exec = mysqli_query($conn, $query);
 			
@@ -101,12 +108,14 @@
 				<input type="file" name="picture" placeholder="Browse" required>
 				<textarea name="details" placeholder="Details" required></textarea>
 				<h3>Who can view this news?</h3>
+				<center>
 				<div class="bla" >
 					<input type="checkbox" name="faculties" value="1" style="-webkit-appearance: checkbox; width: 20px;"> Faculties
 					<input type="checkbox" name="students" value="1" style="-webkit-appearance: checkbox; width: 20px; "> Students
 					<input type="checkbox" name="alumnus" value="1" style="-webkit-appearance: checkbox; width: 20px;"> Alumnus
 					<input type="checkbox" name="guests" value="1" style="-webkit-appearance: checkbox; width: 20px;"> Guests
 				</div>
+				</center>
 				<input type="submit" name="post" value="Post">
 			</form>
 		</div>

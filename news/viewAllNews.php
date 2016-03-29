@@ -29,8 +29,7 @@
 		$query = "UPDATE news SET is_approved = 1 WHERE news_id = " . $_POST['for_approval_id'] . ";";
 		$exec = mysqli_query($conn, $query);
 		echo '<script type="text/javascript">alert("Approved")</script>';
-	}
-	date_default_timezone_set('Asia/Manila');
+	}	
 ?>
 <html>
 	<script type="text/javascript">
@@ -161,7 +160,8 @@
 				}
 
 				$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ', ' . $page_rows;
-				$sql = "select * from news n, picture p, users u where n.picture_id = p.picture_id and u.user_id = n.user_id and n.is_approved = 1 order by date_posted desc $limit";
+				$sql = "select n.news_id as news_id, n.user_id as user_id, n.title as title, n.details as details, n.date_posted as date_posted, 
+				n.is_approved as is_approved, p.file_path as file_path, u.first_name as first_name, u.user_type as user_type from news n, picture p, users u where n.picture_id = p.picture_id and u.user_id = n.user_id and n.is_approved = 1 order by date_posted desc $limit";
 				$query = mysqli_query($conn, $sql);
 				$textline1 = "ldap_count_entries(link_identifier, result_identifier) (<b>$rows<b>)";
 				$textline2 = "Page (<b>$pagenum<b> of <b>$last<b>)";
@@ -202,7 +202,7 @@
 					echo "<p> $textline2</p>";
 					while($row =  mysqli_fetch_array($query)){
 						if($row['is_approved'] && ($_SESSION['user_type'] == 6 || $_SESSION['user_type'] == 7 || $_SESSION['user_type'] == 8)){
-							$dateTime = new DateTime($row['date_posted'], new DateTimeZone('Asia/Kolkata')); ?>
+							$date = date("F m, Y g:ia", strtotime($row['date_posted'])); ?>
 							<div class="card">
 							    <!-- Header -->
 							    <div class="card-img">
@@ -216,7 +216,7 @@
 							      	<!-- Footer-->
 							      	<?php 
 						      			$words = explode(' ', $row['details']);
-						      			echo '<strong>Posted: ' . $dateTime->format("d/m/y  H:i A") . ' </strong><br>';
+						      			echo '<strong>Posted: ' . $date. ' </strong><br>';
 						      			echo '<strong>By: ' . $row['first_name'] . ', ';
 						      			if($row['is_approved'] == 0)
 						      				echo 'Not yet approved</strong><br><br>';
@@ -237,7 +237,7 @@
 							<?php
 							}else{
 								if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
-									$dateTime = new DateTime($row['date_posted'], new DateTimeZone('Asia/Kolkata')); ?>
+									$date = date("F m, Y g:ia", strtotime($row['date_posted'])); ?>
 									<div class="card">
 									    <!-- Header -->
 									    <div class="card-img">
@@ -251,7 +251,7 @@
 									      	<!-- Footer-->
 									      	<?php 
 								      			$words = explode(' ', $row['details']);
-								      			echo '<strong>Posted: ' . $dateTime->format("d/m/y  H:i A") . ' </strong><br>';
+								      			echo '<strong>Posted: ' . $date. ' </strong><br>';
 								      			echo '<strong>By: ' . $row['first_name'] . ', ';
 								      			if($row['is_approved'] == 0)
 								      				echo 'Not yet approved</strong><br><br>';
@@ -280,15 +280,20 @@
 										</div>
 									</div>
 										    <?php
-										    }else{?>
-											    <div class="admin-btn">
-											    	<div class="edit" onclick="editNewsFunction(<?php echo $row['news_id']?>)"> <span>Edit</span>
-											        	<div class="label"></div>
-											      	</div>
-											      	<div class="delete" onclick="deleteNews(<?php echo $row['news_id']?>)"> <span>Delete</span>
-											        	<div class="label"></div>
-											      	</div>
-											 	</div>
+										    }else{
+										    	if($_SESSION['user_id'] == $row['user_id'] || $_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3){
+										    	?>
+												    <div class="admin-btn">
+												    	<div class="edit" onclick="editNewsFunction(<?php echo $row['news_id']?>)"> <span>Edit</span>
+												        	<div class="label"></div>
+												      	</div>
+												      	<div class="delete" onclick="deleteNews(<?php echo $row['news_id']?>)"> <span>Delete</span>
+												        	<div class="label"></div>
+												      	</div>
+												 	</div>
+											 	<?php
+											 	}
+											 	?>
 											</div>
 										</div>
 									</div>

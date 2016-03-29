@@ -294,6 +294,10 @@ CREATE TABLE IF NOT EXISTS `news` (
   `title` varchar(100) NOT NULL,
   `details` text,
   `date_posted` datetime DEFAULT NULL,
+  faculties tinyint(1) DEFAULT 0,
+  students tinyint(1) DEFAULT 0,
+  alumnus tinyint(1) DEFAULT 0,
+  guests tinyint(1) DEFAULT 0,
   `is_approved` tinyint(1) NOT NULL,
    user_type tinyint(1) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -302,8 +306,8 @@ CREATE TABLE IF NOT EXISTS `news` (
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`news_id`, `user_id`, `picture_id`, `title`, `details`, `date_posted`, `is_approved`, user_type) VALUES
-(1, 1, 1, 'TACTICS Election', 'Vote wise!', '2016/03/09 08:52:24 am', 0, 6);
+INSERT INTO `news` (`news_id`, `user_id`, `picture_id`, `title`, `details`, `date_posted`,faculties, students, alumnus, guests, `is_approved`, user_type) VALUES
+(1, 1, 1, 'TACTICS Election', 'Vote wise!', '2016/03/09 08:52:24 am', 1, 1, 1, 1, 0, 6);
 
 -- --------------------------------------------------------
 

@@ -5,6 +5,7 @@
 		* @authors Charles Torrente
 	*/
 	session_start();
+	date_default_timezone_set('Asia/Manila');
 	function login($conn, $username, $password){
 		$query = "SELECT * FROM users where username like '%" . $username . "%'";
 		$exec_query = @mysqli_query($conn, $query);

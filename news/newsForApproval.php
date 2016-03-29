@@ -62,9 +62,13 @@
 		}
 		
 		function approve(news_for_approval_id) {
-			var form = document.getElementById("approvalForm");
-			form.for_approval_id.value = news_for_approval_id;
-			form.submit();
+			var tmp = confirm("Are your sure you want to approve this?");
+
+			if(tmp){
+				var form = document.getElementById("approvalForm");
+				form.for_approval_id.value = news_for_approval_id;
+				form.submit();
+			}
 		}
 	</script>
 	<form action="login.php" method="POST" id="logoutForm" style="display:none;">
@@ -126,6 +130,13 @@
 			<div class="ptcontainer">
 				<div class = "pagetitle">
            			<p> News for Approval</p>
+            	</div>
+
+            	<div class = "pagetitle" id="downadd">
+            		<?php 
+						if($_SESSION['user_type'] == 5)
+							echo '<a href="addNews.php" class="add">Add &#10133;</a>';
+					?>    	
             	</div>
             </div><br><br><br>
 
@@ -195,7 +206,10 @@
 					echo "<p> $textline2</p>";
 					while($row =  mysqli_fetch_array($query)){
 						if($row['is_approved'] && ($_SESSION['user_type'] == 6 || $_SESSION['user_type'] == 7 || $_SESSION['user_type'] == 8)){
-							$dateTime = new DateTime($row['date_posted'], new DateTimeZone('Asia/Kolkata')); ?>
+							
+							$date = date("F m, Y g:ia", strtotime($row['date_posted']));
+							?>
+
 							<div class="card">
 							    <!-- Header -->
 							    <div class="card-img">
@@ -209,7 +223,7 @@
 							      	<!-- Footer-->
 							      	<?php 
 						      			$words = explode(' ', $row['details']);
-						      			echo '<strong>Posted: ' . $dateTime->format("d/m/y  H:i A") . ' </strong><br>';
+						      			echo '<strong>Posted: ' . $date . ' </strong><br>';
 						      			echo '<strong>By: ' . $row['first_name'] . ', ';
 						      			if($row['is_approved'] == 0)
 						      				echo 'Not yet approved</strong><br><br>';
@@ -230,7 +244,9 @@
 							<?php
 							}else{
 								if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
-									$dateTime = new DateTime($row['date_posted'], new DateTimeZone('Asia/Kolkata')); ?>
+									$date = date("F m, Y g:ia", strtotime($row['date_posted']));
+								?>
+								
 									<div class="card">
 									    <!-- Header -->
 									    <div class="card-img">
@@ -244,7 +260,7 @@
 									      	<!-- Footer-->
 									      	<?php 
 								      			$words = explode(' ', $row['details']);
-								      			echo '<strong>Posted: ' . $dateTime->format("d/m/y  H:i A") . ' </strong><br>';
+								      			echo '<strong>Posted: ' . $date . ' </strong><br>';
 								      			echo '<strong>By: ' . $row['first_name'] . ', ';
 								      			if($row['is_approved'] == 0)
 								      				echo 'Not yet approved</strong><br><br>';

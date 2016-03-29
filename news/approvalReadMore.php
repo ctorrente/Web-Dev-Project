@@ -148,8 +148,11 @@
 
 				<?php
 					if(isset($_POST['news_id'])){
-						$query = 'SELECT * FROM news n, picture p, users u WHERE n.news_id = ' .  $_POST['news_id'] . ' AND ' .
-						'n.picture_id = p.picture_id AND n.user_id = u.user_id';
+						$query = 'SELECT  n.news_id as news_id, n.user_id as user_id, n.title as title, n.details as details, n.date_posted as date_posted, 
+						n.is_approved as is_approved, p.file_path as file_path, p.file_name as file_name, u.first_name as 
+						first_name, n.faculties as faculties, n.students as students, n.alumnus as alumnus, n.guests as guests,  
+						u.user_type as user_type FROM news n, picture p, users u WHERE n.news_id = ' . 
+						 $_POST['news_id'] . ' AND ' .'n.picture_id = p.picture_id AND n.user_id = u.user_id';
 						$exec = mysqli_query($conn, $query);
 						$row = mysqli_fetch_assoc($exec);
 
@@ -162,51 +165,51 @@
     	?>
 				<a onclick="editNewsFunction(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 130px;">Edit</a>
 	    		<a onclick="deleteNews(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 130px;">Delete</a>
-	    		 <a onclick="approve(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 130px; width:80px; height: 17px;">&#10133; Approve</a>
+	    		<a onclick="approve(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 130px; width:80px; height: 17px;">&#10133; Approve</a>
     	<?php 
     		}
-    		if($_SESSION['user_type'] == $num_rows['user_type']){
+    		if($_SESSION['user_type'] == 5)
+    			echo '<a href="addNews.php" class="btn" style="margin-top: 130px; font-size:12px; ">&#10133; Add</a>';
+    		if($_SESSION['user_id'] == $row['user_id']){
     	?>
-    			<a onclick="editNewsFunction(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 130px;">Edit</a>
-	    		<a onclick="deleteNews(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 130px;">Delete</a>
+    			<a onclick="editNewsFunction(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 130px;">Edit</a>
+	    		<a onclick="deleteNews(<?php echo $_POST['news_id']?>)" class="btn" style="margin-top: 130px;">Delete</a>
     	<?php
     		}
-    		if(isset($_POST['news_idSave']) && ($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3) || $_SESSION['user_id'] == $num_rows['user_id']){
-    	?>
-				<a onclick="editNewsFunction(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 130px;">Edit</a>
-	    		<a onclick="deleteNews(<?php echo $_POST['news_idSave']?>)" class="btn" style="margin-top: 130px;">Delete</a>
-    	<?php
-    		}
+    		
     	?>
     	</div>
 			<div style="font-size: 30px; margin:0 auto; margin-top:100px; padding-left: 300px; margin-right: 300px;">
 				<h2 ><?php echo $row['title']?></h2>
 			</div>
-
 			<div style="margin: 0 auto" >
 			<div class="content" style="width: 100%; margin: 0 auto;">
-				<?php
-						echo '<br><br><div style="text-align: center;"><i><strong >By: </strong>' . $row['first_name'] . ' <strong>| Date posted: </strong>' . $row['date_posted'] . '</i></div><br>';
+					<?php
+						$date = date("F m, Y g:ia", strtotime($row['date_posted']));
+						echo '<br><br><div style="text-align: center;"><i><strong >By: </strong>' . $row['first_name'] . ' <strong>| Date posted: </strong>' . $date . '</i></div><br>';
 						echo '<img style="margin: 0 auto; height: 50%; " src="' . 'newsPictures/' . $row['file_name'] . '" >'; 
-						echo '<p><strong>Details: </strong>' . $row['details'] . '</p>';
-						
-					}else {
-						if(isset($_POST['news_idSave'])){
-							$query = 'SELECT * FROM news n, picture p, users u WHERE n.news_id = ' .  $_POST['news_idSave']. ' AND ' .
-							'n.picture_id = p.picture_id AND n.user_id = u.user_id';
-							$exec = mysqli_query($conn, $query);
-							$row = mysqli_fetch_assoc($exec);
+					
+						$faculties = ($row['faculties'] == 1)?'checked':'';
+						$students = ($row['students'] == 1)?'checked':'';
+						$alumnus = ($row['alumnus'] == 1)?'checked':'';
+						$guests = ($row['guests'] == 1)?'checked':'';
+					?>
 
-							echo '<h1 style="text-align: center;">' .  $row['title'] . '</h1>';
-							echo '<br><br><div><i><strong >By: </strong>' . $row['first_name'] . ' <strong>| Date posted: </strong>' . $row['date_posted'] . '</i></div>';
-							echo '<img style="margin-top: 2%; height: 50%;" src="' . $row['file_path'] . '">'; 
-							echo '<p><strong>Details: </strong>' . $row['details'] . '</p>';
-						}else
-							header('location: viewAllNews.php');
+					<center>
+					<h3>Can view by: </h3>
+					<div class="bla" >
+						<input disabled <?php echo $faculties?> type="checkbox" name="faculties" value="1" style="-webkit-appearance: checkbox; width: 20px;"> Faculties
+						<input disabled <?php echo $students?> type="checkbox" name="students" value="1" style="-webkit-appearance: checkbox; width: 20px; "> Students
+						<input disabled <?php echo $alumnus?> type="checkbox" name="alumnus" value="1" style="-webkit-appearance: checkbox; width: 20px;"> Alumnus
+						<input disabled <?php echo $guests?> type="checkbox" name="guests" value="1" style="-webkit-appearance: checkbox; width: 20px;"> Guests
+					</div>
+					</center>
+
+					<?php
+						echo '<p><strong>Details: </strong>' . $row['details'] . '</p>';
 					}
-				?>
-				</div>
- 			</div>
+					?>
+	 			</div>
 		</div>
 	</div>
 	<!--end content-->

@@ -22,36 +22,7 @@
 					}else
 						echo '<li><a href="../news/viewAllNews.php">News</a></li>';
 				?>
-<<<<<<< Updated upstream
-			<?php 
-					if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
-						echo '<li class="has-sub" style="float: left;"><a href="../events/calendar/calendar.php">Events</a>' . 
-							'<ul>' . 
-								'<li><a href="../events/calendar/eventstable_off.php">Manage Events</a></li>' . 
-							'</ul>'.
-						'</li>';
-					}else if($_SESSION['user_type'] == 6 || $_SESSION['user_type'] == 7 || $_SESSION['user_type'] == 8){
-						'<li class="has-sub" style="float: left;"><a href="../events/calendar/calendar.php">Events</a>' . 
-							'<ul>' . 
-								'<li><a href="../events/calendar/eventstable_mod.php">Events for Approval</a></li>' . 
-=======
-			<?php
-			echo '<li style="float: left;"><a href="events/calendar/calendar.php">Events</a>';
-					if($_SESSION['user_type'] == 5){
-						 echo 
-							'<ul>' . 
-								'<li><a href="events/calendar/eventstable_off.php">Manage Events</a></li>' . 
-							'</ul>'.
-						'</li>';
-					}else if($_SESSION['user_type'] == 6 || $_SESSION['user_type'] == 7 || $_SESSION['user_type'] == 8){
-						'<li class="has-sub" style="float: left;"><a href="events/calendar/calendar.php">Events</a>' . 
-							'<ul>' . 
-								'<li><a href="events/calendar/eventstable_mod.php">Events for Approval</a></li>' . 
->>>>>>> Stashed changes
-							'</ul>'.
-						'</li>';
-					}
-				?>
+				<li><a href='../events/calendar/calendar.php'>Events</a></li>
 				<li><a href='course_list.php'>Courses</a></li>
 				<li><a href='program_list.php'>Programs</a></li>
 				<?php if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5) {

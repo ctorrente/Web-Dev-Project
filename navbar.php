@@ -4,17 +4,7 @@
 	<div class="container">
 		<div id='cssmenu'>
 			<ul>
-			<li><a href='home.php'>Home</a></li>
-				
-				<?php
-					if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
-						echo '<li class="has-sub" style="float: left;"><a href="news/viewAllNews.php">News</a>';
-						echo '<ul>' . 
-							'<li><a href="news/viewAllNews.php">News</a></li><li><a href="news/newsForApproval.php">News for approval</a></li>' . 
-						'</ul></li>';
-					}else
-						echo  '<li style="float: left;"><a href="news/viewAllNews.php">News</a></li>';
-				?>
+				<li><a href='../../home.php'>Home</a></li>
 				<?php 
 					if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
 						echo '<li class="has-sub" style="float: left;"><a href="events/calendar/calendar.php">Events</a>' . 
@@ -24,11 +14,29 @@
 						'</li>';
 					}else if($_SESSION['user_type'] == 6 || $_SESSION['user_type'] == 7 || $_SESSION['user_type'] == 8){
 						'<li class="has-sub" style="float: left;"><a href="events/calendar/calendar.php">Events</a>' . 
+						echo '<li class="has-sub" style="float: left;"><a href="news/viewAllNews.php">News</a>' . 
 							'<ul>' . 
 								'<li><a href="events/calendar/eventstable_mod.php">Events for Approval</a></li>' . 
 							'</ul>'.
 						'</li>';
+					} else {
+						echo '<li><a href="news/viewAllNews.php">News</a></li>';
 					}
+					echo '<li style="float: left;"><a href="events/calendar/calendar.php">Events</a>';
+					if ($_SESSION['user_type'] == 5 ) {
+						 echo 
+							'<ul>' .
+								'<li><a href="events/calendar/eventstable_off.php">Manage Events</a></li>' . 	
+							'</ul>'.
+						'</li>';
+					} else if ($_SESSION['user_type'] == 3) {
+						 echo 
+							'<ul>' . 
+								'<li><a href="events/calendar/eventstable_mod.php">Events for Approval</a></li>' . 	
+							'</ul>'.
+						'</li>';
+					} else
+						echo '</li>';
 				?>
 				<li><a href='program/course_list.php'>Courses</a></li>
 				<li><a href='program/program_list.php'>Programs</a></li>

@@ -4,25 +4,10 @@
 	<div class="container">
 		<div id='cssmenu'>
 			<ul>
-<<<<<<< Updated upstream
-				<li><a href='../home.php'>Home</a></li>
-				<li><a href="../../news/viewAllNews.php">News</a></li>
+				<li><a href='home.php'>Home</a></li>
 				<?php 
 					if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
-						echo '<li class="has-sub" style="float: left;"><a href="calendar.php">Events</a>' . 
-							'<ul>' . 
-								'<li><a href="eventstable_off.php">Manage Events</a></li>' . 
-							'</ul>'.
-						'</li>';
-					}else if($_SESSION['user_type'] == 6 || $_SESSION['user_type'] == 7 || $_SESSION['user_type'] == 8){
-						'<li class="has-sub" style="float: left;"><a href="calendar.php">Events</a>' . 
-							'<ul>' . 
-								'<li><a href="eventstable_mod.php">Events for Approval</a></li>' . 
-=======
-				<li><a href='../../home.php'>Home</a></li>
-				<?php 
-					if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
-						echo '<li class="has-sub" style="float: left;"><a href="news/viewAllNews.php">News</a>' . 
+						echo '<li class="has-sub" style="float: left;"><a href="viewAllNews.php">News</a>' . 
 							'<ul>' . 
 								'<li><a href="news/viewAllNews.php">All News</a></li>' . 
 								'<li><a href="news/forFaculties.php">For faculties</a></li>' . 
@@ -30,39 +15,20 @@
 								'<li><a href="news/forStudents.php">For students</a></li>' . 
 								'<li><a href="news/forAlumni.php">For alumni</a></li>' . 
 								'<li><a href="news/forGuests.php">For guests</a></li>' . 
->>>>>>> Stashed changes
 							'</ul>'.
 						'</li>';
+					}else{
+						echo '<li><a href="news/viewAllNews.php">News</a></li>';
 					}
-					echo '<li style="float: left;"><a href="events/calendar/calendar.php">Events</a>';
-					if ($_SESSION['user_type'] == 5 ) {
-						 echo 
-							'<ul>' . 
-								'<li><a href="events/calendar/eventstable_off.php">Manage Events</a></li>' . 	
-							'</ul>'.
-						'</li>';
-					} else if ($_SESSION['user_type'] == 3) {
-						 echo 
-							'<ul>' . 
-								'<li><a href="events/calendar/eventstable_mod.php">Events for Approval</a></li>' . 	
-							'</ul>'.
-						'</li>';
-					} else
-						echo '</li>';
 				?>
-<<<<<<< Updated upstream
-			</li>
-				<li><a href='../../program/course_list.php'>Courses</a></li>
-				<li><a href='../../program/program_list.php'>Programs</a></li>
-=======
+				<li><a href='events/calendar/calendar.php'>Events</a></li>
 				<li><a href='program/course_list.php'>Courses</a></li>
 				<li><a href='program/program_list.php'>Programs</a></li>
->>>>>>> Stashed changes
 				<?php if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){
 					echo "<li><a href='sitestatistics.php'>Statistics</a></li>";
 				} ?>
 
-				<li class='has-sub'><a href='../../profile.php'><?php echo $_SESSION['first_name'];?></a>
+				<li class='has-sub'><a href='profile.php'><?php echo $_SESSION['first_name'];?></a>
 					<ul>
 						<li><a href='logout.php'>Log Out</a></li>
 						<?php if($_SESSION['user_type'] == 1) {

@@ -1,18 +1,11 @@
-/**
- * File Description: DCS site full with users and other input data Database 
- * @version 2.0
- * @authors Eric Rosales, Sotto, Charles Torrente
-*/
-
-
 -- phpMyAdmin SQL Dump
--- version 4.4.11
+-- version 4.5.4.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 09, 2016 at 10:01 PM
--- Server version: 5.6.24-log
--- PHP Version: 5.6.6
+-- Generation Time: Mar 28, 2016 at 04:10 PM
+-- Server version: 10.1.11-MariaDB
+-- PHP Version: 7.0.2RC1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,17 +19,14 @@ SET time_zone = "+00:00";
 --
 -- Database: `dcs_project`
 --
-DROP DATABASE IF EXISTS dcs_project;
-CREATE DATABASE IF NOT EXISTS `dcs_project` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `dcs_project`;
 
--- ----------------------------dlasdljsal----------------------------
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `adviser`
 --
-  
-CREATE TABLE IF NOT EXISTS `adviser` (
+
+CREATE TABLE `adviser` (
   `faculty_id` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -56,7 +46,7 @@ INSERT INTO `adviser` (`faculty_id`) VALUES
 -- Table structure for table `chair`
 --
 
-CREATE TABLE IF NOT EXISTS `chair` (
+CREATE TABLE `chair` (
   `faculty_id` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -73,13 +63,13 @@ INSERT INTO `chair` (`faculty_id`) VALUES
 -- Table structure for table `course`
 --
 
-CREATE TABLE IF NOT EXISTS `course` (
+CREATE TABLE `course` (
   `course_id` int(11) NOT NULL,
   `course_code` varchar(20) DEFAULT NULL,
   `course_name` varchar(100) DEFAULT NULL,
   `credit_units` int(11) DEFAULT NULL,
   `course_description` varchar(1000) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `course`
@@ -88,7 +78,8 @@ CREATE TABLE IF NOT EXISTS `course` (
 INSERT INTO `course` (`course_id`, `course_code`, `course_name`, `credit_units`, `course_description`) VALUES
 (1, 'ICST 101', 'Computing Fundamentals', 3, 'WTF'),
 (2, 'ICST 102', 'Computer Programming 1', 3, 'Prog 1'),
-(3, 'ICST 103', 'Computer Programming 2', 3, 'PRog 2');
+(3, 'ICST 103', 'Computer Programming 2', 3, 'PRog 2'),
+(4, 'ICSE015', 'Methods of Research', 3, '');
 
 -- --------------------------------------------------------
 
@@ -96,13 +87,13 @@ INSERT INTO `course` (`course_id`, `course_code`, `course_name`, `credit_units`,
 -- Table structure for table `curriculum`
 --
 
-CREATE TABLE IF NOT EXISTS `curriculum` (
+CREATE TABLE `curriculum` (
   `curriculum_id` int(11) NOT NULL,
   `program_id` int(11) DEFAULT NULL,
   `curriculum_year` int(11) DEFAULT NULL,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `last_modified` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `curriculum`
@@ -112,7 +103,12 @@ INSERT INTO `curriculum` (`curriculum_id`, `program_id`, `curriculum_year`, `dat
 (1, 1, 2019, '2016-03-07 04:22:52', NULL),
 (2, 2, 2017, '2016-03-09 05:30:41', NULL),
 (3, 3, 2017, '2016-03-09 10:16:24', NULL),
-(4, 1, 2017, '2016-03-09 10:18:48', NULL);
+(4, 1, 2017, '2016-03-09 10:18:48', NULL),
+(5, 1, 2017, '2016-03-10 05:51:21', NULL),
+(6, 1, 2017, '2016-03-10 05:51:29', NULL),
+(7, 1, 2014, '2016-03-17 06:12:00', NULL),
+(8, 3, 2020, '2016-03-17 06:18:06', NULL),
+(9, 3, 2017, '2016-03-17 06:22:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -120,21 +116,26 @@ INSERT INTO `curriculum` (`curriculum_id`, `program_id`, `curriculum_year`, `dat
 -- Table structure for table `curriculum_downloads`
 --
 
-CREATE TABLE IF NOT EXISTS `curriculum_downloads` (
+CREATE TABLE `curriculum_downloads` (
   `download_count_id` int(6) NOT NULL,
   `curriculum_id` int(11) NOT NULL,
   `download_count_value` int(9) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `curriculum_downloads`
 --
 
 INSERT INTO `curriculum_downloads` (`download_count_id`, `curriculum_id`, `download_count_value`) VALUES
-(1, 1, 1),
+(1, 1, 7),
 (2, 2, 0),
-(3, 3, 0),
-(4, 4, 0);
+(3, 3, 6),
+(4, 4, 2),
+(5, 5, 0),
+(6, 6, 0),
+(7, 7, 0),
+(8, 8, 0),
+(9, 9, 0);
 
 -- --------------------------------------------------------
 
@@ -142,7 +143,7 @@ INSERT INTO `curriculum_downloads` (`download_count_id`, `curriculum_id`, `downl
 -- Table structure for table `curr_subjects`
 --
 
-CREATE TABLE IF NOT EXISTS `curr_subjects` (
+CREATE TABLE `curr_subjects` (
   `curriculum_id` int(11) DEFAULT NULL,
   `course_id` int(11) DEFAULT NULL,
   `curr_year` int(11) DEFAULT NULL,
@@ -156,7 +157,9 @@ CREATE TABLE IF NOT EXISTS `curr_subjects` (
 INSERT INTO `curr_subjects` (`curriculum_id`, `course_id`, `curr_year`, `curr_sem`) VALUES
 (1, 1, 1, 1),
 (1, 2, 1, 1),
-(1, 3, 1, 2);
+(1, 3, 1, 2),
+(4, 1, 1, 1),
+(1, 3, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -164,16 +167,22 @@ INSERT INTO `curr_subjects` (`curriculum_id`, `course_id`, `curr_year`, `curr_se
 -- Table structure for table `event`
 --
 
-CREATE TABLE IF NOT EXISTS `event` (
+CREATE TABLE `event` (
   `event_id` int(4) NOT NULL,
-  `event_title` text NOT NULL,
-  `event_desc` text,
-  `event_start` text NOT NULL,
-  `event_end` text,
-  `event_status` enum('0','1','2','') NOT NULL DEFAULT '0',
-  `event_comment` varchar(100) DEFAULT NULL,
-  `event_color` enum('#ff1a1a','#3399ff','#33cc33','#ffff00') DEFAULT NULL
+  `event_title` varchar(32) NOT NULL,
+  `event_description` text,
+  `event_start` datetime NOT NULL,
+  `event_end` datetime DEFAULT NULL,
+  `event_status` enum('0','1','2','') NOT NULL,
+  `event_comment` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`event_id`, `event_title`, `event_description`, `event_start`, `event_end`, `event_status`, `event_comment`) VALUES
+(1, 'Moi\'s Birthday', 'Happy birthday Moi!', '2016-03-11 00:00:00', '2016-03-11 00:00:00', '0', NULL);
 
 -- --------------------------------------------------------
 
@@ -181,11 +190,11 @@ CREATE TABLE IF NOT EXISTS `event` (
 -- Table structure for table `event_statistics`
 --
 
-CREATE TABLE IF NOT EXISTS `event_statistics` (
+CREATE TABLE `event_statistics` (
   `id` int(6) NOT NULL,
   `value` int(9) NOT NULL,
   `date` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `event_statistics`
@@ -203,7 +212,30 @@ INSERT INTO `event_statistics` (`id`, `value`, `date`) VALUES
 (9, 0, '2016-03-09'),
 (10, 0, '2016-03-09'),
 (11, 0, '2016-03-09'),
-(12, 0, '2016-03-09');
+(12, 0, '2016-03-09'),
+(13, 0, '2016-03-09'),
+(14, 0, '2016-03-09'),
+(15, 0, '2016-03-10'),
+(16, 0, '2016-03-10'),
+(17, 0, '2016-03-10'),
+(18, 0, '2016-03-10'),
+(19, 0, '2016-03-10'),
+(20, 0, '2016-03-10'),
+(21, 0, '2016-03-10'),
+(22, 0, '2016-03-10'),
+(23, 0, '2016-03-10'),
+(24, 0, '2016-03-10'),
+(25, 0, '2016-03-10'),
+(26, 0, '2016-03-10'),
+(27, 0, '2016-03-10'),
+(28, 0, '2016-03-10'),
+(29, 0, '2016-03-10'),
+(30, 1, '2016-03-17'),
+(31, 1, '2016-03-17'),
+(32, 1, '2016-03-17'),
+(33, 1, '2016-03-17'),
+(34, 1, '2016-03-17'),
+(35, 1, '2016-03-17');
 
 -- --------------------------------------------------------
 
@@ -211,7 +243,7 @@ INSERT INTO `event_statistics` (`id`, `value`, `date`) VALUES
 -- Table structure for table `faculty`
 --
 
-CREATE TABLE IF NOT EXISTS `faculty` (
+CREATE TABLE `faculty` (
   `user_id` int(6) NOT NULL,
   `faculty_id` varchar(10) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
@@ -240,11 +272,11 @@ INSERT INTO `faculty` (`user_id`, `faculty_id`, `status`, `is_admin`) VALUES
 -- Table structure for table `faculty_statistics`
 --
 
-CREATE TABLE IF NOT EXISTS `faculty_statistics` (
+CREATE TABLE `faculty_statistics` (
   `id` int(6) NOT NULL,
   `value` int(9) NOT NULL,
   `date` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `faculty_statistics`
@@ -262,7 +294,30 @@ INSERT INTO `faculty_statistics` (`id`, `value`, `date`) VALUES
 (9, 10, '2016-03-09'),
 (10, 10, '2016-03-09'),
 (11, 10, '2016-03-09'),
-(12, 10, '2016-03-09');
+(12, 10, '2016-03-09'),
+(13, 10, '2016-03-09'),
+(14, 10, '2016-03-09'),
+(15, 10, '2016-03-10'),
+(16, 10, '2016-03-10'),
+(17, 10, '2016-03-10'),
+(18, 10, '2016-03-10'),
+(19, 10, '2016-03-10'),
+(20, 11, '2016-03-10'),
+(21, 11, '2016-03-10'),
+(22, 11, '2016-03-10'),
+(23, 11, '2016-03-10'),
+(24, 11, '2016-03-10'),
+(25, 11, '2016-03-10'),
+(26, 11, '2016-03-10'),
+(27, 11, '2016-03-10'),
+(28, 11, '2016-03-10'),
+(29, 11, '2016-03-10'),
+(30, 11, '2016-03-17'),
+(31, 11, '2016-03-17'),
+(32, 11, '2016-03-17'),
+(33, 12, '2016-03-17'),
+(34, 13, '2016-03-17'),
+(35, 13, '2016-03-17');
 
 -- --------------------------------------------------------
 
@@ -270,7 +325,7 @@ INSERT INTO `faculty_statistics` (`id`, `value`, `date`) VALUES
 -- Table structure for table `moderator`
 --
 
-CREATE TABLE IF NOT EXISTS `moderator` (
+CREATE TABLE `moderator` (
   `faculty_id` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -287,27 +342,23 @@ INSERT INTO `moderator` (`faculty_id`) VALUES
 -- Table structure for table `news`
 --
 
-CREATE TABLE IF NOT EXISTS `news` (
+CREATE TABLE `news` (
   `news_id` int(11) NOT NULL,
   `user_id` int(6) NOT NULL,
   `picture_id` int(11) DEFAULT NULL,
   `title` varchar(100) NOT NULL,
   `details` text,
   `date_posted` datetime DEFAULT NULL,
-  faculties tinyint(1) DEFAULT 0,
-  students tinyint(1) DEFAULT 0,
-  alumnus tinyint(1) DEFAULT 0,
-  guests tinyint(1) DEFAULT 0,
-  `is_approved` tinyint(1) NOT NULL,
-   user_type tinyint(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `is_approved` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`news_id`, `user_id`, `picture_id`, `title`, `details`, `date_posted`,faculties, students, alumnus, guests, `is_approved`, user_type) VALUES
-(1, 1, 1, 'TACTICS Election', 'Vote wise!', '2016/03/09 08:52:24 am', 1, 1, 1, 1, 0, 6);
+INSERT INTO `news` (`news_id`, `user_id`, `picture_id`, `title`, `details`, `date_posted`, `is_approved`) VALUES
+(17, 12, 1, 'Curriculum Booklet Submission', 'Deadline: 27 April 2016 5:00pm at DCS Office', '2016-03-18 11:52:16', 1),
+(18, 12, 2, 'Elective Offerings for Summer Semester', 'icse001\r\nicse002', '2016-03-18 11:56:33', 1);
 
 -- --------------------------------------------------------
 
@@ -315,11 +366,11 @@ INSERT INTO `news` (`news_id`, `user_id`, `picture_id`, `title`, `details`, `dat
 -- Table structure for table `news_statistics`
 --
 
-CREATE TABLE IF NOT EXISTS `news_statistics` (
+CREATE TABLE `news_statistics` (
   `id` int(6) NOT NULL,
   `value` int(9) NOT NULL,
   `date` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `news_statistics`
@@ -337,7 +388,30 @@ INSERT INTO `news_statistics` (`id`, `value`, `date`) VALUES
 (9, 1, '2016-03-09'),
 (10, 1, '2016-03-09'),
 (11, 1, '2016-03-09'),
-(12, 1, '2016-03-09');
+(12, 1, '2016-03-09'),
+(13, 1, '2016-03-09'),
+(14, 1, '2016-03-09'),
+(15, 2, '2016-03-10'),
+(16, 2, '2016-03-10'),
+(17, 2, '2016-03-10'),
+(18, 2, '2016-03-10'),
+(19, 2, '2016-03-10'),
+(20, 3, '2016-03-10'),
+(21, 3, '2016-03-10'),
+(22, 3, '2016-03-10'),
+(23, 3, '2016-03-10'),
+(24, 3, '2016-03-10'),
+(25, 3, '2016-03-10'),
+(26, 3, '2016-03-10'),
+(27, 3, '2016-03-10'),
+(28, 4, '2016-03-10'),
+(29, 4, '2016-03-10'),
+(30, 4, '2016-03-17'),
+(31, 4, '2016-03-17'),
+(32, 4, '2016-03-17'),
+(33, 10, '2016-03-17'),
+(34, 11, '2016-03-17'),
+(35, 11, '2016-03-17');
 
 -- --------------------------------------------------------
 
@@ -345,11 +419,11 @@ INSERT INTO `news_statistics` (`id`, `value`, `date`) VALUES
 -- Table structure for table `organization_officer`
 --
 
-CREATE TABLE IF NOT EXISTS `organization_officer` (
+CREATE TABLE `organization_officer` (
   `officer_id` int(4) NOT NULL,
   `position` varchar(50) NOT NULL,
   `student_id` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `organization_officer`
@@ -363,7 +437,7 @@ INSERT INTO `organization_officer` (`officer_id`, `position`, `student_id`) VALU
 (5, 'External Vice President', NULL),
 (6, 'Secretary', NULL),
 (7, 'Assistant Secretary', NULL),
-(8, 'Treasurer',  NULL),
+(8, 'Treasurer', NULL),
 (9, 'Auditor', NULL),
 (10, 'Business Manager', NULL),
 (11, 'Business Manager', NULL),
@@ -375,18 +449,19 @@ INSERT INTO `organization_officer` (`officer_id`, `position`, `student_id`) VALU
 -- Table structure for table `picture`
 --
 
-CREATE TABLE IF NOT EXISTS `picture` (
+CREATE TABLE `picture` (
   `picture_id` int(11) NOT NULL,
   `file_name` varchar(32) DEFAULT NULL,
   `file_path` varchar(32) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `picture`
 --
 
 INSERT INTO `picture` (`picture_id`, `file_name`, `file_path`) VALUES
-(1, '1.jpg', 'newsPictures/1.jpg');
+(1, '1.png', 'newsPictures/1.png'),
+(2, '2.png', 'newsPictures/2.png');
 
 -- --------------------------------------------------------
 
@@ -394,7 +469,7 @@ INSERT INTO `picture` (`picture_id`, `file_name`, `file_path`) VALUES
 -- Table structure for table `prerequisite`
 --
 
-CREATE TABLE IF NOT EXISTS `prerequisite` (
+CREATE TABLE `prerequisite` (
   `course_id` int(11) DEFAULT NULL,
   `course_id_pre` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -412,12 +487,12 @@ INSERT INTO `prerequisite` (`course_id`, `course_id_pre`) VALUES
 -- Table structure for table `program`
 --
 
-CREATE TABLE IF NOT EXISTS `program` (
+CREATE TABLE `program` (
   `program_id` int(11) NOT NULL,
   `program_code` varchar(20) DEFAULT NULL,
   `program_name` varchar(30) DEFAULT NULL,
   `program_desc` varchar(910) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `program`
@@ -434,7 +509,7 @@ INSERT INTO `program` (`program_id`, `program_code`, `program_name`, `program_de
 -- Table structure for table `program_coordinator`
 --
 
-CREATE TABLE IF NOT EXISTS `program_coordinator` (
+CREATE TABLE `program_coordinator` (
   `faculty_id` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -451,7 +526,7 @@ INSERT INTO `program_coordinator` (`faculty_id`) VALUES
 -- Table structure for table `students`
 --
 
-CREATE TABLE IF NOT EXISTS `students` (
+CREATE TABLE `students` (
   `user_id` int(6) NOT NULL,
   `student_id` varchar(10) NOT NULL,
   `adviser_id` varchar(10) DEFAULT NULL,
@@ -471,9 +546,11 @@ INSERT INTO `students` (`user_id`, `student_id`, `adviser_id`, `year_level`, `ye
 (5, 's201310501', 'f201511000', 3, 2013, 0),
 (6, 's201310502', 'f201511002', 3, 2013, 0),
 (7, 's200011234', 'f200112345', 1, 2013, 0),
-(19, 's200412345', NULL, 4, 2004, 0),
-(20, 's200412000', NULL, 4, 2004, 0),
-(21, 's200412001', NULL, 4, 2004, 0);
+(19, 's200412345', 'f201511000', 4, 2004, 0),
+(20, 's200412000', 'f201511002', 4, 2004, 0),
+(21, 's200412001', 'f200112345', 4, 2004, 0),
+(23, 's200910445', 'f201511000', 4, 2009, 0),
+(26, 's201810445', 'f200410123', 1, 2018, 0);
 
 -- --------------------------------------------------------
 
@@ -481,11 +558,11 @@ INSERT INTO `students` (`user_id`, `student_id`, `adviser_id`, `year_level`, `ye
 -- Table structure for table `students_statistics`
 --
 
-CREATE TABLE IF NOT EXISTS `students_statistics` (
+CREATE TABLE `students_statistics` (
   `id` int(6) NOT NULL,
   `value` int(9) NOT NULL,
   `date` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `students_statistics`
@@ -503,7 +580,30 @@ INSERT INTO `students_statistics` (`id`, `value`, `date`) VALUES
 (9, 9, '2016-03-09'),
 (10, 9, '2016-03-09'),
 (11, 9, '2016-03-09'),
-(12, 9, '2016-03-09');
+(12, 9, '2016-03-09'),
+(13, 9, '2016-03-09'),
+(14, 9, '2016-03-09'),
+(15, 9, '2016-03-10'),
+(16, 9, '2016-03-10'),
+(17, 9, '2016-03-10'),
+(18, 9, '2016-03-10'),
+(19, 9, '2016-03-10'),
+(20, 9, '2016-03-10'),
+(21, 9, '2016-03-10'),
+(22, 9, '2016-03-10'),
+(23, 9, '2016-03-10'),
+(24, 9, '2016-03-10'),
+(25, 9, '2016-03-10'),
+(26, 9, '2016-03-10'),
+(27, 9, '2016-03-10'),
+(28, 9, '2016-03-10'),
+(29, 9, '2016-03-10'),
+(30, 9, '2016-03-17'),
+(31, 9, '2016-03-17'),
+(32, 9, '2016-03-17'),
+(33, 10, '2016-03-17'),
+(34, 11, '2016-03-17'),
+(35, 11, '2016-03-17');
 
 -- --------------------------------------------------------
 
@@ -511,7 +611,7 @@ INSERT INTO `students_statistics` (`id`, `value`, `date`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `user_id` int(6) NOT NULL,
   `user_type` tinyint(1) NOT NULL,
   `username` varchar(10) NOT NULL,
@@ -524,33 +624,37 @@ CREATE TABLE IF NOT EXISTS `users` (
   `address` text NOT NULL,
   `major` enum('IS','IT','CS','') NOT NULL,
   `gbox_acct` varchar(48) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_id`, `user_type`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `gender`, `birth_date`, `address`, `major`, `gbox_acct`) VALUES
-(1, 5, 's201311530', 'e10adc3949ba59abbe56e057f20f883e', 'Eric Xavier', 'Carreras', 'Rosales', 'M', '1990-09-19', '52 Abella Street Villa Sorabella Subdivision Naga City', 'IT', 'errosales@gbox.adnu.edu.ph'),
-(2, 6, 's201310531', 'e10adc3949ba59abbe56e057f20f883e', 'Patricia', 'Geronimo', 'de Leon', 'F', '1996-06-14', 'Z-1 Del Rosario, Naga City', 'CS', 'esotto@gbox.adnu.edu.ph'),
-(4, 6, 's201310500', 'e10adc3949ba59abbe56e057f20f883e', 'Kelly', 'Rosales', 'Mila', 'M', '2013-01-03', 'Z-1 Del Rosario, Naga City', 'IS', 'mmarlou@gbox.adnu.edu.ph'),
-(5, 6, 's201310501', 'e10adc3949ba59abbe56e057f20f883e', 'Shara Mae', 'Dayandante', 'Yu', 'F', '2005-11-06', 'Z-1 Del Rosario, Naga City', 'CS', 'jbieber@gbox.adnu.edu.ph'),
-(6, 6, 's201310502', 'e10adc3949ba59abbe56e057f20f883e', 'Charles', 'Cavita', 'Torrente', 'F', '2016-03-06', 'Z-1 Del Rosario, Naga City', 'IS', 'mozawa@gbox.adnu.edu.ph'),
-(7, 6, 's200011234', 'e10adc3949ba59abbe56e057f20f883e', 'Luigi', 'Alden', 'Dihiansan', 'M', '1996-02-02', 'BETLOG AVENUE', 'IT', 'sone@gbox.adnu.edu.ph'),
-(8, 4, 'f200112345', 'e10adc3949ba59abbe56e057f20f883e', 'Adrian Leo', 'Tendenilla', 'Pajarillo', 'M', '1987-10-03', 'Camaligan', 'IT', 'apajarillo@gbox.adnu.edu.ph'),
-(9, 4, 'f201511000', 'e10adc3949ba59abbe56e057f20f883e', 'Mitchell Zachary', 'Bax', 'Imperial', 'M', '1991-03-10', 'Naga City', 'CS', 'miimperial@gbox.adnu.edu.ph'),
-(10, 4, 'f201511001', 'e10adc3949ba59abbe56e057f20f883e', 'John Sixto', 'Something', 'Santos', 'M', '1990-05-06', 'Naga City', 'IT', 'johnssantos@gbox.adnu.edu.ph'),
-(11, 4, 'f201511002', 'e10adc3949ba59abbe56e057f20f883e', 'Michelle', 'Buenagua', 'Santos', 'F', '1992-08-08', 'Naga City', 'IS', 'misantos@gbox.adnu.edu.ph'),
-(12, 1, 'f200410123', 'e10adc3949ba59abbe56e057f20f883e', 'Frederick', 'Yamaha', 'Olano', 'M', '1967-10-03', 'Naga City', 'CS', 'fzolano@gbox.adnu.edu.ph'),
-(13, 4, 'f201211001', 'e10adc3949ba59abbe56e057f20f883e', 'Jalea', 'Pantoja', 'Aureus', 'F', '1987-07-10', 'Naga City', 'IT', 'jaureus@gbox.adnu.edu.ph'),
-(14, 2, 'f201211002', 'e10adc3949ba59abbe56e057f20f883e', 'Rey', 'Man', 'Vidallo', 'M', '1982-05-03', 'Naga City', 'CS', 'rvidallo@gbox.adnu.edu.ph'),
-(16, 4, 'f200811000', 'e10adc3949ba59abbe56e057f20f883e', 'Cecilbeth', 'Ibanez', 'Vidallo', 'F', '1984-01-03', 'Naga City', 'IT', 'cvidallo@gbox.adnu.edu.ph'),
-(17, 3, 'f201311000', 'e10adc3949ba59abbe56e057f20f883e', 'Marianne', 'P-something', 'Ang', 'F', '1988-05-17', 'Naga City', 'CS', 'mang@gbox.adnu.edu.ph'),
-(18, 4, 'f200111000', 'e10adc3949ba59abbe56e057f20f883e', 'Joshua', 'Something', 'Martinez', 'M', '1976-08-14', 'Naga City', 'IT', 'jmartinez@gbox.adnu.edu.ph'),
-(19, 6, 's200412345', 'e10adc3949ba59abbe56e057f20f883e', 'Joshua', 'Francisco', 'Tolentino', 'M', '1987-06-06', 'Naga City Camarines Sur', 'CS', 'ostudent@gbox.adnu.edu.ph'),
-(20, 6, 's200412000', 'e10adc3949ba59abbe56e057f20f883e', 'Vince Volter', 'Parco', 'Morandarte', 'M', '1987-10-14', 'Naga City Camarines Sur', 'IS', 'anstudent@gbox.adnu.edu.ph'),
-(21, 6, 's200412001', 'e10adc3949ba59abbe56e057f20f883e', 'Burt', 'Go', 'Co', 'M', '1990-12-12', 'Naga City Camarines Sur', 'IT', 'jastudent@gbox.adnu.edu.ph'),
-(22, 8, 'guest', 'e10adc3949ba59abbe56e057f20f883e', 'Michael', 'King', 'Fernandez', 'M', '1990-12-12', 'Naga City Camarines Sur', 'IT', 'guest@gbox.adnu.edu.ph');
+(1, 5, 's201311530', '5f4dcc3b5aa765d61d8327deb882cf99', 'Eric Xavier', 'Carreras', 'Rosales', 'M', '1990-09-19', '52 Abella Street Villa Sorabella Subdivision Naga City', 'IT', 'errosales@gbox.adnu.edu.ph'),
+(2, 6, 's201310531', '219157c8dc4073b8b0839ac526a7bdc8', 'Xavier Eric', 'Carreras', 'Rosales', 'M', '1996-06-14', 'Z-1 Del Rosario, Naga City', 'CS', 'esotto@gbox.adnu.edu.ph'),
+(4, 6, 's201310500', '101a6ec9f938885df0a44f20458d2eb4', 'Don', 'king', 'Tan', 'M', '2013-01-03', 'Z-1 Del Rosario, Naga City', 'IS', 'mmarlou@gbox.adnu.edu.ph'),
+(5, 6, 's201310501', '4e4d6c332b6fe62a63afe56171fd3725', 'Alex', 'Saballegue', 'Billones', 'M', '2005-11-06', 'Z-1 Del Rosario, Naga City', 'CS', 'jbieber@gbox.adnu.edu.ph'),
+(6, 6, 's201310502', 'd41d8cd98f00b204e9800998ecf8427e', 'John', 'King', 'Fernandez', 'F', '2016-03-06', 'Z-1 Del Rosario, Naga City', 'IS', 'mozawa@gbox.adnu.edu.ph'),
+(7, 6, 's200011234', '5f4dcc3b5aa765d61d8327deb882cf99', 'Vince', 'Volter', 'Morandarte', 'M', '1996-02-02', 'BETLOG AVENUE', 'IT', 'sone@gbox.adnu.edu.ph'),
+(8, 4, 'f200112345', '5f4dcc3b5aa765d61d8327deb882cf99', 'Adrian Leo', 'Tendenilla', 'Pajarillo', 'M', '1987-10-03', 'Camaligan', 'IT', 'apajarillo@gbox.adnu.edu.ph'),
+(9, 4, 'f201511000', '5f4dcc3b5aa765d61d8327deb882cf99', 'Mitchell Zachary', 'Bax', 'Imperial', 'M', '1991-03-10', 'Naga City', 'CS', 'miimperial@gbox.adnu.edu.ph'),
+(10, 4, 'f201511001', '5f4dcc3b5aa765d61d8327deb882cf99', 'John Sixto', 'Jordan', 'Santos', 'M', '1990-05-06', 'Naga City', 'IT', 'johnssantos@gbox.adnu.edu.ph'),
+(11, 4, 'f201511002', '5f4dcc3b5aa765d61d8327deb882cf99', 'Michelle', 'Buenagua', 'Santos', 'F', '1992-08-08', 'Naga City', 'IS', 'misantos@gbox.adnu.edu.ph'),
+(12, 1, 'f200410123', '5f4dcc3b5aa765d61d8327deb882cf99', 'Frederick', 'Yamaha', 'Olano', 'M', '1967-10-03', 'Naga City', 'CS', 'fzolano@gbox.adnu.edu.ph'),
+(13, 4, 'f201211001', '5f4dcc3b5aa765d61d8327deb882cf99', 'Jalea', 'Pantoja', 'Aureus', 'F', '1987-07-10', 'Naga City', 'IT', 'jaureus@gbox.adnu.edu.ph'),
+(14, 2, 'f201211002', '5f4dcc3b5aa765d61d8327deb882cf99', 'Rey', 'Man', 'Vidallo', 'M', '1982-05-03', 'Naga City', 'CS', 'rvidallo@gbox.adnu.edu.ph'),
+(16, 4, 'f200811000', '5f4dcc3b5aa765d61d8327deb882cf99', 'Cecilbeth', 'Ibanez', 'Vidallo', 'F', '1984-01-03', 'Naga City', 'IT', 'cvidallo@gbox.adnu.edu.ph'),
+(17, 3, 'f201311000', '5f4dcc3b5aa765d61d8327deb882cf99', 'Marianne', 'Pilao', 'Ang', 'F', '1988-05-17', 'Naga City', 'CS', 'mang@gbox.adnu.edu.ph'),
+(18, 4, 'f200111000', '5f4dcc3b5aa765d61d8327deb882cf99', 'Joshua', 'Nonito', 'Martinez', 'M', '1976-08-14', 'Naga City', 'IT', 'jmartinez@gbox.adnu.edu.ph'),
+(19, 6, 's200412345', '5f4dcc3b5aa765d61d8327deb882cf99', 'Patricia', 'Geronimo', 'De Leon', 'M', '1987-06-06', 'Naga City Camarines Sur', 'CS', 'ostudent@gbox.adnu.edu.ph'),
+(20, 6, 's200412000', '5f4dcc3b5aa765d61d8327deb882cf99', 'Keith', 'Psy', 'Aguilar', 'M', '1987-10-14', 'Naga City Camarines Sur', 'IS', 'anstudent@gbox.adnu.edu.ph'),
+(21, 6, 's200412001', '5f4dcc3b5aa765d61d8327deb882cf99', 'Joshua', 'Francisco', 'Tolentino', 'F', '1990-12-12', 'Naga City Camarines Sur', 'IT', 'jastudent@gbox.adnu.edu.ph'),
+(22, 8, 's20111000', '5f4dcc3b5aa765d61d8327deb882cf99', 'Aileen', 'Ai', 'Rillon', 'F', '1980-07-19', 'Naga City Philippines', 'IS', 'arillon@gbox.adnu.edu.ph'),
+(23, 8, 's200910445', '5f4dcc3b5aa765d61d8327deb882cf99', 'kevin', 'Cleofas', 'bigay', 'M', '1992-04-27', 'asdadas', 'CS', 'kbigay@gbox.adnu.edu.ph'),
+(24, 0, 'f20611544', '5f4dcc3b5aa765d61d8327deb882cf99', 'Christian', 'Noel', 'Lizardo', 'M', '1989-09-09', 'slf;shflna', 'CS', 'asdjhjk@gbox.adnu.edu.ph'),
+(25, 2, 'f200010000', '5f4dcc3b5aa765d61d8327deb882cf99', 'Ron', 'Amaro', 'Orpia', 'F', '0890-10-10', 'sadsgfgkjfjsgfla', 'IT', 'ashfkhadf@gbox.adnu.edu.ph'),
+(26, 8, 's201810445', '5f4dcc3b5aa765d61d8327deb882cf99', 'Shara Mae', 'Mila', 'Yu', 'M', '1999-02-07', 'fhagfkhjapsfhoah', 'CS', 'brusty@gbox.adnu.edu.ph');
 
 -- --------------------------------------------------------
 
@@ -558,11 +662,11 @@ INSERT INTO `users` (`user_id`, `user_type`, `username`, `password`, `first_name
 -- Table structure for table `users_statistics`
 --
 
-CREATE TABLE IF NOT EXISTS `users_statistics` (
+CREATE TABLE `users_statistics` (
   `id` int(6) NOT NULL,
   `value` int(9) NOT NULL,
   `date` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users_statistics`
@@ -580,7 +684,30 @@ INSERT INTO `users_statistics` (`id`, `value`, `date`) VALUES
 (9, 19, '2016-03-09'),
 (10, 19, '2016-03-09'),
 (11, 19, '2016-03-09'),
-(12, 19, '2016-03-09');
+(12, 19, '2016-03-09'),
+(13, 19, '2016-03-09'),
+(14, 19, '2016-03-09'),
+(15, 19, '2016-03-10'),
+(16, 19, '2016-03-10'),
+(17, 19, '2016-03-10'),
+(18, 19, '2016-03-10'),
+(19, 19, '2016-03-10'),
+(20, 20, '2016-03-10'),
+(21, 20, '2016-03-10'),
+(22, 20, '2016-03-10'),
+(23, 20, '2016-03-10'),
+(24, 20, '2016-03-10'),
+(25, 20, '2016-03-10'),
+(26, 20, '2016-03-10'),
+(27, 20, '2016-03-10'),
+(28, 20, '2016-03-10'),
+(29, 20, '2016-03-10'),
+(30, 20, '2016-03-17'),
+(31, 20, '2016-03-17'),
+(32, 20, '2016-03-17'),
+(33, 22, '2016-03-17'),
+(34, 24, '2016-03-17'),
+(35, 24, '2016-03-17');
 
 -- --------------------------------------------------------
 
@@ -588,18 +715,18 @@ INSERT INTO `users_statistics` (`id`, `value`, `date`) VALUES
 -- Table structure for table `visit_statistics`
 --
 
-CREATE TABLE IF NOT EXISTS `visit_statistics` (
+CREATE TABLE `visit_statistics` (
   `id` int(6) NOT NULL,
   `value` int(9) NOT NULL,
   `date` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `visit_statistics`
 --
 
 INSERT INTO `visit_statistics` (`id`, `value`, `date`) VALUES
-(1, 4, '2016-03-09');
+(1, 93, '2016-03-09');
 
 --
 -- Indexes for dumped tables
@@ -769,77 +896,77 @@ ALTER TABLE `visit_statistics`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `curriculum`
 --
 ALTER TABLE `curriculum`
-  MODIFY `curriculum_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `curriculum_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `curriculum_downloads`
 --
 ALTER TABLE `curriculum_downloads`
-  MODIFY `download_count_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `download_count_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `event_id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `event_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `event_statistics`
 --
 ALTER TABLE `event_statistics`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `faculty_statistics`
 --
 ALTER TABLE `faculty_statistics`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `news_statistics`
 --
 ALTER TABLE `news_statistics`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `organization_officer`
 --
 ALTER TABLE `organization_officer`
-  MODIFY `officer_id` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `officer_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `picture`
 --
 ALTER TABLE `picture`
-  MODIFY `picture_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `picture_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `program`
 --
 ALTER TABLE `program`
-  MODIFY `program_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `program_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `students_statistics`
 --
 ALTER TABLE `students_statistics`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+  MODIFY `user_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `users_statistics`
 --
 ALTER TABLE `users_statistics`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `visit_statistics`
 --
 ALTER TABLE `visit_statistics`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --

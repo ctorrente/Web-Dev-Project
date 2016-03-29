@@ -1,10 +1,3 @@
-<?php
-	session_start();
-	include("link.php");
-	require('header.php');
-	require('navbar.php');
-?>
-
 <html>
 	<head>
 		<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
@@ -167,7 +160,7 @@
 		.eventdate {
 			width: 140px;
 		}
-		#submitEvent, #cancelevent, .bd2 {
+		#submitEvent, #cancelevent, #addEvent,.bd2 {
 			width: 100px;
 			height: 37px;
 		}
@@ -176,9 +169,9 @@
 <script>
 
 function delete_id(id) {
-	if (confirm("Are you sure you want to delete this record?")) {
-		$.post('eventstable_off.php', {id: id});
-	}
+	prompt("why");
+	if (confirm("Are you sure you want to delete this record?")) 
+		window.location.href='eventstable_off.php?delete_id='+id;
 }
 
 $(document).ready(function(){
@@ -195,61 +188,88 @@ $(document).ready(function(){
 	<a href='#'><img src="css/temp/dcs-sign.png" /></a>
 </div>
 
-<!--start content-->
+<!--start navbar-->
+
+<div class="nav">
+	<div class="container">
+		<div id='cssmenu'>
+			<ul>
+				<li><a href='#'>About</a></li>
+				<li><a href='#'>Admission</a></li>
+				<li><a href='#'>Faculty</a></li>
+				<li><a href='#'>Policies</a></li>
+
+				<li class='has-sub'><a href='#'>User</a>
+					<ul>
+						<li><a href='#'>Log Out</a></li>
+						 <li class='has-sub'><a href='#'>Option 1</a>
+							<ul>
+								 <li><a href='#'>Sub Option 1</a></li>
+								 <li><a href='#'>Sub Option 2</a></li>
+							</ul>
+						 </li>
+						 <li class='has-sub'><a href='#'>Option 1</a>
+							<ul>
+								 <li><a href='#'>Sub Option 1</a></li>
+								 <li><a href='#'>Sub Option 2</a></li>
+							</ul>
+						 </li>
+					</ul>
+				</li>
+				<li class="msg"><a data-toggle="open-modal" data-target="#contact">&#9993;</a></li>
+				<li class="msg">
+					<input type="search" placeholder="&#x1f50e; Search" /></li>
+
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!--end navbar-->
+
+	<!--start content-->
+	
 	<div class="container">
 		<div class="content-wrapper">
 			<div class="content">
-			
-			<!--create button-->
-			<button id="addEvent">Create Event</button> <a href='eventstable_off.php'><button class='headerbutton'>Refresh</button></a>
-			<div class="eveContainer"><br><br><br>
-			
-			<!--start of table-->
-			<table id="offEvents">
-				<!--start of header-->
-				<tr>		
-					<th style="width:150px;">Event Name</th>
-					<th style="width:250px;">Description</th>
-					<th style="width:150px;">Date</th>	
-					<th style="width:150px;">Status</th>	
-					<th style="width:150px;">Comment</th>
-					<th style="width:70px;"><th>
-				</tr>
-				<!--end of header-->
-				<!--hidden row for create-->
-				<tr style="display:none" id="addRow">
-				<form action='<?php echo $_SERVER['PHP_SELF'];?>' method='post'>
-					<td><input type='text' name='eventTitle' size='10'></td>
-					<td><textarea name='eventDesc'></textarea></td>
-					<td><input type='date' name='eventStartDate' class='eventdate'><br>to<br><input type='date' name='eventEndDate' class='eventdate'></td>
-					<td colspan='3'><button name='submitEvent' id='submitEvent'>Submit</button> <button id='cancelevent'>Cancel</button></td>
-				</form>
-				</tr>
-				<!--end of hidden row-->
-				<?php
-					$dblink = mysqli_connect("localhost", "root", "root", "dcs_project");
-					$sql = "SELECT * FROM EVENT WHERE EVENT_SUB_BY = 5 ORDER BY EVENT_START DESC;";
-					$result = mysqli_query($dblink, $sql);
+		
+			<button id="addEvent">Create Event</button> <a href='eventstable_off.php'><button class='buttondesign bd2'>Refresh</button>
+			<div class="eveContainer"></a><br><br><br>
+				<form method="post" action="eventstable_off.php">
+				<table id="offEvents">
+		
+					<!--start header-->
+					<tr>
+						
+						<th style="width:150px;">Event Name</th>
+						<th style="width:200px;">Description</th>
+						<th style="width:150px;">Date</th>	
+						<th style="width:150px;">Status</th>	
+						<th style="width:150px;">Comment</th>
+						<th style="width:150px;">Action</th>
+						<th><th>
+					</tr>
+					<!--end header-->
+
+					<!--start content-->
 					
-<<<<<<< Updated upstream
 					<tr style="display:none" id="addRow">
 						<td><input type='text' name='eventTitle' size='10'></td>
 						<td><textarea name='eventDesc'></textarea></td>
 						<td><input type='date' name='eventStartDate' class='eventdate'><br>to<br><input type='date' name='eventEndDate' class='eventdate'></td>
-						<td></td><td colspan='2'><button name='submitEvent' id='submitEvent'>Submit</button> <button id='cancelevent'>Cancel</button></td>
+						<td colspan='3'><button name='submitEvent' id='submitEvent'>Submit</button> <button id='cancelevent'>Cancel</button></td>
 					</tr>
 		
 					<?php
-						$dblink = mysqli_connect("localhost", "root", "", "dcs_project");
 						
-						$dblink = mysqli_connect("localhost", "root", "", "dcs_project");
+						$dblink = mysqli_connect("localhost", "root", "root", "dcs_project");
 
-					    $sql = "SELECT * FROM event where event_id = 5 ORDER BY event_start DESC;";
+					    $sql = "SELECT * FROM event where event_sub_by = 5 ORDER BY event_start DESC;";
 					    $result = mysqli_query($dblink, $sql);
 
 					    if (mysqli_num_rows($result) > 0) {
 					    	 while($row = mysqli_fetch_assoc($result)) {
-							 if (!isset($_POST['editevent']) || $_POST["id"] != $row["event_id"]) {
+							 if (!isset($_POST['editevent']) || $_POST["eventid"] != $row["event_id"]) {
 					?>
 					<tr>
 						<td><?php echo $row["event_title"]; ?></td>
@@ -258,7 +278,7 @@ $(document).ready(function(){
 							if ($row["event_start"] != $row["event_end"])
 								echo date('M j, Y',strtotime($row['event_start'])) . " until " . date('M j, Y',strtotime($row['event_end'])) ;
 							else
-								echo date('M j, Y',strtotime($row['event_start'])) ;
+								echo date('M j, Y',strtotime($row['event_start']));
 						?></td>
 						<td><?php
 						if ($row["event_status"]==0)
@@ -269,61 +289,37 @@ $(document).ready(function(){
 							echo "For approval";
 						 ?></td>
 						<td><?php echo $row["event_comment"]; ?></td>
-						<td>
-						<input type='text' name='id' value="<?php echo $row['event_id']; ?>" hidden>
-						<button name='editevent'>Edit</button></td>
+						<td><form  action= "<?php echo $_SERVER['PHP_SELF']?>" method='post'>
+						<input type='text' name='eventid' value="<?php echo $row['event_id']; ?>" hidden>
+						<input type='submit' name='editevent' class='buttondesign' value='Edit'></form></td>
 					</tr>
 					<?php
-=======
-					//iterate through rows of data
-					if (mysqli_num_rows($result) > 0) {
-						while($row = mysqli_fetch_assoc($result)) {
-							if (!isset($_POST['editevent']) || $_POST["eventid"] != $row["event_id"]) {
-								echo "<tr>
-								<form action='".$_SERVER['PHP_SELF']."' method='post'>
-								<td>".$row['event_title']."</td>
-								<td>".$row['event_desc']."</td><td>";
-								if ($row["event_start"] != $row["event_end"])
-									echo date('M j, Y',strtotime($row['event_start'])) . " until " . date('M j, Y',strtotime($row['event_end']));
-								else
-									echo date('M j, Y',strtotime($row['event_start']));
-								echo "</td><td>";
-								if ($row["event_status"]==0)
-									echo "Approved";
-								else if ($row["event_status"]==1)
-									echo "Disapproved";
-								else
-									echo "For approval";
-								echo "</td>
-								<td>".$row['event_comment']."</td>
-								<td>
-								<input type='text' name='eventid' value=".$row['event_id']." hidden>
-								<input type='submit' name='editevent' class='buttondesign bd2' value='Edit'></td>
-								</form>
-								</tr>";
->>>>>>> Stashed changes
 							}
 							else {
-								echo "<tr>
-								<form action='".$_SERVER['PHP_SELF']."' method='post'>
-								<input type='text' name='edit_id' value='".$row["event_id"]."' hidden>
+								echo "<form action='".$_SERVER['PHP_SELF']."' method='post'>
+								<tr><input type='text' name='edit_id' value='".$row["event_id"]."' hidden>
 								<td><input type='text' name='editedname' value='".$row["event_title"]."'></td>
 								<td><textarea name='editeddesc' id='editdesc'>".$row["event_desc"]."</textarea></td>
 								<td><input type=date name='editedstart' class='eventdate' value='".$row['event_start']."'><br>to<br><input type=date name='editedend' class='eventdate' value='".$row['event_end']."'></td>
-								<td colspan='3'><input type='submit' name='saveedit' class='buttondesign bd2' value = 'Save'> <button class='buttondesign bd2' onclick='delete_id(".$row['event_id'].")'>Delete</button> <input type='submit' class='buttondesign bd2' name='canceledit' value = 'Cancel'></td>
+								<td></td>
+								<td></td>
+								<td colspan='3'><input type='submit' name='saveedit' class='buttondesign bd2' value = 'Save'> <a href='javascript:delete_id(".$row['event_id'].")'><button class='buttondesign bd2'>Delete</button></a> <input type='submit' class='buttondesign bd2' name='canceledit' value = 'Cancel'></td>
 								</tr>
 								</form>";
 							}
+							}
+					    }
+						else {
+							echo "No events submitted.";
 						}
-					}
-					else {
-						echo "No events submitted.";
-					}
-				?>
-			</table>
+					?>
+				</table>
+				</form>
+			</div>
+
+
+			</div>
 			
-			</div>
-			</div>
 		</div>
 	</div>
 
@@ -378,6 +374,8 @@ $(document).ready(function(){
 	</div>
 </body>
 
+
+
 <?php
 
 $dblink = mysqli_connect("localhost", "root", "root", "dcs_project");
@@ -389,10 +387,10 @@ if(isset($_POST['submitEvent'])) {
 		$startdate = '\''.$_POST["eventStartDate"].'\'';
 		$enddate = '\''.$_POST["eventEndDate"].'\'';
 
-		$query="INSERT INTO EVENT (event_title, event_desc, event_start, event_end, event_sub_by, event_status,event_comment) VALUES ($title, $desc, $startdate, $enddate, '5', '2')";
+		$query="INSERT INTO EVENT (event_title, event_desc, event_start, event_end, event_sub_by, event_status) VALUES ($title, $desc, $startdate, $enddate, '5', '2')";
 		
 		mysqli_query($dblink, $query);
-		header('Location:eventstable_off.php');
+		header("Location: eventstable_off.php");
 	}
 }
 
@@ -406,17 +404,21 @@ if(isset($_POST['saveedit'])) {
 		$query="UPDATE EVENT SET event_title = $title, event_desc = $desc, event_start = $startdate, event_end = $enddate, event_status = '2' WHERE event_id = '$id'";
 		
 		mysqli_query($dblink, $query);
+		
 }
 
-if(isset($_POST['id'])) {
-	
-	$id = $_POST['id'];
+if(isset($_GET['delete_id'])) {
+		$id = $_GET['edit_id'];
 
-	$query="DELETE FROM EVENT WHERE EVENT_ID=$id";
-	mysqli_query($dblink, $query);
+		$query="DELETE FROM EVENT WHERE EVENT_ID=$id";
+		
+		mysqli_query($dblink, $query);
 }
 
 
 ?>
+
+
+
 
 <html>

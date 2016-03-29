@@ -1,10 +1,3 @@
-<?php
-	session_start();
-	include("link.php");
-	require('header.php');
-	require('navbar.php');
-?>
-
 <html>
 	<head>
 		<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
@@ -41,15 +34,13 @@
 			margin: 0 auto;
 		}
 		
-		button {
+		button, input {
 			background: none;
 			border: 1px solid #A9A9A9;
 			border-radius: 8px;
-			padding: 10px;
+			padding: 5px;
 			color: #A9A9A9;
 			outline: none;
-			width: 200px;
-			height: 37px;
 		}
 		button:hover {
 			color: white;
@@ -88,7 +79,6 @@
 		td {
 		    text-align: center;
 		    vertical-align: center;
-			font-size:90%;
 		}
 
 		ul{
@@ -116,8 +106,8 @@
 		}
 
 		textarea{
-			max-width: 70%;
-			height: 4em;
+			max-width: 50%;
+			height: 3em;
 			padding: 10px;
 			margin: 20px 0;
 			border: 1px solid #A9A9A9;
@@ -126,14 +116,7 @@
 			color: #A9A9A9;
 			outline: none;
 		}
-		input{
-			background: none;
-			border: 1px solid #A9A9A9;
-			border-radius: 8px;
-			padding: 5px;
-			color: #A9A9A9;
-			outline: none;
-		}
+
 		input:hover{
 			color: white;
 			background: #2062a2;
@@ -146,16 +129,6 @@
 			margin: 20px 0;
 			max-width: 50%;
 		}
-		.headerbutton {
-			padding: 10px;
-			width: 100px;
-			height: 37px;
-			position: absolute;
-			margin-left: 66%;
-		}
-		.eveContainer {
-			width: 100%;
-		}
 		
 		</style>
 
@@ -165,13 +138,60 @@
 	<a href='#'><img src="css/temp/dcs-sign.png" /></a>
 </div>
 
+<!--start navbar-->
+
+<div class="nav">
+	<div class="container">
+		<div id='cssmenu'>
+			<ul>
+				<li><a href='#'>About</a></li>
+				<li><a href='#'>Admission</a></li>
+				<li><a href='#'>Faculty</a></li>
+				<li><a href='#'>Policies</a></li>
+
+				<li class='has-sub'><a href='#'>User</a>
+					<ul>
+						<li><a href='#'>Log Out</a></li>
+						 <li class='has-sub'><a href='#'>Option 1</a>
+							<ul>
+								 <li><a href='#'>Sub Option 1</a></li>
+								 <li><a href='#'>Sub Option 2</a></li>
+							</ul>
+						 </li>
+						 <li class='has-sub'><a href='#'>Option 1</a>
+							<ul>
+								 <li><a href='#'>Sub Option 1</a></li>
+								 <li><a href='#'>Sub Option 2</a></li>
+							</ul>
+						 </li>
+					</ul>
+				</li>
+				<li class="msg"><a data-toggle="open-modal" data-target="#contact">&#9993;</a></li>
+				<li class="msg">
+					<input type="search" placeholder="&#x1f50e; Search" /></li>
+
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!--end navbar-->
+
 	<!--start content-->
 	<div class="container">
 		<div class="content-wrapper">
 			<div class="content">
 
-				<a href='eventstable_mod.php'><button class='headerbutton'>Refresh</button></a>
-				<div class="eveContainer"><br><br>
+				<table>
+					<!--start header-->
+					<tr>
+						<th>Event Name</th>
+						<th>Description</th>
+						<th>Date</th>	
+						<th>Status</th>	
+						<th>Comment</th>
+						<th>Action</th>							
+					</tr>
 					<!--end header-->
 
 					<!--start content-->
@@ -183,18 +203,6 @@
 					    $result = mysqli_query($dblink, $sql);
 
 					    if (mysqli_num_rows($result) > 0) {
-							
-							echo "<table>
-					<!--start header-->
-					<tr>
-						<th>Event Name</th>
-						<th>Description</th>
-						<th>Date</th>	
-						<th>Status</th>	
-						<th>Comment</th>
-						<th>Action</th>							
-					</tr>";
-							
 					    	 while($row = mysqli_fetch_assoc($result)) {
 
 
@@ -204,12 +212,7 @@
 					<tr>
 						<td><?php echo $row["event_title"] ?></td>
 						<td><?php echo $row["event_desc"] ?></td>
-						<td><?php
-							if ($row["event_start"] != $row["event_end"])
-								echo date('M j, Y',strtotime($row['event_start'])) . " until " . date('M j, Y',strtotime($row['event_end'])) ;
-							else
-								echo date('M j, Y',strtotime($row['event_start']));
-						?></td>
+						<td><?php echo $row["event_start"] ?></td>
 						<td>
 								<select id="select" name="status"> 
 									<option value="D">Disapprove</option>
@@ -227,15 +230,12 @@
 					<?php
 							}
 					    }
-						else {
-							echo "<p style='margin: 60px';>No events submitted.</p>";
-						}
 
 					?>
 					<!--end content-->
 	</table>
 	
-	</div>
+	
 
 			</div>
 		</div>

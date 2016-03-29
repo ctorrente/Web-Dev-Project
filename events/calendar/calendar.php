@@ -1,20 +1,6 @@
 <?php
 	session_start();
 	include("link.php");
-	
-	// if(!$_SESSION['user_id']) {
-		// if ($_SESSION['user_type'] != 0) {
-			// header("Location: login.php");
-			// exit;
-		// }
-	// } else {
-		// $id = $_SESSION['user_id'];
-		// $info = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM users WHERE user_id=$id"));		
-		
-		// $_SESSION['first_name'] = $info['first_name'];
-		// $_SESSION['user_type'] = $info['user_type'];
-		// $_SESSION['user_id']= $info['user_id'];
-	// }
 	require('header.php');
 	require('navbar.php');
 ?>
@@ -289,7 +275,7 @@
 								type: 'POST',
 								dataType: 'text',
 								success: function(json) {
-									alert("Added successfully!");
+									alert(title + " " + desc + " " + start + " " + end + " " + user);
 								}
 							});
 						}

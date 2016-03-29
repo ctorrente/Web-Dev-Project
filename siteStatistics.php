@@ -415,7 +415,7 @@
 			//--------------------------------------------------Connect DB---------------------------------------------------
 			$servername = "localhost";
 			$username = "root";
-			$password = "";
+			$password = "root";
 			$dbname = "dcs_project";
 
 			// Create connection

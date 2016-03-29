@@ -201,7 +201,7 @@
 				}else{
 					echo "<p> $textline2</p>";
 					while($row =  mysqli_fetch_array($query)){
-						if($row['is_approved'] && ($_SESSION['user_type'] == 6 || $_SESSION['user_type'] == 7 || $_SESSION['user_type'] == 8)){
+						if($row['is_approved'] && ($_SESSION['user_type'] == 4 || $_SESSION['user_type'] == 6 || $_SESSION['user_type'] == 7 || $_SESSION['user_type'] == 8)){
 							$date = date("F m, Y g:ia", strtotime($row['date_posted'])); ?>
 							<div class="card">
 							    <!-- Header -->

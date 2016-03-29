@@ -194,7 +194,7 @@
 						$alumnus = ($row['alumnus'] == 1)?'checked':'';
 						$guests = ($row['guests'] == 1)?'checked':'';
 					?>
-
+					<?php if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2 || $_SESSION['user_type'] == 3 || $_SESSION['user_type'] == 5){?>
 					<center>
 					<h3>Can view by: </h3>
 					<div class="bla" >
@@ -206,6 +206,7 @@
 					</center>
 
 					<?php
+						}
 						echo '<p><strong>Details: </strong>' . $row['details'] . '</p>';
 					}
 					?>
